@@ -4,7 +4,7 @@
 2. Aplikacja jest skierowana do laików i językiem głównym MVP jest angielski.
 3. Struktura produktu zostaje oparta na 5 Partach: Part 1 `Info about the car`, Part 2 `At a standstill`, Part 3 `Starting the engine`, Part 4 `Test drive`, Part 5 `Documents`.
 4. Part 1 zawiera formularz konfiguracji auta i pola `Fuel type`, `Transmission`, `Drive`, `Body type` są obowiązkowe, ponieważ determinują zestaw pytań.
-5. Lista pytań w dostarczonym pliku jest tylko bazą podstawową; logika mapowania pytań oraz brakujące pytania dla konkretnych kategorii pojazdów mają zostać doprojektowane w PRD.
+5. Lista pytań w dostarczonym pliku była bazą podstawową; pełna logika mapowania pytań oraz brakujące pytania dla konkretnych kategorii pojazdów zostały doprojektowane i rozpisane w artefaktach `.ai/`.
 6. Wszystkie pytania mają identyczną wagę. MVP nie przewiduje wag usterek ani systemu deal-breakerów.
 7. Wynik nie jest pojedynczą oceną jakości auta. `Total Score` i wyniki sekcji to zawsze prosty wykres kolumnowy podzielony na trzy części: `Yes / No / Don't know`, np. `70% Yes / 10% No / 20% Don't know`.
 8. Aplikacja ma działać w modelu `Offline-First` jako PWA, z lokalnym przechowywaniem danych i kolejką zmian synchronizowaną po odzyskaniu połączenia.
@@ -41,6 +41,11 @@
 39. W MVP nie narzucamy żadnego tech stacku; osobna sesja planistyczna ma zdecydować o technologiach.
 40. W pierwszej fazie MVP rezygnujemy z monitorowania błędów i narzędzi typu Sentry/LogRocket.
 41. MVP nie obejmuje PDF, link sharingu, zdjęć, zewnętrznej weryfikacji VIN, aplikacji natywnych, porównywarki i systemu automatycznej dyskwalifikacji auta.
+42. System pytań został rozdzielony na trzy warstwy: `questionGroups` odpowiadają za widoczność i logikę warunkową, `questions` przechowują treść pytań, a `explanations` przechowują treści edukacyjne pod ikoną `i`.
+43. `questionGroups` nie zawierają pytań w środku; pytania są linkowane przez `groupId`, a treści edukacyjne przez `explanationRef`.
+44. Widoczność pytań zależy od obowiązkowych pól Part 1 oraz runtime flags typu `combustionEnginePresent`, `sparkPlugsPresent`, `chargingPortEquipped`, `turboEquipped`, `mechanicalCompressorEquipped` i `evBatteryDocsAvailable`.
+45. Zmiana pól mapujących `fuelType`, `transmission`, `drive` i `bodyType` uruchamia `Smart Pruning`, czyli usunięcie odpowiedzi należących do grup, które stały się niewidoczne, oraz natychmiastowe przeliczenie postępu i `Total Score`.
+46. W modelu danych systemu pytań obowiązują stabilne identyfikatory `questionId`, `groupId` i `explanationRef`, a pole `order` rośnie co 10, aby umożliwić późniejsze wstawianie nowych pytań bez renumeracji całej listy.
 {{/decisions}}
 
 {{matched_recommendations}}
@@ -63,6 +68,10 @@
 17. Dodać zachętę do instalacji PWA na ekranie głównym po pierwszym sensownym użyciu aplikacji.
 18. Rozważyć użycie `Screen Wake Lock API` podczas aktywnej inspekcji, aby ekran nie wygasał w kluczowych momentach.
 19. Dodać lekkie komunikaty typu toast dla potwierdzeń prostych akcji, np. zapisania notatki.
+20. Rozdzielić warstwę widoczności `questionGroups` od warstwy treści `questions`, łącząc je przez `groupId` zamiast osadzać pytania bezpośrednio w konfiguracji grup.
+21. Znormalizować treści edukacyjne w słowniku `explanations`, do którego pytania odnoszą się przez `explanationRef`.
+22. Używać stabilnych identyfikatorów i pola `order` zamiast wiązać logikę aplikacji z tekstem pytania lub jego pozycją w źródłowym markdownie.
+23. Wprowadzić runtime flags dla przypadków `if equipped` i edge case'ów hybrydowych, aby widoczność pytań nie zależała wyłącznie od prostych enumów z Part 1.
 {{/matched_recommendations}}
 
 {{prd_planning_summary}}
@@ -87,6 +96,11 @@ Kluczowe funkcje obejmują:
 14. Manualne zakończenie inspekcji przyciskiem `Zakończ inspekcję`.
 15. Usuwanie profilu użytkownika i wszystkich danych.
 16. Działanie offline z lokalnym przechowywaniem i późniejszą synchronizacją po odzyskaniu połączenia.
+17. Znormalizowaną architekturę systemu pytań: `questionGroups` w configu odpowiadają tylko za widoczność, `questions` w banku pytań za treść i kolejność, a `explanations` za współdzielone treści edukacyjne.
+18. Obsługę warunkowych grup pytań dla diesel, LPG, hybrid/electric, automatic, 4WD, convertible, SUV, van, pickup oraz dokumentów EV.
+19. Obsługę pytań typu `if equipped` poprzez runtime flags, a nie przez mnożenie wariantów konfiguracji w Part 1.
+20. `Smart Pruning` odpowiedzi osieroconych po zmianie konfiguracji auta.
+21. Natychmiastowe przeliczanie postępu i `Total Score` po zmianie odpowiedzi albo widoczności pytań.
 
 **b. Kluczowe historie użytkownika i ścieżki korzystania**
 
@@ -95,8 +109,8 @@ Najważniejsza ścieżka użytkownika:
 2. Trafia na pusty dashboard albo listę swoich inspekcji.
 3. Rozpoczyna nową inspekcję, widzi instrukcję w pop-upie.
 4. Otwiera `Stronę sesji` i wypełnia Part 1.
-5. Po poprawnym uzupełnieniu wymaganych pól odblokowują się Part 2-5.
-6. Użytkownik przechodzi przez pytania sekcjami, jedna karta na ekran, pozioma nawigacja, obowiązkowa odpowiedź.
+5. Po poprawnym uzupełnieniu wymaganych pól odblokowują się Part 2-5, a system wylicza widoczne grupy pytań na podstawie `fuelType`, `transmission`, `drive`, `bodyType` i runtime flags.
+6. Użytkownik przechodzi przez pytania sekcjami, jedna karta na ekran, pozioma nawigacja, obowiązkowa odpowiedź; treść pytań pochodzi z `question-bank`, a ich widoczność z `questionGroups`.
 7. W razie potrzeby dodaje notatki do konkretnych pytań.
 8. Po zakończeniu sekcji wraca na `Stronę sesji`, skąd wybiera kolejny Part.
 9. Na `Summary` przegląda wykresy sekcyjne i globalny wykres odpowiedzi, edytuje odpowiedzi i finalizuje inspekcję.
@@ -104,7 +118,7 @@ Najważniejsza ścieżka użytkownika:
 
 Poboczne ścieżki:
 1. Użytkownik wraca do draftu z dashboardu dzięki przypiętemu CTA.
-2. Użytkownik zmienia konfigurację auta w Part 1, a system ostrzega, że część odpowiedzi zostanie usunięta.
+2. Użytkownik zmienia konfigurację auta w Part 1, a system ostrzega, że część odpowiedzi zostanie usunięta, wykonuje `Smart Pruning` i ponownie przelicza wynik.
 3. Użytkownik pracuje offline, a aplikacja zapisuje zmiany lokalnie i synchronizuje je po odzyskaniu sieci.
 4. Użytkownik osiąga limit 2 inspekcji i dostaje pop-up limitu.
 5. Użytkownik usuwa starą inspekcję, aby zwolnić slot.
@@ -126,11 +140,24 @@ Praktyczne sposoby mierzenia w PRD:
 
 Uwaga: z uwagi na decyzję o rezygnacji z monitoringu błędów w pierwszej fazie, PRD powinno zapisać te metryki jako cel biznesowo-produktowy, ale bez rozbudowanych wymagań narzędziowych dla MVP.
 
-**d. Nierozwiązane kwestie lub obszary wymagające dalszego wyjaśnienia**
+**d. Działanie systemu pytań**
 
-Najważniejszy obszar do dalszego dopracowania przed napisaniem pełnego PRD to logika domenowa pytań:
-1. Brakuje finalnej matrycy mapowania pytań zależnych od typu paliwa, skrzyni, napędu i nadwozia.
-2. Brakuje uzupełnionej listy brakujących pytań dla wybranych kategorii pojazdów, szczególnie EV, hybryd i innych wariantów specjalnych.
+System pytań został doprecyzowany na poziomie danych i logiki runtime:
+1. Bramka wejściowa do systemu pytań wymaga poprawnego uzupełnienia pól `make`, `model`, `year`, `registrationNumber`, `fuelType`, `transmission`, `drive` i `bodyType` w Part 1.
+2. Warstwa widoczności jest opisana w `veriffica-question-mapping-config.json`, gdzie każda grupa ma `id`, `part`, `dependsOnFields`, `visibleWhen` i opcjonalne `requiresEquipmentFlag`.
+3. Warstwa treści jest opisana w `veriffica-question-bank.json`, gdzie każde pytanie ma stabilne `id`, `groupId`, `part`, `section`, `subsection`, `label`, `order` i opcjonalne `explanationRef`.
+4. Warstwa wyjaśnień jest znormalizowana w top-level sekcji `explanations`, dzięki czemu wiele pytań może współdzielić ten sam opis usterki lub wskazówki edukacyjnej.
+5. Zakres mapowania obejmuje zarówno grupy bazowe, jak i warunki dla paliwa, skrzyni, napędu, nadwozia oraz przypadków `if equipped`.
+6. Runtime flags rozwiązują przypadki graniczne i wyposażeniowe, np. hybrydę z silnikiem spalinowym i świecami, port ładowania, turbo, kompresor mechaniczny czy dokumenty baterii EV.
+7. Kolejność ewaluacji jest następująca: walidacja pól wymaganych Part 1, ustawienie `requiredPart1Complete`, obliczenie widoczności grup, zastosowanie flag `if equipped`, render tylko widocznych grup, pruning odpowiedzi osieroconych oraz przeliczenie postępu i `Total Score`.
+8. Zmiana jednego z pól mapujących `fuelType`, `transmission`, `drive` lub `bodyType` uruchamia pruning w trybie `remove_answers_for_now_hidden_groups`.
+9. Odpowiedzi i notatki powinny odnosić się do stabilnych identyfikatorów, a nie do tekstów pytań, co upraszcza edycję odpowiedzi na `Summary`, przyszłe tłumaczenia i dalszy rozwój modelu danych.
+
+**e. Nierozwiązane kwestie lub obszary wymagające dalszego wyjaśnienia**
+
+Najważniejszy obszar do dalszego dopracowania przed implementacją to warstwa runtime systemu pytań:
+1. Brakuje implementacji kodowej ewaluatora widoczności pytań oraz `Smart Pruning` zgodnych z przygotowanym configiem.
+2. Brakuje finalnego schematu zapisu odpowiedzi i notatek oraz zasad serializacji offline dla warstwy domenowej systemu pytań.
 
 Drugorzędne doprecyzowania do dopisania w PRD:
 1. Dokładne reguły ścisłej walidacji wszystkich pól w Part 1, pole po polu.
@@ -140,8 +167,8 @@ Drugorzędne doprecyzowania do dopisania w PRD:
 {{/prd_planning_summary}}
 
 {{unresolved_issues}}
-1. Brak kompletnej logiki mapowania pytań z Part 1 do Partów 2-5.
-2. Brak rozszerzonej listy pytań dla brakujących kategorii pojazdów i konfiguracji technicznych.
+1. Brak implementacji kodowej ewaluatora widoczności pytań i `Smart Pruning` zgodnych z przygotowanym configiem.
+2. Brak finalnego schematu odpowiedzi, notatek i storage modelu dla warstwy offline systemu pytań.
 3. Brak szczegółowej specyfikacji walidacji dla wszystkich pól formularza Part 1.
 4. Brak finalnych treści UX dla komunikatów błędów, limitów, ostrzeżeń i potwierdzeń.
 5. Nieustalone zachowanie aplikacji przy pierwszej wizycie offline przed zainstalowaniem cache PWA.
