@@ -1,8 +1,246 @@
 {
   "version": 1,
   "name": "veriffica-question-bank",
-  "description": "Implementation-ready question bank for Veriffica MVP, linked to questionGroups by groupId.",
+  "description": "Implementation-ready question bank for Veriffica MVP, linked to questionGroups by groupId and explanation references.",
   "defaultAnswerType": "yes-no-dont-know",
+  "explanations": [
+    {
+      "id": 1,
+      "text": "Damaged cylinder head, cylinder head gasket or engine block"
+    },
+    {
+      "id": 2,
+      "text": "Coolant leakage due to damaged rubber hoses, radiator, water pump, cylinder head or engine block"
+    },
+    {
+      "id": 3,
+      "text": "Leaking seals, need to be replaced"
+    },
+    {
+      "id": 4,
+      "text": "Worn drive unit"
+    },
+    {
+      "id": 5,
+      "text": "Turbocharger for replacement"
+    },
+    {
+      "id": 6,
+      "text": "Replacement needed"
+    },
+    {
+      "id": 7,
+      "text": "Damaged shock absorber"
+    },
+    {
+      "id": 8,
+      "text": "Bad chassis geometry or bad wheel alignment"
+    },
+    {
+      "id": 9,
+      "text": "Indicates a replacement of a worn element due to damage or hide the signs of wear"
+    },
+    {
+      "id": 10,
+      "text": "Car leaking or flooded"
+    },
+    {
+      "id": 11,
+      "text": "The owner was a smoker"
+    },
+    {
+      "id": 12,
+      "text": "Steering system requires repair"
+    },
+    {
+      "id": 13,
+      "text": "Damaged / discharged battery or damaged alternator"
+    },
+    {
+      "id": 14,
+      "text": "Damaged starter"
+    },
+    {
+      "id": 15,
+      "text": "Starter, alternator or battery damaged"
+    },
+    {
+      "id": 16,
+      "text": "Systems indicated by the check lights damaged"
+    },
+    {
+      "id": 17,
+      "text": "Damage to the lambda probe"
+    },
+    {
+      "id": 18,
+      "text": "Worn power steering belts or pulleys"
+    },
+    {
+      "id": 19,
+      "text": "Damaged engine cushions"
+    },
+    {
+      "id": 20,
+      "text": "Leaking at the front of the exhaust system"
+    },
+    {
+      "id": 21,
+      "text": "Too much oil in the combustion chamber - damaged seals, valves or rings"
+    },
+    {
+      "id": 22,
+      "text": "Fuel system not adjusted - carburetor or fuel injectors"
+    },
+    {
+      "id": 23,
+      "text": "Worn clutch disc or poor contact pressure"
+    },
+    {
+      "id": 24,
+      "text": "Gearbox damaged"
+    },
+    {
+      "id": 25,
+      "text": "Bad stabilizer link or damaged rocker arm, rubber bushing, or rocker arm pin"
+    },
+    {
+      "id": 26,
+      "text": "Damaged control arm or tie rod"
+    },
+    {
+      "id": 27,
+      "text": "Worn shock absorbers, damaged steering rods or suspension springs"
+    },
+    {
+      "id": 28,
+      "text": "Defective bearings or wrong tires"
+    },
+    {
+      "id": 29,
+      "text": "Brake fluid leakage"
+    },
+    {
+      "id": 30,
+      "text": "Braking system badly damaged"
+    },
+    {
+      "id": 31,
+      "text": "Seized brakes"
+    },
+    {
+      "id": 32,
+      "text": "Broken brake discs or drums, poorly fitting rims or worn bearings"
+    },
+    {
+      "id": 33,
+      "text": "Air in the brake system"
+    },
+    {
+      "id": 34,
+      "text": "ABS system damaged"
+    },
+    {
+      "id": 35,
+      "text": "Bad brake linings or discs or damaged steering system components"
+    },
+    {
+      "id": 36,
+      "text": "Damaged turbocharger"
+    },
+    {
+      "id": 37,
+      "text": "Fuel filter housing or seals leaking"
+    },
+    {
+      "id": 38,
+      "text": "High-pressure fuel pump may be wearing internally"
+    },
+    {
+      "id": 39,
+      "text": "Fuel system leakage, requires repair"
+    },
+    {
+      "id": 40,
+      "text": "Glow plug system or engine management fault"
+    },
+    {
+      "id": 41,
+      "text": "Fuel contamination or poor diesel maintenance"
+    },
+    {
+      "id": 42,
+      "text": "High-voltage electrical system requires specialist inspection"
+    },
+    {
+      "id": 43,
+      "text": "Traction battery housing or battery cooling system may be damaged"
+    },
+    {
+      "id": 44,
+      "text": "Charging system requires repair and may be unsafe to use"
+    },
+    {
+      "id": 45,
+      "text": "Automatic transmission wear or fluid condition issue"
+    },
+    {
+      "id": 46,
+      "text": "Automatic selector or gearbox control issue"
+    },
+    {
+      "id": 47,
+      "text": "Transfer case, differential or prop shaft wear"
+    },
+    {
+      "id": 48,
+      "text": "Driveshaft joint or axle boot replacement needed"
+    },
+    {
+      "id": 49,
+      "text": "Convertible roof mechanism or sealing requires repair"
+    },
+    {
+      "id": 50,
+      "text": "Sliding door mechanism worn or misaligned"
+    },
+    {
+      "id": 51,
+      "text": "Tailgate hardware damaged and may fail under load"
+    },
+    {
+      "id": 52,
+      "text": "Pickup body may have structural or accident-related damage"
+    },
+    {
+      "id": 53,
+      "text": "Combustion quality, glow plugs or injector system issue"
+    },
+    {
+      "id": 54,
+      "text": "Engine mount, injector or compression issue"
+    },
+    {
+      "id": 55,
+      "text": "Hybrid / EV drive system fault, specialist diagnosis required"
+    },
+    {
+      "id": 56,
+      "text": "Diesel emissions or turbo / intake issue"
+    },
+    {
+      "id": 57,
+      "text": "Brake blending or regenerative braking calibration issue"
+    },
+    {
+      "id": 58,
+      "text": "Traction battery condition may be degraded"
+    },
+    {
+      "id": 59,
+      "text": "4WD / AWD system fault or drivetrain wind-up issue"
+    }
+  ],
   "questions": [
     {
       "id": "q_p2_car_body_corrosion_bonnet",

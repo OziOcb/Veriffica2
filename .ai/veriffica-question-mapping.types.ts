@@ -227,6 +227,11 @@ export interface VerifficaQuestionMappingConfig {
 export type QuestionAnswerType = "yes-no-dont-know";
 export type InspectionAnswerValue = "yes" | "no" | "dont_know";
 
+export interface ExplanationDefinition {
+  id: number;
+  text: string;
+}
+
 export interface QuestionDefinition {
   id: string;
   groupId: QuestionGroupId;
@@ -244,6 +249,7 @@ export interface QuestionBankFile {
   name: string;
   description: string;
   defaultAnswerType: QuestionAnswerType;
+  explanations: ExplanationDefinition[];
   questions: QuestionDefinition[];
 }
 
