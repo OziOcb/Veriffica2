@@ -35,6 +35,181 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 - Address
 - Notes
 
+## Question mapping logic / Logika mapowania pytań
+
+The list below defines which questions must be shown after the user completes Part 1.
+
+### 1. Core rules
+- All users always see the base questions from:
+  - Part 2: Car Body, Front suspension, Tires, Car interior
+  - Part 5: Chassis numbers (VIN), Service booklet, Registration certificate, Vehicle card, Cars imported from the EU
+- Questions marked `If equipped` are shown only when that equipment is visibly present in the inspected car.
+- If the user changes any required field in Part 1 after answering questions, the app should:
+  - keep answers that still match the new configuration
+  - remove answers that no longer match the new configuration
+  - recalculate per-Part progress and Total Score immediately
+
+### 2. Fuel type mapping
+
+#### Petrol
+- Show all base combustion-engine questions from Parts 2-4.
+- Show `Spark plugs condition`.
+- Show `Black exhaust from gasoline engine`.
+- Hide diesel-only, LPG-only and electric-only sections.
+
+#### Diesel
+- Show all base combustion-engine questions from Parts 2-4 except petrol-only checks.
+- Show the diesel-only sections listed below.
+- Hide `Spark plugs condition`.
+- Hide `Black exhaust from gasoline engine`.
+- Hide LPG-only and electric-only sections.
+
+#### LPG
+- Show all petrol questions.
+- Show all LPG sections in Part 2 and Part 5.
+- Hide diesel-only and electric-only sections.
+
+#### Hybrid
+- Show all base questions for body, suspension, tires, interior, VIN and documents.
+- Show combustion-engine sections that are still applicable to the inspected hybrid car.
+- Show hybrid/high-voltage sections.
+- Hide LPG-only sections unless the car is visibly equipped with LPG.
+- Hide pure electric-only checks that require a car with no combustion engine.
+
+#### Electric
+- Show all base questions for body, suspension, tires, interior, VIN and documents.
+- Hide combustion-engine sections that depend on engine oil, exhaust, spark plugs, clutch or fuel combustion.
+- Show electric/high-voltage/charging sections.
+- Hide LPG-only and diesel-only sections.
+
+### 3. Transmission mapping
+
+#### Manual
+- Show `Gearbox and clutch` checks for clutch engagement and starting in third gear.
+- Show any question that refers to the clutch pedal or manual gear lever behavior.
+- Hide automatic-only gearbox questions.
+
+#### Automatic
+- Hide `The car starts in third gear`.
+- Hide clutch-specific questions.
+- Show all automatic-only gearbox questions listed below.
+
+### 4. Drive mapping
+
+#### 2WD
+- Show all base suspension, steering and braking questions.
+- Hide 4WD-only drivetrain questions.
+
+#### 4WD
+- Show all base suspension, steering and braking questions.
+- Show 4WD drivetrain questions listed below.
+
+### 5. Body type mapping
+
+#### Sedan / Hatchback / Coupe / Other
+- Show the base checklist only.
+
+#### SUV
+- Show the base checklist.
+- Show `SUV / raised body checks`.
+
+#### Convertible
+- Show the base checklist.
+- Show `Convertible roof and seals`.
+
+#### Van
+- Show the base checklist.
+- Show `Van body and cargo area`.
+
+#### Pickup
+- Show the base checklist.
+- Show `Pickup load bed and tailgate`.
+
+### 6. Mapping matrix by section
+
+#### Part 2 — At a standstill
+- Always show:
+  - Car Body
+  - Front suspension
+  - Tires
+  - Car interior
+- Show only for Petrol / LPG / Hybrid when combustion engine is present:
+  - The condition of the coolant in the expansion tank and engine
+  - Oil condition
+  - Spark plugs condition
+  - Belts and pulleys
+- Show only for Diesel / Hybrid when diesel engine is present:
+  - Diesel fuel system
+  - Diesel cold-engine checks
+- Show only for LPG:
+  - LPG installation
+- Show only for Electric / Hybrid:
+  - High-voltage battery and electrical system
+  - Charging port and charging accessories (if equipped)
+- Show only for Automatic:
+  - Automatic transmission visual inspection
+- Show only for 4WD:
+  - 4WD driveline condition
+- Show only for Convertible:
+  - Convertible roof and seals
+- Show only for SUV:
+  - SUV / raised body checks
+- Show only for Van:
+  - Van body and cargo area
+- Show only for Pickup:
+  - Pickup load bed and tailgate
+- Hide for Electric:
+  - Exhaust system condition
+  - Mechanical turbocharger
+
+#### Part 3 — Starting the engine
+- Show only for combustion vehicles and hybrids with combustion engine:
+  - Ignition
+  - Engine condition
+  - Exhaust system
+- Show only for Diesel:
+  - Diesel start-up behavior
+- Show only for Electric / Hybrid:
+  - Hybrid / electric power-up checks
+- Show only for Automatic:
+  - Automatic selector engagement at standstill
+- Hide for Electric:
+  - Exhaust system
+  - Engine oil splash / smoke checks
+
+#### Part 4 — Test drive
+- Always show:
+  - Suspension
+  - Steering system
+  - Other phenomena
+  - Brakes
+- Show only for Manual:
+  - Manual gearbox and clutch condition
+- Show only for Automatic:
+  - Automatic transmission operation
+- Show only for Diesel:
+  - Diesel operation under load
+- Show only for Electric / Hybrid:
+  - Hybrid / electric drive behavior
+- Show only for 4WD:
+  - 4WD system operation
+- Show only for turbo-equipped combustion vehicles:
+  - Turbocharger
+- Show only for Convertible:
+  - Convertible body noise and seal behavior
+
+#### Part 5 — Documents
+- Always show:
+  - Chassis numbers (VIN)
+  - Service booklet
+  - Registration certificate
+  - Vehicle card
+  - Cars imported from the EU
+- Show only for LPG:
+  - LPG documents
+- Show only for Electric / Hybrid if equipped:
+  - Charging and traction battery documents
+
 ---
 
 ## Part 2 — At a standstill / Na postoju
@@ -101,10 +276,33 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 - Black coating
 - Traces of soot
 
+#### Diesel fuel system (If Diesel)
+- Diesel fuel filter housing leaks *37
+- Traces of metal filings around the high-pressure pump *38
+- Wet injectors or smell of diesel fuel in the engine bay *39
+- Cracked or hardened return fuel hoses *39
+
+#### Diesel cold-engine checks (If Diesel)
+- Glow plug indicator does not behave normally after turning the ignition on *40
+- Excessive waxy deposits around the fuel filter in cold weather *41
+
 #### LPG installation (If equipped)
 - Corrosion of the fuel pump
 - Corrosion of the fuel tank
 - Dirty fuel filter
+
+#### High-voltage battery and electrical system (If Electric / Hybrid)
+- Damaged orange high-voltage cables or missing protective covers *42
+- Warning labels missing in the engine bay or service access areas
+- Traces of impact, dents or deformation near the traction battery housing *43
+- Evidence of moisture, corrosion or dirt around high-voltage connectors *42
+- Strong chemical smell near the battery area after opening the car *43
+
+#### Charging port and charging accessories (If Electric / Hybrid and if equipped)
+- Charging port flap damaged or does not close properly
+- Visible corrosion, burns or bent pins in the charging port *44
+- Charging cable insulation damaged or plug casing cracked *44
+- Portable charger missing or obviously damaged (if included in the sale)
 
 #### Belts and pulleys
 - Frayed belts
@@ -114,6 +312,39 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 
 #### Mechanical turbocharger (if equipped)
 - Broken compressor belt *5
+
+#### Automatic transmission visual inspection (If Automatic)
+- Transmission fluid leak under the gearbox area *45
+- Burnt smell around the transmission fluid dipstick or filler area (if accessible) *45
+- Selector positions on the lever are worn or not clearly engaging *46
+
+#### 4WD driveline condition (If 4WD)
+- Leaks around transfer case or rear differential *47
+- Torn driveshaft or axle rubber boots *48
+- Noticeable play in the prop shaft when checked by hand *47
+
+#### Convertible roof and seals (If Convertible)
+- Roof fabric or panels damaged, cracked or torn
+- Moisture marks near roof seals or top edge of windshield *10
+- Roof opens or closes unevenly (if test is possible) *49
+- Side windows do not align with roof seals *49
+
+#### SUV / raised body checks (If SUV)
+- Cracked or damaged plastic underbody covers
+- Damaged side steps or rocker area from off-road impacts
+- Uneven wear or damage on lower bumpers and splash shields
+
+#### Van body and cargo area (If Van)
+- Sliding door rollers noisy, sticking or misaligned *50
+- Rear cargo floor bent, cracked or patched
+- Signs of water leaks in the cargo area *10
+- Bulkhead or cargo tie-down points visibly damaged
+
+#### Pickup load bed and tailgate (If Pickup)
+- Load bed floor heavily bent or patched
+- Tailgate cables, hinges or latches damaged *51
+- Corrosion under bed liner or around wheel arches
+- Bed and cabin alignment visibly uneven *52
 
 ### Front suspension
 #### Suspension condition
@@ -181,10 +412,25 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 - indicator lamps on after starting the engine *16
 - Rough idling *17
 
+#### Diesel start-up behavior (If Diesel)
+- Excessive smoke immediately after cold start *53
+- Engine shakes strongly for the first seconds after starting *54
+- Glow plug or engine management warning remains on after start *40
+
+#### Hybrid / electric power-up checks (If Hybrid / Electric)
+- The car does not enter READY / drive-ready mode after start procedure *55
+- High-voltage system warning light remains on after power-up *42
+- Main display shows charging system, battery or isolation fault messages *42
+- Unusually loud cooling fan starts immediately after power-up on a cold car *43
+
 ### Car interior
 #### Steering system
 - A whistling sound is heard when the wheels turn fully *18
 - Vibration of plastic parts in the cabin *19
+
+#### Automatic selector engagement at standstill (If Automatic)
+- Delay or strong jerk when shifting from P to D or R with the brake applied *46
+- Selector cannot be moved smoothly through all positions *46
 
 ### Engine compartment and engine
 #### Engine condition
@@ -209,6 +455,17 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 - Imprecise gears *24
 - Hearable creaks *24
 
+#### Automatic transmission operation (If Automatic)
+- Delay when moving off after selecting D or R *46
+- Noticeable jerks during upshifts or downshifts *46
+- Gear hunting or frequent unnecessary shifts at steady speed *46
+- Transmission slips under acceleration (engine revs rise but speed does not) *45
+
+#### Diesel operation under load (If Diesel)
+- Noticeable loss of power above medium speed *56
+- Excessive black smoke under acceleration *22
+- DPF / emissions warning appears during the drive *56
+
 ### Suspension
 #### Suspension responses
 - Rear suspension knocks *25
@@ -222,6 +479,12 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 
 ### Other phenomena
 - Whining as speed increases *28
+
+#### Hybrid / electric drive behavior (If Hybrid / Electric)
+- Jerky transition between regenerative braking and friction braking *57
+- Noticeable vibration or humming from the battery area during acceleration *43
+- Sudden drop of available power shown on the dashboard *55
+- State-of-charge drops unusually fast during a short drive *58
 
 ### Brakes
 #### Braking system responses
@@ -242,6 +505,17 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 #### Mechanical turbocharger
 - Compressor whistling excessively loud as engine speed increases *36
 
+### 4WD system operation (If 4WD)
+#### Drivetrain responses
+- Binding, hopping or heavy resistance during slow full-lock turns on dry ground *59
+- Knocking or vibration from the center tunnel during acceleration *47
+- 4WD warning light appears during the drive *59
+
+### Convertible body noise and seal behavior (If Convertible)
+#### Roof responses during the drive
+- Excessive wind noise around the roof seals at city speed *49
+- Water leak noise, rattles or roof frame knocks on bumps *49
+
 ---
 
 ## Part 5 — Documents / Numer nadwozia i dokumenty pojazdu
@@ -258,6 +532,13 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 - Gas installation documentation
 - Gas cylinder approval
 - LPG entry in the registration certificate
+
+### Charging and traction battery documents (If Electric / Hybrid and if equipped)
+#### Necessary documents
+- Battery warranty or battery health report (if available from the seller)
+- Charging cable(s) and charging adapter(s) included in the sale
+- Documentation for replaced traction battery modules (if applicable)
+- Documentation for high-voltage system service campaigns or recalls (if applicable)
 
 ### Service booklet
 #### Desired information
@@ -327,6 +608,29 @@ Forma do wypełnienia w której użytkownik wpisywać będzie podstawowe dane po
 34. ABS system damaged
 35. Bad brake linings or discs or damaged steering system components
 36. Damaged turbocharger
+37. Fuel filter housing or seals leaking
+38. High-pressure fuel pump may be wearing internally
+39. Fuel system leakage, requires repair
+40. Glow plug system or engine management fault
+41. Fuel contamination or poor diesel maintenance
+42. High-voltage electrical system requires specialist inspection
+43. Traction battery housing or battery cooling system may be damaged
+44. Charging system requires repair and may be unsafe to use
+45. Automatic transmission wear or fluid condition issue
+46. Automatic selector or gearbox control issue
+47. Transfer case, differential or prop shaft wear
+48. Driveshaft joint or axle boot replacement needed
+49. Convertible roof mechanism or sealing requires repair
+50. Sliding door mechanism worn or misaligned
+51. Tailgate hardware damaged and may fail under load
+52. Pickup body may have structural or accident-related damage
+53. Combustion quality, glow plugs or injector system issue
+54. Engine mount, injector or compression issue
+55. Hybrid / EV drive system fault, specialist diagnosis required
+56. Diesel emissions or turbo / intake issue
+57. Brake blending or regenerative braking calibration issue
+58. Traction battery condition may be degraded
+59. 4WD / AWD system fault or drivetrain wind-up issue
 
 ---
 
