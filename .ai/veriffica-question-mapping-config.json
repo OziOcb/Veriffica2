@@ -1,0 +1,1061 @@
+{
+  "version": 1,
+  "name": "veriffica-question-mapping-config",
+  "description": "Implementation-ready question visibility config for Veriffica MVP",
+  "part1": {
+    "requiredFields": [
+      "make",
+      "model",
+      "year",
+      "registrationNumber",
+      "fuelType",
+      "transmission",
+      "drive",
+      "bodyType"
+    ],
+    "enumValues": {
+      "fuelType": ["petrol", "diesel", "lpg", "hybrid", "electric"],
+      "transmission": ["manual", "automatic"],
+      "drive": ["2wd", "4wd"],
+      "bodyType": [
+        "sedan",
+        "hatchback",
+        "suv",
+        "coupe",
+        "convertible",
+        "van",
+        "pickup",
+        "other"
+      ]
+    }
+  },
+  "runtimeFlags": {
+    "requiredPart1Complete": {
+      "type": "derived",
+      "description": "All required Part 1 fields are present and valid"
+    },
+    "combustionEnginePresent": {
+      "type": "derived",
+      "description": "True for petrol, diesel, LPG and most hybrid vehicles"
+    },
+    "sparkPlugsPresent": {
+      "type": "runtime-confirmed",
+      "description": "Used mainly for hybrid edge cases"
+    },
+    "chargingPortEquipped": {
+      "type": "runtime-confirmed",
+      "description": "True when the inspected vehicle has a usable charging port and charging equipment should be checked"
+    },
+    "turboEquipped": {
+      "type": "runtime-confirmed",
+      "description": "True when the inspected combustion vehicle has a turbocharger"
+    },
+    "mechanicalCompressorEquipped": {
+      "type": "runtime-confirmed",
+      "description": "True when the inspected combustion vehicle has a belt-driven mechanical compressor"
+    },
+    "evBatteryDocsAvailable": {
+      "type": "runtime-confirmed",
+      "description": "True when the seller provides battery or charging-related documents worth checking"
+    }
+  },
+  "questionGroups": [
+    {
+      "id": "p2_car_body",
+      "part": "part2",
+      "label": "Car Body",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_engine_bay_base",
+      "part": "part2",
+      "label": "Engine compartment and engine: base visual checks",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_coolant_condition",
+      "part": "part2",
+      "label": "The condition of the coolant in the expansion tank and engine",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "operator": "any",
+            "conditions": [
+              {
+                "field": "fuelType",
+                "in": ["petrol", "diesel", "lpg"]
+              },
+              {
+                "operator": "all",
+                "conditions": [
+                  {
+                    "field": "fuelType",
+                    "equals": "hybrid"
+                  },
+                  {
+                    "flag": "combustionEnginePresent",
+                    "equals": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_oil_condition",
+      "part": "part2",
+      "label": "Oil condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "operator": "any",
+            "conditions": [
+              {
+                "field": "fuelType",
+                "in": ["petrol", "diesel", "lpg"]
+              },
+              {
+                "operator": "all",
+                "conditions": [
+                  {
+                    "field": "fuelType",
+                    "equals": "hybrid"
+                  },
+                  {
+                    "flag": "combustionEnginePresent",
+                    "equals": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_spark_plugs",
+      "part": "part2",
+      "label": "Spark plugs condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "operator": "any",
+            "conditions": [
+              {
+                "field": "fuelType",
+                "in": ["petrol", "lpg"]
+              },
+              {
+                "operator": "all",
+                "conditions": [
+                  {
+                    "field": "fuelType",
+                    "equals": "hybrid"
+                  },
+                  {
+                    "flag": "sparkPlugsPresent",
+                    "equals": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_diesel_fuel_system",
+      "part": "part2",
+      "label": "Diesel fuel system",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "diesel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_diesel_cold_checks",
+      "part": "part2",
+      "label": "Diesel cold-engine checks",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "diesel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_lpg_installation",
+      "part": "part2",
+      "label": "LPG installation",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "lpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_hv_system",
+      "part": "part2",
+      "label": "High-voltage battery and electrical system",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["hybrid", "electric"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_charging_port",
+      "part": "part2",
+      "label": "Charging port and charging accessories",
+      "dependsOnFields": ["fuelType"],
+      "requiresEquipmentFlag": "chargingPortEquipped",
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["hybrid", "electric"]
+          },
+          {
+            "flag": "chargingPortEquipped",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_belts_pulleys",
+      "part": "part2",
+      "label": "Belts and pulleys",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_mechanical_supercharger",
+      "part": "part2",
+      "label": "Mechanical turbocharger",
+      "dependsOnFields": ["fuelType"],
+      "requiresEquipmentFlag": "mechanicalCompressorEquipped",
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          },
+          {
+            "flag": "mechanicalCompressorEquipped",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_auto_visual",
+      "part": "part2",
+      "label": "Automatic transmission visual inspection",
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "transmission",
+            "equals": "automatic"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_4wd_driveline",
+      "part": "part2",
+      "label": "4WD driveline condition",
+      "dependsOnFields": ["drive"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "drive",
+            "equals": "4wd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_convertible_roof",
+      "part": "part2",
+      "label": "Convertible roof and seals",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "bodyType",
+            "equals": "convertible"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_suv_checks",
+      "part": "part2",
+      "label": "SUV / raised body checks",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "bodyType",
+            "equals": "suv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_van_cargo",
+      "part": "part2",
+      "label": "Van body and cargo area",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "bodyType",
+            "equals": "van"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_pickup_bed",
+      "part": "part2",
+      "label": "Pickup load bed and tailgate",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "bodyType",
+            "equals": "pickup"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_front_suspension",
+      "part": "part2",
+      "label": "Front suspension",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_tires",
+      "part": "part2",
+      "label": "Tires",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_exhaust_condition",
+      "part": "part2",
+      "label": "Exhaust system condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_interior_wear",
+      "part": "part2",
+      "label": "Car interior: wear indicating high mileage",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_interior_upholstery",
+      "part": "part2",
+      "label": "Car interior: upholstery condition",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_interior_electrics",
+      "part": "part2",
+      "label": "Car interior: electrics",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p2_steering_static",
+      "part": "part2",
+      "label": "Car interior: steering system",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_ignition",
+      "part": "part3",
+      "label": "Ignition / engine start-up",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_diesel_start",
+      "part": "part3",
+      "label": "Diesel start-up behavior",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "diesel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_ev_ready",
+      "part": "part3",
+      "label": "Hybrid / electric power-up checks",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["hybrid", "electric"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_steering_interior",
+      "part": "part3",
+      "label": "Car interior: steering system",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_auto_selector",
+      "part": "part3",
+      "label": "Automatic selector engagement at standstill",
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "transmission",
+            "equals": "automatic"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_engine_condition",
+      "part": "part3",
+      "label": "Engine compartment and engine: engine condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_exhaust",
+      "part": "part3",
+      "label": "Exhaust system",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_manual_gearbox",
+      "part": "part4",
+      "label": "Gearbox and clutch condition",
+      "dependsOnFields": ["transmission", "fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "transmission",
+            "equals": "manual"
+          },
+          {
+            "field": "fuelType",
+            "notIn": ["electric"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_automatic_gearbox",
+      "part": "part4",
+      "label": "Automatic transmission operation",
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "transmission",
+            "equals": "automatic"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_diesel_load",
+      "part": "part4",
+      "label": "Diesel operation under load",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "diesel"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_suspension",
+      "part": "part4",
+      "label": "Suspension responses",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_steering",
+      "part": "part4",
+      "label": "Steering system responses",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_other",
+      "part": "part4",
+      "label": "Other phenomena",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_ev_drive",
+      "part": "part4",
+      "label": "Hybrid / electric drive behavior",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["hybrid", "electric"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_brakes",
+      "part": "part4",
+      "label": "Braking system responses",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_turbo",
+      "part": "part4",
+      "label": "Turbocharger",
+      "dependsOnFields": ["fuelType"],
+      "requiresEquipmentFlag": "turboEquipped",
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["petrol", "diesel", "lpg", "hybrid"]
+          },
+          {
+            "flag": "turboEquipped",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_4wd_operation",
+      "part": "part4",
+      "label": "4WD system operation",
+      "dependsOnFields": ["drive"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "drive",
+            "equals": "4wd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_convertible_noise",
+      "part": "part4",
+      "label": "Convertible body noise and seal behavior",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "bodyType",
+            "equals": "convertible"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_vin",
+      "part": "part5",
+      "label": "Chassis numbers (VIN)",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_lpg_docs",
+      "part": "part5",
+      "label": "LPG documents",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "equals": "lpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_ev_docs",
+      "part": "part5",
+      "label": "Charging and traction battery documents",
+      "dependsOnFields": ["fuelType"],
+      "requiresEquipmentFlag": "evBatteryDocsAvailable",
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          },
+          {
+            "field": "fuelType",
+            "in": ["hybrid", "electric"]
+          },
+          {
+            "flag": "evBatteryDocsAvailable",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_service_booklet",
+      "part": "part5",
+      "label": "Service booklet",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_registration",
+      "part": "part5",
+      "label": "Registration certificate",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_vehicle_card",
+      "part": "part5",
+      "label": "Vehicle card",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p5_eu_import",
+      "part": "part5",
+      "label": "Cars imported from the EU",
+      "dependsOnFields": [],
+      "visibleWhen": {
+        "operator": "all",
+        "conditions": [
+          {
+            "flag": "requiredPart1Complete",
+            "equals": true
+          }
+        ]
+      }
+    }
+  ],
+  "derivedRules": [
+    {
+      "id": "R1",
+      "name": "gate-parts-by-part1-validity",
+      "description": "Lock Parts 2-5 until all required Part 1 fields are valid"
+    },
+    {
+      "id": "R2",
+      "name": "update-session-title-live",
+      "description": "Update the inspection tile immediately after make, model, year or registration number changes"
+    },
+    {
+      "id": "R3",
+      "name": "prune-hidden-group-answers",
+      "description": "When any mapping field changes, remove answers belonging to question groups that became hidden"
+    },
+    {
+      "id": "R4",
+      "name": "recalculate-progress-and-score",
+      "description": "Recalculate current Part progress and Total Score immediately after visibility or answer changes"
+    },
+    {
+      "id": "R5",
+      "name": "if-equipped-gate",
+      "description": "Groups that require equipment flags are visible only when the base condition and the equipment flag are both true"
+    }
+  ],
+  "pruning": {
+    "triggerFields": ["fuelType", "transmission", "drive", "bodyType"],
+    "mode": "remove_answers_for_now_hidden_groups",
+    "recalculateImmediately": true
+  },
+  "evaluationOrder": [
+    "validate_required_part1_fields",
+    "set_requiredPart1Complete_flag",
+    "evaluate_group_visibility",
+    "apply_if_equipped_flags",
+    "render_only_visible_groups",
+    "prune_orphaned_answers_after_part1_changes",
+    "recalculate_progress_and_total_score"
+  ]
+}
