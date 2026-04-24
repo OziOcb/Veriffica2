@@ -1,0 +1,2213 @@
+{
+  "$schema": "./question-bank.schema.json",
+  "version": 1,
+  "sourceFile": ".ai/veriffica-questions-list/list-of-questions.md",
+  "allowedAnswers": ["yes", "no", "dont_know"],
+  "questions": [
+    {
+      "id": "q-p2-base-car-body-corrosion-bonnet",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Bonnet",
+      "order": 10
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-boot-lid",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Boot lid",
+      "order": 20
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-fender",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Fender",
+      "order": 30
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-gasket-window-areas",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Gasket and window areas",
+      "order": 40
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-body-dents",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Body dents",
+      "order": 50
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-fuel-filler-area",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Fuel filler area",
+      "order": 60
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-hinges-connections",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Hinges connections",
+      "order": 70
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-door-edges",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Door edges",
+      "order": 80
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-handles",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Handles",
+      "order": 90
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-engine-compartment",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Engine compartment",
+      "order": 100
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-floor-moisture",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Floor (moisture)",
+      "order": 110
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-windshield",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Windshield",
+      "order": 120
+    },
+    {
+      "id": "q-p2-base-car-body-corrosion-floor-under-back-seats",
+      "groupId": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "label": "Floor, under back seats",
+      "order": 130
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-paint-discoloration",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Paint discoloration",
+      "order": 140
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-paint-cracking",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Paint cracking",
+      "order": 150
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-paint-swelling",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Paint swelling",
+      "order": 160
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-visible-lumps-and-dirt-under-paint",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Visible lumps and dirt under the paint",
+      "order": 170
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-paint-polishing-paste-on-seals",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Traces of paint/polishing paste on the seals",
+      "order": 180
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-badly-matched-body-parts",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Badly matched body parts",
+      "order": 190
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-moldings-curves-or-uneven-body-lines",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Moldings curves or uneven body lines",
+      "order": 200
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-noticeable-welds-on-body-or-bumpers",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Noticeable welds on the car body, bumpers etc.",
+      "order": 210
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-different-glass-production-dates",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Different production dates, different glass manufacturers",
+      "order": 220
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-different-lamp-production-dates",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Different production dates, different lamp manufacturers",
+      "order": 230
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-scratches-on-windshield-under-wipers",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Scratches on the windshield under the wipers",
+      "order": 240
+    },
+    {
+      "id": "q-p2-base-car-body-repair-traces-damages-on-windshields",
+      "groupId": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "label": "Damages on the windshields (chips, cracks)",
+      "order": 250
+    },
+    {
+      "id": "q-p2-base-engine-structure-bumpers-fenders-damaged-mounting-bolts",
+      "groupId": "g-p2-base-engine-structure-bumpers-fenders",
+      "part": "part2",
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Bumpers and fenders",
+      "label": "Damaged mounting bolts (paint scratches on the bolt head)",
+      "order": 260
+    },
+    {
+      "id": "q-p2-base-engine-structure-bumpers-fenders-different-fastening-elements",
+      "groupId": "g-p2-base-engine-structure-bumpers-fenders",
+      "part": "part2",
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Bumpers and fenders",
+      "label": "Different fastening elements",
+      "order": 270
+    },
+    {
+      "id": "q-p2-base-engine-structure-side-members-rust",
+      "groupId": "g-p2-base-engine-structure-side-members",
+      "part": "part2",
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Side members",
+      "label": "Rust",
+      "order": 280
+    },
+    {
+      "id": "q-p2-base-engine-structure-side-members-traces-of-repairs",
+      "groupId": "g-p2-base-engine-structure-side-members",
+      "part": "part2",
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Side members",
+      "label": "Traces of repairs",
+      "order": 290
+    },
+    {
+      "id": "q-p2-base-engine-structure-welds-asymmetrical-welds",
+      "groupId": "g-p2-base-engine-structure-welds",
+      "part": "part2",
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Welds",
+      "label": "Asymmetrical welds",
+      "order": 300
+    },
+    {
+      "id": "q-p2-base-front-suspension-condition-signs-of-corrosion",
+      "groupId": "g-p2-base-front-suspension-condition",
+      "part": "part2",
+      "section": "Front suspension",
+      "subsection": "Suspension condition",
+      "label": "signs of corrosion of the suspension",
+      "order": 310
+    },
+    {
+      "id": "q-p2-base-front-suspension-condition-cracked-rubber-parts",
+      "groupId": "g-p2-base-front-suspension-condition",
+      "part": "part2",
+      "section": "Front suspension",
+      "subsection": "Suspension condition",
+      "label": "cracked rubber parts",
+      "order": 320,
+      "explanationRef": "exp-006"
+    },
+    {
+      "id": "q-p2-base-front-suspension-condition-slow-return-to-vertical",
+      "groupId": "g-p2-base-front-suspension-condition",
+      "part": "part2",
+      "section": "Front suspension",
+      "subsection": "Suspension condition",
+      "label": "Slow return to vertical when force is applied over the shock absorber",
+      "order": 330,
+      "explanationRef": "exp-007"
+    },
+    {
+      "id": "q-p2-base-tires-condition-wear-less-than-1-6mm",
+      "groupId": "g-p2-base-tires-condition",
+      "part": "part2",
+      "section": "Tires",
+      "subsection": "Tires condition",
+      "label": "Wear less than 1.6mm or TW1 point",
+      "order": 340
+    },
+    {
+      "id": "q-p2-base-tires-condition-uneven-tire-wear",
+      "groupId": "g-p2-base-tires-condition",
+      "part": "part2",
+      "section": "Tires",
+      "subsection": "Tires condition",
+      "label": "Uneven tire wear",
+      "order": 350,
+      "explanationRef": "exp-008"
+    },
+    {
+      "id": "q-p2-base-tires-condition-bubbles-cracks-scratches",
+      "groupId": "g-p2-base-tires-condition",
+      "part": "part2",
+      "section": "Tires",
+      "subsection": "Tires condition",
+      "label": "Bubbles, cracks, scratches, etc.",
+      "order": 360
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-heavily-worn-driver-seat-upholstery",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Heavily worn driver's seat upholstery",
+      "order": 370
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-sagging-driver-seat",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Sagging driver seat",
+      "order": 380
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-broken-driver-seat-springs",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Broken driver's seat springs",
+      "order": 390
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-visible-wipe-on-driver-seat",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Visible wipe of the driver's seat from the door side",
+      "order": 400
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-both-sets-of-keys-worn-out",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Both sets of keys worn out",
+      "order": 410
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-drivers-belt-tensioner-springs-weak",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Driver's belt tensioner springs are weak",
+      "order": 420
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-worn-steering-wheel",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Worn steering wheel",
+      "order": 430
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-steering-wheel-better-than-interior",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Steering wheel in better condition than the interior of the car",
+      "order": 440,
+      "explanationRef": "exp-009"
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-worn-marks-on-light-switches",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Worn marks on light switches",
+      "order": 450
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-worn-or-new-pedal-covers",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Worn pedal covers or new pedal covers",
+      "order": 460,
+      "explanationRef": "exp-009"
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-worn-or-new-stick-shift",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Worn or noticeably new stick shift",
+      "order": 470,
+      "explanationRef": "exp-009"
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-shifter-guard-cracked",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Shifter guard cracked",
+      "order": 480
+    },
+    {
+      "id": "q-p2-base-interior-high-mileage-wear-cracked-shifters-sound-deadening",
+      "groupId": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "label": "Cracked shifters sound deadening",
+      "order": 490
+    },
+    {
+      "id": "q-p2-base-interior-upholstery-condition-water-marks",
+      "groupId": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "label": "Water marks",
+      "order": 500,
+      "explanationRef": "exp-010"
+    },
+    {
+      "id": "q-p2-base-interior-upholstery-condition-moisture",
+      "groupId": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "label": "Moisture",
+      "order": 510,
+      "explanationRef": "exp-010"
+    },
+    {
+      "id": "q-p2-base-interior-upholstery-condition-musty-smell",
+      "groupId": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "label": "Musty smell",
+      "order": 520,
+      "explanationRef": "exp-010"
+    },
+    {
+      "id": "q-p2-base-interior-upholstery-condition-burnt-upholstery",
+      "groupId": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "label": "Burnt upholstery",
+      "order": 530,
+      "explanationRef": "exp-011"
+    },
+    {
+      "id": "q-p2-base-interior-upholstery-condition-dirty-ashtray",
+      "groupId": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "label": "Dirty ashtray",
+      "order": 540,
+      "explanationRef": "exp-011"
+    },
+    {
+      "id": "q-p2-base-interior-electrics-interior-and-exterior-lighting-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Interior and exterior lighting is not working",
+      "order": 550
+    },
+    {
+      "id": "q-p2-base-interior-electrics-air-vents-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Air vents are not working",
+      "order": 560
+    },
+    {
+      "id": "q-p2-base-interior-electrics-central-locking-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Central locking not working (if applicable)",
+      "order": 570
+    },
+    {
+      "id": "q-p2-base-interior-electrics-electric-mirrors-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Electric mirrors not working (if applicable)",
+      "order": 580
+    },
+    {
+      "id": "q-p2-base-interior-electrics-radio-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Radio not working (if applicable)",
+      "order": 590
+    },
+    {
+      "id": "q-p2-base-interior-electrics-electric-windows-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Electric windows not working (if applicable)",
+      "order": 600
+    },
+    {
+      "id": "q-p2-base-interior-electrics-sunroof-not-working",
+      "groupId": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "label": "Sunroof not working (if applicable)",
+      "order": 610
+    },
+    {
+      "id": "q-p2-base-interior-steering-system-backlash-when-turning-wheel",
+      "groupId": "g-p2-base-interior-steering-system",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "label": "Backlash when turning the steering wheel",
+      "order": 620
+    },
+    {
+      "id": "q-p2-base-interior-steering-system-knock-while-pulling-and-pushing-wheel",
+      "groupId": "g-p2-base-interior-steering-system",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "label": "a knock while pulling and pushing the steering wheel diagonally from right to left",
+      "order": 630,
+      "explanationRef": "exp-012"
+    },
+    {
+      "id": "q-p2-base-interior-steering-system-knock-from-bottom-when-shaking-wheel",
+      "groupId": "g-p2-base-interior-steering-system",
+      "part": "part2",
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "label": "a knock coming from the bottom of the car when shaking the steering wheel rapidly left and right",
+      "order": 640,
+      "explanationRef": "exp-012"
+    },
+    {
+      "id": "q-p2-fuel-combustion-coolant-condition-lack-of-clarity",
+      "groupId": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "label": "Lack of clarity",
+      "order": 650,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-coolant-condition-smell-of-exhaust-fumes",
+      "groupId": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "label": "Smell of exhaust fumes",
+      "order": 660,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-coolant-condition-black-or-brown-grease-on-tank-edges",
+      "groupId": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "label": "Black or brown grease on the edges of the tank",
+      "order": 670,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-coolant-condition-foaming",
+      "groupId": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "label": "Foaming",
+      "order": 680,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-coolant-condition-leaks",
+      "groupId": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "label": "Leaks",
+      "order": 690,
+      "explanationRef": "exp-002"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leakage-around-oil-filler-wrench",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leakage around the oil filler wrench",
+      "order": 700,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-engine-block",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the engine block",
+      "order": 710,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-motor-head",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the motor head",
+      "order": 720,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-oil-drain",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the oil drain",
+      "order": 730,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-oil-pump",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the oil pump",
+      "order": 740,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-oil-filter",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the oil filter",
+      "order": 750,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-leaks-around-turbocharger",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Leaks around the turbocharger (if applicable)",
+      "order": 760,
+      "explanationRef": "exp-003"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-water-marks-on-dipstick",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Water marks on the oil dipstick",
+      "order": 770,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-sludge-on-oil-plug",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Sludge on the oil plug",
+      "order": 780,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p2-fuel-combustion-oil-condition-metal-filings-on-indicator",
+      "groupId": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "section": "Oil condition",
+      "subsection": null,
+      "label": "Metal filings on the oil indicator",
+      "order": 790,
+      "explanationRef": "exp-004"
+    },
+    {
+      "id": "q-p2-fuel-combustion-belts-pulleys-frayed-belts",
+      "groupId": "g-p2-fuel-combustion-belts-pulleys",
+      "part": "part2",
+      "section": "Belts and pulleys",
+      "subsection": null,
+      "label": "Frayed belts",
+      "order": 800
+    },
+    {
+      "id": "q-p2-fuel-combustion-belts-pulleys-cracked-belts",
+      "groupId": "g-p2-fuel-combustion-belts-pulleys",
+      "part": "part2",
+      "section": "Belts and pulleys",
+      "subsection": null,
+      "label": "Cracked belts",
+      "order": 810
+    },
+    {
+      "id": "q-p2-fuel-combustion-belts-pulleys-deflected-belts",
+      "groupId": "g-p2-fuel-combustion-belts-pulleys",
+      "part": "part2",
+      "section": "Belts and pulleys",
+      "subsection": null,
+      "label": "Deflected belts (about 1 cm or less)",
+      "order": 820
+    },
+    {
+      "id": "q-p2-fuel-combustion-belts-pulleys-deformation-of-pulleys",
+      "groupId": "g-p2-fuel-combustion-belts-pulleys",
+      "part": "part2",
+      "section": "Belts and pulleys",
+      "subsection": null,
+      "label": "Deformation of pulleys",
+      "order": 830
+    },
+    {
+      "id": "q-p2-fuel-combustion-exhaust-condition-traces-of-corrosion",
+      "groupId": "g-p2-fuel-combustion-exhaust-condition",
+      "part": "part2",
+      "section": "Exhaust system",
+      "subsection": "Exhaust system condition",
+      "label": "Traces of corrosion",
+      "order": 840
+    },
+    {
+      "id": "q-p2-fuel-petrol-hybrid-spark-plugs-black-coating",
+      "groupId": "g-p2-fuel-petrol-hybrid-spark-plugs",
+      "part": "part2",
+      "section": "Spark plugs condition",
+      "subsection": null,
+      "label": "Black coating",
+      "order": 850
+    },
+    {
+      "id": "q-p2-fuel-petrol-hybrid-spark-plugs-traces-of-soot",
+      "groupId": "g-p2-fuel-petrol-hybrid-spark-plugs",
+      "part": "part2",
+      "section": "Spark plugs condition",
+      "subsection": null,
+      "label": "Traces of soot",
+      "order": 860
+    },
+    {
+      "id": "q-p2-fuel-diesel-fuel-system-filter-housing-leaks",
+      "groupId": "g-p2-fuel-diesel-fuel-system",
+      "part": "part2",
+      "section": "Diesel fuel system",
+      "subsection": null,
+      "label": "Diesel fuel filter housing leaks",
+      "order": 870,
+      "explanationRef": "exp-037"
+    },
+    {
+      "id": "q-p2-fuel-diesel-fuel-system-metal-filings-high-pressure-pump",
+      "groupId": "g-p2-fuel-diesel-fuel-system",
+      "part": "part2",
+      "section": "Diesel fuel system",
+      "subsection": null,
+      "label": "Traces of metal filings around the high-pressure pump",
+      "order": 880,
+      "explanationRef": "exp-038"
+    },
+    {
+      "id": "q-p2-fuel-diesel-fuel-system-wet-injectors-or-diesel-smell",
+      "groupId": "g-p2-fuel-diesel-fuel-system",
+      "part": "part2",
+      "section": "Diesel fuel system",
+      "subsection": null,
+      "label": "Wet injectors or smell of diesel fuel in the engine bay",
+      "order": 890,
+      "explanationRef": "exp-039"
+    },
+    {
+      "id": "q-p2-fuel-diesel-fuel-system-cracked-or-hardened-return-fuel-hoses",
+      "groupId": "g-p2-fuel-diesel-fuel-system",
+      "part": "part2",
+      "section": "Diesel fuel system",
+      "subsection": null,
+      "label": "Cracked or hardened return fuel hoses",
+      "order": 900,
+      "explanationRef": "exp-039"
+    },
+    {
+      "id": "q-p2-fuel-diesel-cold-engine-checks-glow-plug-indicator-abnormal",
+      "groupId": "g-p2-fuel-diesel-cold-engine-checks",
+      "part": "part2",
+      "section": "Diesel cold-engine checks",
+      "subsection": null,
+      "label": "Glow plug indicator does not behave normally after turning the ignition on",
+      "order": 910,
+      "explanationRef": "exp-040"
+    },
+    {
+      "id": "q-p2-fuel-diesel-cold-engine-checks-waxy-deposits-around-filter",
+      "groupId": "g-p2-fuel-diesel-cold-engine-checks",
+      "part": "part2",
+      "section": "Diesel cold-engine checks",
+      "subsection": null,
+      "label": "Excessive waxy deposits around the fuel filter in cold weather",
+      "order": 920,
+      "explanationRef": "exp-041"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-high-voltage-system-damaged-orange-cables",
+      "groupId": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "label": "Damaged orange high-voltage cables or missing protective covers",
+      "order": 930,
+      "explanationRef": "exp-042"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-high-voltage-system-warning-labels-missing",
+      "groupId": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "label": "Warning labels missing in the engine bay or service access areas",
+      "order": 940
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-high-voltage-system-impact-near-battery-housing",
+      "groupId": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "label": "Traces of impact, dents or deformation near the traction battery housing",
+      "order": 950,
+      "explanationRef": "exp-043"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-high-voltage-system-moisture-around-hv-connectors",
+      "groupId": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "label": "Evidence of moisture, corrosion or dirt around high-voltage connectors",
+      "order": 960,
+      "explanationRef": "exp-042"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-high-voltage-system-strong-chemical-smell",
+      "groupId": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "label": "Strong chemical smell near the battery area after opening the car",
+      "order": 970,
+      "explanationRef": "exp-043"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-charging-port-accessories-flap-damaged",
+      "groupId": "g-p2-fuel-hybrid-electric-charging-port-accessories",
+      "part": "part2",
+      "section": "Charging port and charging accessories",
+      "subsection": null,
+      "label": "Charging port flap damaged or does not close properly",
+      "order": 980
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-charging-port-accessories-visible-corrosion-burns-or-bent-pins",
+      "groupId": "g-p2-fuel-hybrid-electric-charging-port-accessories",
+      "part": "part2",
+      "section": "Charging port and charging accessories",
+      "subsection": null,
+      "label": "Visible corrosion, burns or bent pins in the charging port",
+      "order": 990,
+      "explanationRef": "exp-044"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-charging-port-accessories-charging-cable-damaged",
+      "groupId": "g-p2-fuel-hybrid-electric-charging-port-accessories",
+      "part": "part2",
+      "section": "Charging port and charging accessories",
+      "subsection": null,
+      "label": "Charging cable insulation damaged or plug casing cracked",
+      "order": 1000,
+      "explanationRef": "exp-044"
+    },
+    {
+      "id": "q-p2-fuel-hybrid-electric-charging-port-accessories-portable-charger-missing",
+      "groupId": "g-p2-fuel-hybrid-electric-charging-port-accessories",
+      "part": "part2",
+      "section": "Charging port and charging accessories",
+      "subsection": null,
+      "label": "Portable charger missing or obviously damaged (if included in the sale)",
+      "order": 1010
+    },
+    {
+      "id": "q-p2-fuel-combustion-mechanical-compressor-broken-compressor-belt",
+      "groupId": "g-p2-fuel-combustion-mechanical-compressor",
+      "part": "part2",
+      "section": "Mechanical turbocharger",
+      "subsection": null,
+      "label": "Broken compressor belt",
+      "order": 1020,
+      "explanationRef": "exp-005"
+    },
+    {
+      "id": "q-p2-transmission-automatic-visual-inspection-transmission-fluid-leak",
+      "groupId": "g-p2-transmission-automatic-visual-inspection",
+      "part": "part2",
+      "section": "Automatic transmission visual inspection",
+      "subsection": null,
+      "label": "Transmission fluid leak under the gearbox area",
+      "order": 1030,
+      "explanationRef": "exp-045"
+    },
+    {
+      "id": "q-p2-transmission-automatic-visual-inspection-burnt-smell-around-dipstick",
+      "groupId": "g-p2-transmission-automatic-visual-inspection",
+      "part": "part2",
+      "section": "Automatic transmission visual inspection",
+      "subsection": null,
+      "label": "Burnt smell around the transmission fluid dipstick or filler area (if accessible)",
+      "order": 1040,
+      "explanationRef": "exp-045"
+    },
+    {
+      "id": "q-p2-transmission-automatic-visual-inspection-selector-positions-worn",
+      "groupId": "g-p2-transmission-automatic-visual-inspection",
+      "part": "part2",
+      "section": "Automatic transmission visual inspection",
+      "subsection": null,
+      "label": "Selector positions on the lever are worn or not clearly engaging",
+      "order": 1050,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p2-drive-4wd-driveline-condition-leaks-around-transfer-case-or-differential",
+      "groupId": "g-p2-drive-4wd-driveline-condition",
+      "part": "part2",
+      "section": "4WD driveline condition",
+      "subsection": null,
+      "label": "Leaks around transfer case or rear differential",
+      "order": 1060,
+      "explanationRef": "exp-047"
+    },
+    {
+      "id": "q-p2-drive-4wd-driveline-condition-torn-driveshaft-or-axle-boots",
+      "groupId": "g-p2-drive-4wd-driveline-condition",
+      "part": "part2",
+      "section": "4WD driveline condition",
+      "subsection": null,
+      "label": "Torn driveshaft or axle rubber boots",
+      "order": 1070,
+      "explanationRef": "exp-048"
+    },
+    {
+      "id": "q-p2-drive-4wd-driveline-condition-noticeable-play-in-prop-shaft",
+      "groupId": "g-p2-drive-4wd-driveline-condition",
+      "part": "part2",
+      "section": "4WD driveline condition",
+      "subsection": null,
+      "label": "Noticeable play in the prop shaft when checked by hand",
+      "order": 1080,
+      "explanationRef": "exp-047"
+    },
+    {
+      "id": "q-p2-body-convertible-roof-seals-roof-fabric-or-panels-damaged",
+      "groupId": "g-p2-body-convertible-roof-seals",
+      "part": "part2",
+      "section": "Convertible roof and seals",
+      "subsection": null,
+      "label": "Roof fabric or panels damaged, cracked or torn",
+      "order": 1090
+    },
+    {
+      "id": "q-p2-body-convertible-roof-seals-moisture-marks-near-roof-seals",
+      "groupId": "g-p2-body-convertible-roof-seals",
+      "part": "part2",
+      "section": "Convertible roof and seals",
+      "subsection": null,
+      "label": "Moisture marks near roof seals or top edge of windshield",
+      "order": 1100,
+      "explanationRef": "exp-010"
+    },
+    {
+      "id": "q-p2-body-convertible-roof-seals-roof-opens-or-closes-unevenly",
+      "groupId": "g-p2-body-convertible-roof-seals",
+      "part": "part2",
+      "section": "Convertible roof and seals",
+      "subsection": null,
+      "label": "Roof opens or closes unevenly (if test is possible)",
+      "order": 1110,
+      "explanationRef": "exp-049"
+    },
+    {
+      "id": "q-p2-body-convertible-roof-seals-side-windows-do-not-align",
+      "groupId": "g-p2-body-convertible-roof-seals",
+      "part": "part2",
+      "section": "Convertible roof and seals",
+      "subsection": null,
+      "label": "Side windows do not align with roof seals",
+      "order": 1120,
+      "explanationRef": "exp-049"
+    },
+    {
+      "id": "q-p2-body-suv-raised-body-checks-cracked-underbody-covers",
+      "groupId": "g-p2-body-suv-raised-body-checks",
+      "part": "part2",
+      "section": "SUV / raised body checks",
+      "subsection": null,
+      "label": "Cracked or damaged plastic underbody covers",
+      "order": 1130
+    },
+    {
+      "id": "q-p2-body-suv-raised-body-checks-damaged-side-steps",
+      "groupId": "g-p2-body-suv-raised-body-checks",
+      "part": "part2",
+      "section": "SUV / raised body checks",
+      "subsection": null,
+      "label": "Damaged side steps or rocker area from off-road impacts",
+      "order": 1140
+    },
+    {
+      "id": "q-p2-body-suv-raised-body-checks-uneven-wear-lower-bumpers",
+      "groupId": "g-p2-body-suv-raised-body-checks",
+      "part": "part2",
+      "section": "SUV / raised body checks",
+      "subsection": null,
+      "label": "Uneven wear or damage on lower bumpers and splash shields",
+      "order": 1150
+    },
+    {
+      "id": "q-p2-body-van-cargo-area-sliding-door-rollers-noisy",
+      "groupId": "g-p2-body-van-cargo-area",
+      "part": "part2",
+      "section": "Van body and cargo area",
+      "subsection": null,
+      "label": "Sliding door rollers noisy, sticking or misaligned",
+      "order": 1160,
+      "explanationRef": "exp-050"
+    },
+    {
+      "id": "q-p2-body-van-cargo-area-rear-cargo-floor-bent",
+      "groupId": "g-p2-body-van-cargo-area",
+      "part": "part2",
+      "section": "Van body and cargo area",
+      "subsection": null,
+      "label": "Rear cargo floor bent, cracked or patched",
+      "order": 1170
+    },
+    {
+      "id": "q-p2-body-van-cargo-area-signs-of-water-leaks",
+      "groupId": "g-p2-body-van-cargo-area",
+      "part": "part2",
+      "section": "Van body and cargo area",
+      "subsection": null,
+      "label": "Signs of water leaks in the cargo area",
+      "order": 1180,
+      "explanationRef": "exp-010"
+    },
+    {
+      "id": "q-p2-body-van-cargo-area-bulkhead-or-tiedown-damaged",
+      "groupId": "g-p2-body-van-cargo-area",
+      "part": "part2",
+      "section": "Van body and cargo area",
+      "subsection": null,
+      "label": "Bulkhead or cargo tie-down points visibly damaged",
+      "order": 1190
+    },
+    {
+      "id": "q-p2-body-pickup-load-bed-tailgate-load-bed-floor-bent",
+      "groupId": "g-p2-body-pickup-load-bed-tailgate",
+      "part": "part2",
+      "section": "Pickup load bed and tailgate",
+      "subsection": null,
+      "label": "Load bed floor heavily bent or patched",
+      "order": 1200
+    },
+    {
+      "id": "q-p2-body-pickup-load-bed-tailgate-tailgate-cables-hinges-latches-damaged",
+      "groupId": "g-p2-body-pickup-load-bed-tailgate",
+      "part": "part2",
+      "section": "Pickup load bed and tailgate",
+      "subsection": null,
+      "label": "Tailgate cables, hinges or latches damaged",
+      "order": 1210,
+      "explanationRef": "exp-051"
+    },
+    {
+      "id": "q-p2-body-pickup-load-bed-tailgate-corrosion-under-bed-liner",
+      "groupId": "g-p2-body-pickup-load-bed-tailgate",
+      "part": "part2",
+      "section": "Pickup load bed and tailgate",
+      "subsection": null,
+      "label": "Corrosion under bed liner or around wheel arches",
+      "order": 1220
+    },
+    {
+      "id": "q-p2-body-pickup-load-bed-tailgate-bed-cabin-alignment-uneven",
+      "groupId": "g-p2-body-pickup-load-bed-tailgate",
+      "part": "part2",
+      "section": "Pickup load bed and tailgate",
+      "subsection": null,
+      "label": "Bed and cabin alignment visibly uneven",
+      "order": 1230,
+      "explanationRef": "exp-052"
+    },
+    {
+      "id": "q-p3-base-interior-steering-system-whistling-when-wheels-turn-fully",
+      "groupId": "g-p3-base-interior-steering-system",
+      "part": "part3",
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "label": "A whistling sound is heard when the wheels turn fully",
+      "order": 1240,
+      "explanationRef": "exp-018"
+    },
+    {
+      "id": "q-p3-base-interior-steering-system-vibration-of-plastic-parts",
+      "groupId": "g-p3-base-interior-steering-system",
+      "part": "part3",
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "label": "Vibration of plastic parts in the cabin",
+      "order": 1250,
+      "explanationRef": "exp-019"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-indicator-lamps-off-before-start",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "Before starting the engine, the indicator lamps are off when the key is turned",
+      "order": 1260
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-starts-more-than-three-seconds-after-key",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "The engine starts more than 3 s after turning the key",
+      "order": 1270,
+      "explanationRef": "exp-013"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-rasp-and-metal-noises",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "Rasp and metal noises when turning the key",
+      "order": 1280,
+      "explanationRef": "exp-014"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-no-start-after-turning-key",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "No start-up after turning the key",
+      "order": 1290,
+      "explanationRef": "exp-015"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-indicator-lamps-on-after-start",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "indicator lamps on after starting the engine",
+      "order": 1300,
+      "explanationRef": "exp-016"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-start-up-rough-idling",
+      "groupId": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "label": "Rough idling",
+      "order": 1310,
+      "explanationRef": "exp-017"
+    },
+    {
+      "id": "q-p3-fuel-combustion-engine-condition-visible-oil-splashes-and-smoke",
+      "groupId": "g-p3-fuel-combustion-engine-condition",
+      "part": "part3",
+      "section": "Engine compartment and engine",
+      "subsection": "Engine condition",
+      "label": "After removing the oil plug and/or dipstick, visible oil splashes and smoke from the engine",
+      "order": 1320,
+      "explanationRef": "exp-004"
+    },
+    {
+      "id": "q-p3-fuel-combustion-exhaust-system-smoke-in-engine-compartment",
+      "groupId": "g-p3-fuel-combustion-exhaust-system",
+      "part": "part3",
+      "section": "Exhaust system",
+      "subsection": null,
+      "label": "Smoke in the engine compartment or a strong smell of exhaust gases",
+      "order": 1330,
+      "explanationRef": "exp-020"
+    },
+    {
+      "id": "q-p3-fuel-combustion-exhaust-system-oily-black-deposits-on-tailpipe",
+      "groupId": "g-p3-fuel-combustion-exhaust-system",
+      "part": "part3",
+      "section": "Exhaust system",
+      "subsection": null,
+      "label": "Oily and black deposits on the tip of the exhaust pipe",
+      "order": 1340,
+      "explanationRef": "exp-021"
+    },
+    {
+      "id": "q-p3-fuel-combustion-exhaust-system-blue-exhaust",
+      "groupId": "g-p3-fuel-combustion-exhaust-system",
+      "part": "part3",
+      "section": "Exhaust system",
+      "subsection": null,
+      "label": "Blue exhaust",
+      "order": 1350,
+      "explanationRef": "exp-004"
+    },
+    {
+      "id": "q-p3-fuel-combustion-exhaust-system-white-exhaust",
+      "groupId": "g-p3-fuel-combustion-exhaust-system",
+      "part": "part3",
+      "section": "Exhaust system",
+      "subsection": null,
+      "label": "White exhaust",
+      "order": 1360,
+      "explanationRef": "exp-001"
+    },
+    {
+      "id": "q-p3-fuel-petrol-hybrid-black-exhaust-black-exhaust-from-gasoline-engine",
+      "groupId": "g-p3-fuel-petrol-hybrid-black-exhaust",
+      "part": "part3",
+      "section": "Exhaust system",
+      "subsection": null,
+      "label": "Black exhaust from gasoline engine (not applicable to diesel engines)",
+      "order": 1370,
+      "explanationRef": "exp-022"
+    },
+    {
+      "id": "q-p3-fuel-diesel-start-up-behavior-excessive-smoke-after-cold-start",
+      "groupId": "g-p3-fuel-diesel-start-up-behavior",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Diesel start-up behavior",
+      "label": "Excessive smoke immediately after cold start",
+      "order": 1380,
+      "explanationRef": "exp-053"
+    },
+    {
+      "id": "q-p3-fuel-diesel-start-up-behavior-engine-shakes-strongly-after-start",
+      "groupId": "g-p3-fuel-diesel-start-up-behavior",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Diesel start-up behavior",
+      "label": "Engine shakes strongly for the first seconds after starting",
+      "order": 1390,
+      "explanationRef": "exp-054"
+    },
+    {
+      "id": "q-p3-fuel-diesel-start-up-behavior-warning-remains-on-after-start",
+      "groupId": "g-p3-fuel-diesel-start-up-behavior",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Diesel start-up behavior",
+      "label": "Glow plug or engine management warning remains on after start",
+      "order": 1400,
+      "explanationRef": "exp-040"
+    },
+    {
+      "id": "q-p3-fuel-hybrid-electric-power-up-checks-not-enter-ready-mode",
+      "groupId": "g-p3-fuel-hybrid-electric-power-up-checks",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Hybrid / electric power-up checks",
+      "label": "The car does not enter READY / drive-ready mode after start procedure",
+      "order": 1410,
+      "explanationRef": "exp-055"
+    },
+    {
+      "id": "q-p3-fuel-hybrid-electric-power-up-checks-hv-warning-remains-on",
+      "groupId": "g-p3-fuel-hybrid-electric-power-up-checks",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Hybrid / electric power-up checks",
+      "label": "High-voltage system warning light remains on after power-up",
+      "order": 1420,
+      "explanationRef": "exp-042"
+    },
+    {
+      "id": "q-p3-fuel-hybrid-electric-power-up-checks-main-display-fault-messages",
+      "groupId": "g-p3-fuel-hybrid-electric-power-up-checks",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Hybrid / electric power-up checks",
+      "label": "Main display shows charging system, battery or isolation fault messages",
+      "order": 1430,
+      "explanationRef": "exp-042"
+    },
+    {
+      "id": "q-p3-fuel-hybrid-electric-power-up-checks-loud-cooling-fan-on-cold-car",
+      "groupId": "g-p3-fuel-hybrid-electric-power-up-checks",
+      "part": "part3",
+      "section": "Ignition",
+      "subsection": "Hybrid / electric power-up checks",
+      "label": "Unusually loud cooling fan starts immediately after power-up on a cold car",
+      "order": 1440,
+      "explanationRef": "exp-043"
+    },
+    {
+      "id": "q-p3-transmission-automatic-selector-engagement-delay-or-jerk-p-to-d-or-r",
+      "groupId": "g-p3-transmission-automatic-selector-engagement",
+      "part": "part3",
+      "section": "Car interior",
+      "subsection": "Automatic selector engagement at standstill",
+      "label": "Delay or strong jerk when shifting from P to D or R with the brake applied",
+      "order": 1450,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p3-transmission-automatic-selector-engagement-cannot-be-moved-smoothly",
+      "groupId": "g-p3-transmission-automatic-selector-engagement",
+      "part": "part3",
+      "section": "Car interior",
+      "subsection": "Automatic selector engagement at standstill",
+      "label": "Selector cannot be moved smoothly through all positions",
+      "order": 1460,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p4-base-suspension-responses-rear-suspension-knocks",
+      "groupId": "g-p4-base-suspension-responses",
+      "part": "part4",
+      "section": "Suspension",
+      "subsection": "Suspension responses",
+      "label": "Rear suspension knocks",
+      "order": 1470,
+      "explanationRef": "exp-025"
+    },
+    {
+      "id": "q-p4-base-suspension-responses-swaying-on-bumps",
+      "groupId": "g-p4-base-suspension-responses",
+      "part": "part4",
+      "section": "Suspension",
+      "subsection": "Suspension responses",
+      "label": "Swaying on bumps",
+      "order": 1480,
+      "explanationRef": "exp-026"
+    },
+    {
+      "id": "q-p4-base-suspension-responses-lack-of-traction-after-braking",
+      "groupId": "g-p4-base-suspension-responses",
+      "part": "part4",
+      "section": "Suspension",
+      "subsection": "Suspension responses",
+      "label": "Lack of traction after braking",
+      "order": 1490,
+      "explanationRef": "exp-027"
+    },
+    {
+      "id": "q-p4-base-steering-responses-drift-after-releasing-wheel",
+      "groupId": "g-p4-base-steering-responses",
+      "part": "part4",
+      "section": "Steering system",
+      "subsection": "Steering system responses",
+      "label": "Drift after releasing the steering wheel",
+      "order": 1500,
+      "explanationRef": "exp-026"
+    },
+    {
+      "id": "q-p4-base-steering-responses-loss-of-traction-on-turns",
+      "groupId": "g-p4-base-steering-responses",
+      "part": "part4",
+      "section": "Steering system",
+      "subsection": "Steering system responses",
+      "label": "Loss of traction on the turns",
+      "order": 1510,
+      "explanationRef": "exp-027"
+    },
+    {
+      "id": "q-p4-base-other-phenomena-whining-as-speed-increases",
+      "groupId": "g-p4-base-other-phenomena",
+      "part": "part4",
+      "section": "Other phenomena",
+      "subsection": null,
+      "label": "Whining as speed increases",
+      "order": 1520,
+      "explanationRef": "exp-028"
+    },
+    {
+      "id": "q-p4-base-braking-responses-excessive-brake-pedal-travel",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Excessive brake pedal travel",
+      "order": 1530,
+      "explanationRef": "exp-029"
+    },
+    {
+      "id": "q-p4-base-braking-responses-brake-not-responding",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Brake not responding",
+      "order": 1540,
+      "explanationRef": "exp-030"
+    },
+    {
+      "id": "q-p4-base-braking-responses-brake-heating",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Brake heating",
+      "order": 1550,
+      "explanationRef": "exp-031"
+    },
+    {
+      "id": "q-p4-base-braking-responses-wheel-and-pedal-tremble-when-braking",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Steering wheel and brake pedal tremble when braking",
+      "order": 1560,
+      "explanationRef": "exp-032"
+    },
+    {
+      "id": "q-p4-base-braking-responses-springing-and-deep-pressure-on-pedal",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Springing and deep pressure on the brake pedal",
+      "order": 1570,
+      "explanationRef": "exp-033"
+    },
+    {
+      "id": "q-p4-base-braking-responses-wheel-lock-when-braking-with-abs",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Wheel lock when braking with ABS",
+      "order": 1580,
+      "explanationRef": "exp-034"
+    },
+    {
+      "id": "q-p4-base-braking-responses-drift-when-braking",
+      "groupId": "g-p4-base-braking-responses",
+      "part": "part4",
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "label": "Drift when braking",
+      "order": 1590,
+      "explanationRef": "exp-035"
+    },
+    {
+      "id": "q-p4-transmission-manual-gearbox-clutch-condition-starts-in-third-gear",
+      "groupId": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "label": "The car starts in third gear",
+      "order": 1600,
+      "explanationRef": "exp-023"
+    },
+    {
+      "id": "q-p4-transmission-manual-gearbox-clutch-condition-clutch-catches-low-or-high",
+      "groupId": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "label": "Clutch catches low or high",
+      "order": 1610
+    },
+    {
+      "id": "q-p4-transmission-manual-gearbox-clutch-condition-gear-stick-shakes",
+      "groupId": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "label": "Gear stick shakes",
+      "order": 1620,
+      "explanationRef": "exp-024"
+    },
+    {
+      "id": "q-p4-transmission-manual-gearbox-clutch-condition-imprecise-gears",
+      "groupId": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "label": "Imprecise gears",
+      "order": 1630,
+      "explanationRef": "exp-024"
+    },
+    {
+      "id": "q-p4-transmission-manual-gearbox-clutch-condition-hearable-creaks",
+      "groupId": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "label": "Hearable creaks",
+      "order": 1640,
+      "explanationRef": "exp-024"
+    },
+    {
+      "id": "q-p4-transmission-automatic-operation-delay-after-selecting-d-or-r",
+      "groupId": "g-p4-transmission-automatic-operation",
+      "part": "part4",
+      "section": "Automatic transmission operation",
+      "subsection": null,
+      "label": "Delay when moving off after selecting D or R",
+      "order": 1650,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p4-transmission-automatic-operation-noticeable-jerks-during-shifts",
+      "groupId": "g-p4-transmission-automatic-operation",
+      "part": "part4",
+      "section": "Automatic transmission operation",
+      "subsection": null,
+      "label": "Noticeable jerks during upshifts or downshifts",
+      "order": 1660,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p4-transmission-automatic-operation-gear-hunting",
+      "groupId": "g-p4-transmission-automatic-operation",
+      "part": "part4",
+      "section": "Automatic transmission operation",
+      "subsection": null,
+      "label": "Gear hunting or frequent unnecessary shifts at steady speed",
+      "order": 1670,
+      "explanationRef": "exp-046"
+    },
+    {
+      "id": "q-p4-transmission-automatic-operation-slips-under-acceleration",
+      "groupId": "g-p4-transmission-automatic-operation",
+      "part": "part4",
+      "section": "Automatic transmission operation",
+      "subsection": null,
+      "label": "Transmission slips under acceleration (engine revs rise but speed does not)",
+      "order": 1680,
+      "explanationRef": "exp-045"
+    },
+    {
+      "id": "q-p4-fuel-diesel-operation-under-load-loss-of-power-above-medium-speed",
+      "groupId": "g-p4-fuel-diesel-operation-under-load",
+      "part": "part4",
+      "section": "Diesel operation under load",
+      "subsection": null,
+      "label": "Noticeable loss of power above medium speed",
+      "order": 1690,
+      "explanationRef": "exp-056"
+    },
+    {
+      "id": "q-p4-fuel-diesel-operation-under-load-excessive-black-smoke",
+      "groupId": "g-p4-fuel-diesel-operation-under-load",
+      "part": "part4",
+      "section": "Diesel operation under load",
+      "subsection": null,
+      "label": "Excessive black smoke under acceleration",
+      "order": 1700,
+      "explanationRef": "exp-022"
+    },
+    {
+      "id": "q-p4-fuel-diesel-operation-under-load-dpf-warning-during-drive",
+      "groupId": "g-p4-fuel-diesel-operation-under-load",
+      "part": "part4",
+      "section": "Diesel operation under load",
+      "subsection": null,
+      "label": "DPF / emissions warning appears during the drive",
+      "order": 1710,
+      "explanationRef": "exp-056"
+    },
+    {
+      "id": "q-p4-fuel-hybrid-electric-drive-behavior-jerky-regen-transition",
+      "groupId": "g-p4-fuel-hybrid-electric-drive-behavior",
+      "part": "part4",
+      "section": "Hybrid / electric drive behavior",
+      "subsection": null,
+      "label": "Jerky transition between regenerative braking and friction braking",
+      "order": 1720,
+      "explanationRef": "exp-057"
+    },
+    {
+      "id": "q-p4-fuel-hybrid-electric-drive-behavior-vibration-or-humming-from-battery-area",
+      "groupId": "g-p4-fuel-hybrid-electric-drive-behavior",
+      "part": "part4",
+      "section": "Hybrid / electric drive behavior",
+      "subsection": null,
+      "label": "Noticeable vibration or humming from the battery area during acceleration",
+      "order": 1730,
+      "explanationRef": "exp-043"
+    },
+    {
+      "id": "q-p4-fuel-hybrid-electric-drive-behavior-sudden-drop-of-available-power",
+      "groupId": "g-p4-fuel-hybrid-electric-drive-behavior",
+      "part": "part4",
+      "section": "Hybrid / electric drive behavior",
+      "subsection": null,
+      "label": "Sudden drop of available power shown on the dashboard",
+      "order": 1740,
+      "explanationRef": "exp-055"
+    },
+    {
+      "id": "q-p4-fuel-hybrid-electric-drive-behavior-state-of-charge-drops-fast",
+      "groupId": "g-p4-fuel-hybrid-electric-drive-behavior",
+      "part": "part4",
+      "section": "Hybrid / electric drive behavior",
+      "subsection": null,
+      "label": "State-of-charge drops unusually fast during a short drive",
+      "order": 1750,
+      "explanationRef": "exp-058"
+    },
+    {
+      "id": "q-p4-fuel-combustion-turbocharger-increased-oil-consumption-and-emissions",
+      "groupId": "g-p4-fuel-combustion-turbocharger",
+      "part": "part4",
+      "section": "Turbocharger",
+      "subsection": "Exhaust turbocharger",
+      "label": "Increased oil consumption and emissions from the exhaust system",
+      "order": 1760,
+      "explanationRef": "exp-036"
+    },
+    {
+      "id": "q-p4-fuel-combustion-turbocharger-loud-operation-and-metallic-sound",
+      "groupId": "g-p4-fuel-combustion-turbocharger",
+      "part": "part4",
+      "section": "Turbocharger",
+      "subsection": "Exhaust turbocharger",
+      "label": "Loud operation and metallic sound",
+      "order": 1770,
+      "explanationRef": "exp-036"
+    },
+    {
+      "id": "q-p4-fuel-combustion-turbocharger-turns-on-above-certain-speed",
+      "groupId": "g-p4-fuel-combustion-turbocharger",
+      "part": "part4",
+      "section": "Turbocharger",
+      "subsection": "Exhaust turbocharger",
+      "label": "Turbocharger only turns on above a certain speed",
+      "order": 1780,
+      "explanationRef": "exp-036"
+    },
+    {
+      "id": "q-p4-fuel-combustion-mechanical-compressor-whistling-excessively-loud",
+      "groupId": "g-p4-fuel-combustion-mechanical-compressor",
+      "part": "part4",
+      "section": "Mechanical turbocharger",
+      "subsection": null,
+      "label": "Compressor whistling excessively loud as engine speed increases",
+      "order": 1790,
+      "explanationRef": "exp-036"
+    },
+    {
+      "id": "q-p4-drive-4wd-system-operation-binding-or-heavy-resistance-on-full-lock",
+      "groupId": "g-p4-drive-4wd-system-operation",
+      "part": "part4",
+      "section": "4WD system operation",
+      "subsection": "Drivetrain responses",
+      "label": "Binding, hopping or heavy resistance during slow full-lock turns on dry ground",
+      "order": 1800,
+      "explanationRef": "exp-059"
+    },
+    {
+      "id": "q-p4-drive-4wd-system-operation-knocking-or-vibration-from-center-tunnel",
+      "groupId": "g-p4-drive-4wd-system-operation",
+      "part": "part4",
+      "section": "4WD system operation",
+      "subsection": "Drivetrain responses",
+      "label": "Knocking or vibration from the center tunnel during acceleration",
+      "order": 1810,
+      "explanationRef": "exp-047"
+    },
+    {
+      "id": "q-p4-drive-4wd-system-operation-warning-light-during-drive",
+      "groupId": "g-p4-drive-4wd-system-operation",
+      "part": "part4",
+      "section": "4WD system operation",
+      "subsection": "Drivetrain responses",
+      "label": "4WD warning light appears during the drive",
+      "order": 1820,
+      "explanationRef": "exp-059"
+    },
+    {
+      "id": "q-p4-body-convertible-roof-responses-excessive-wind-noise-around-seals",
+      "groupId": "g-p4-body-convertible-roof-responses",
+      "part": "part4",
+      "section": "Convertible body noise and seal behavior",
+      "subsection": "Roof responses during the drive",
+      "label": "Excessive wind noise around the roof seals at city speed",
+      "order": 1830,
+      "explanationRef": "exp-049"
+    },
+    {
+      "id": "q-p4-body-convertible-roof-responses-water-leak-noise-rattles-or-frame-knocks",
+      "groupId": "g-p4-body-convertible-roof-responses",
+      "part": "part4",
+      "section": "Convertible body noise and seal behavior",
+      "subsection": "Roof responses during the drive",
+      "label": "Water leak noise, rattles or roof frame knocks on bumps",
+      "order": 1840,
+      "explanationRef": "exp-049"
+    },
+    {
+      "id": "q-p5-base-vin-number-compliance-car-has-decryptable-vins",
+      "groupId": "g-p5-base-vin-number-compliance",
+      "part": "part5",
+      "section": "Chassis numbers (VIN)",
+      "subsection": "VIN number compliance",
+      "label": "The car has decryptable VINs",
+      "order": 1850
+    },
+    {
+      "id": "q-p5-base-vin-number-compliance-vin-is-17-characters-long",
+      "groupId": "g-p5-base-vin-number-compliance",
+      "part": "part5",
+      "section": "Chassis numbers (VIN)",
+      "subsection": "VIN number compliance",
+      "label": "The VIN is 17 characters long",
+      "order": 1860
+    },
+    {
+      "id": "q-p5-base-vin-number-compliance-vins-on-plate-consistent-with-stamped",
+      "groupId": "g-p5-base-vin-number-compliance",
+      "part": "part5",
+      "section": "Chassis numbers (VIN)",
+      "subsection": "VIN number compliance",
+      "label": "VIN numbers on the rating plate are consistent with those stamped on the wheel arch or in the trunk",
+      "order": 1870
+    },
+    {
+      "id": "q-p5-base-vin-number-compliance-vin-data-matches-vehicle",
+      "groupId": "g-p5-base-vin-number-compliance",
+      "part": "part5",
+      "section": "Chassis numbers (VIN)",
+      "subsection": "VIN number compliance",
+      "label": "After identification, the VIN data matches the version, equipment, car type, etc.",
+      "order": 1880
+    },
+    {
+      "id": "q-p5-base-service-booklet-bills-and-invoices-for-all-repairs",
+      "groupId": "g-p5-base-service-booklet",
+      "part": "part5",
+      "section": "Service booklet",
+      "subsection": "Desired information",
+      "label": "Bills and invoices for all repairs",
+      "order": 1890
+    },
+    {
+      "id": "q-p5-base-service-booklet-mileage-matches-odometer",
+      "groupId": "g-p5-base-service-booklet",
+      "part": "part5",
+      "section": "Service booklet",
+      "subsection": "Desired information",
+      "label": "Mileage in the booklet matches the odometer reading",
+      "order": 1900
+    },
+    {
+      "id": "q-p5-base-service-booklet-authorized-service-station-history",
+      "groupId": "g-p5-base-service-booklet",
+      "part": "part5",
+      "section": "Service booklet",
+      "subsection": "Desired information",
+      "label": "Information on servicing the car at an authorized service station throughout its lifetime",
+      "order": 1910
+    },
+    {
+      "id": "q-p5-base-registration-certificate-owner-details",
+      "groupId": "g-p5-base-registration-certificate",
+      "part": "part5",
+      "section": "Registration certificate",
+      "subsection": "Compliance of the data in the documents with the actual data",
+      "label": "Details of the owner and/or co-owner",
+      "order": 1920
+    },
+    {
+      "id": "q-p5-base-registration-certificate-car-data",
+      "groupId": "g-p5-base-registration-certificate",
+      "part": "part5",
+      "section": "Registration certificate",
+      "subsection": "Compliance of the data in the documents with the actual data",
+      "label": "Car data (chassis number, engine number etc.)",
+      "order": 1930
+    },
+    {
+      "id": "q-p5-base-vehicle-card-confirmation-of-history",
+      "groupId": "g-p5-base-vehicle-card",
+      "part": "part5",
+      "section": "Vehicle card",
+      "subsection": "Content",
+      "label": "Confirmation of the car's history",
+      "order": 1940
+    },
+    {
+      "id": "q-p5-fuel-hybrid-electric-battery-documents-battery-warranty-or-health-report",
+      "groupId": "g-p5-fuel-hybrid-electric-battery-documents",
+      "part": "part5",
+      "section": "Charging and traction battery documents",
+      "subsection": "Necessary documents",
+      "label": "Battery warranty or battery health report (if available from the seller)",
+      "order": 1950
+    },
+    {
+      "id": "q-p5-fuel-hybrid-electric-battery-documents-charging-cables-and-adapters-included",
+      "groupId": "g-p5-fuel-hybrid-electric-battery-documents",
+      "part": "part5",
+      "section": "Charging and traction battery documents",
+      "subsection": "Necessary documents",
+      "label": "Charging cable(s) and charging adapter(s) included in the sale",
+      "order": 1960
+    },
+    {
+      "id": "q-p5-fuel-hybrid-electric-battery-documents-replaced-module-documentation",
+      "groupId": "g-p5-fuel-hybrid-electric-battery-documents",
+      "part": "part5",
+      "section": "Charging and traction battery documents",
+      "subsection": "Necessary documents",
+      "label": "Documentation for replaced traction battery modules (if applicable)",
+      "order": 1970
+    },
+    {
+      "id": "q-p5-fuel-hybrid-electric-battery-documents-hv-service-campaign-docs",
+      "groupId": "g-p5-fuel-hybrid-electric-battery-documents",
+      "part": "part5",
+      "section": "Charging and traction battery documents",
+      "subsection": "Necessary documents",
+      "label": "Documentation for high-voltage system service campaigns or recalls (if applicable)",
+      "order": 1980
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-compulsory-documents-sale-and-purchase-agreement",
+      "groupId": "g-p5-runtime-imported-eu-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents compulsory for the seller",
+      "label": "Sale and purchase agreement",
+      "order": 1990
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-compulsory-documents-vehicle-card",
+      "groupId": "g-p5-runtime-imported-eu-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents compulsory for the seller",
+      "label": "Vehicle card",
+      "order": 2000
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-compulsory-documents-confirmation-of-deregistration",
+      "groupId": "g-p5-runtime-imported-eu-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents compulsory for the seller",
+      "label": "Confirmation of the deregistration of the car abroad",
+      "order": 2010
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-non-compulsory-documents-positive-technical-exam-certificate",
+      "groupId": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "label": "Certificate of a positive result of the technical examination",
+      "order": 2020
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-non-compulsory-documents-confirmation-of-excise-duty-payment",
+      "groupId": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "label": "Confirmation of excise duty payment",
+      "order": 2030
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-non-compulsory-documents-confirmation-of-vat-payment",
+      "groupId": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "label": "Confirmation of VAT payment",
+      "order": 2040
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-non-compulsory-documents-confirmation-of-recycling-fee-payment",
+      "groupId": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "label": "Confirmation of recycling fee payment",
+      "order": 2050
+    },
+    {
+      "id": "q-p5-runtime-imported-eu-non-compulsory-documents-translations-of-foreign-documents",
+      "groupId": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "label": "Translations of the documents in a foreign language",
+      "order": 2060
+    }
+  ],
+  "explanations": {
+    "exp-001": {
+      "legacyNumber": 1,
+      "text": "Damaged cylinder head, cylinder head gasket or engine block"
+    },
+    "exp-002": {
+      "legacyNumber": 2,
+      "text": "Coolant leakage due to damaged rubber hoses, radiator, water pump, cylinder head or engine block"
+    },
+    "exp-003": {
+      "legacyNumber": 3,
+      "text": "Leaking seals, need to be replaced"
+    },
+    "exp-004": {
+      "legacyNumber": 4,
+      "text": "Worn drive unit"
+    },
+    "exp-005": {
+      "legacyNumber": 5,
+      "text": "Turbocharger for replacement"
+    },
+    "exp-006": {
+      "legacyNumber": 6,
+      "text": "Replacement needed"
+    },
+    "exp-007": {
+      "legacyNumber": 7,
+      "text": "Damaged shock absorber"
+    },
+    "exp-008": {
+      "legacyNumber": 8,
+      "text": "Bad chassis geometry or bad wheel alignment"
+    },
+    "exp-009": {
+      "legacyNumber": 9,
+      "text": "Indicates a replacement of a worn element due to damage or hide the signs of wear"
+    },
+    "exp-010": {
+      "legacyNumber": 10,
+      "text": "Car leaking or flooded"
+    },
+    "exp-011": {
+      "legacyNumber": 11,
+      "text": "The owner was a smoker"
+    },
+    "exp-012": {
+      "legacyNumber": 12,
+      "text": "Steering system requires repair"
+    },
+    "exp-013": {
+      "legacyNumber": 13,
+      "text": "Damaged / discharged battery or damaged alternator"
+    },
+    "exp-014": {
+      "legacyNumber": 14,
+      "text": "Damaged starter"
+    },
+    "exp-015": {
+      "legacyNumber": 15,
+      "text": "Starter, alternator or battery damaged"
+    },
+    "exp-016": {
+      "legacyNumber": 16,
+      "text": "Systems indicated by the check lights damaged"
+    },
+    "exp-017": {
+      "legacyNumber": 17,
+      "text": "Damage to the lambda probe"
+    },
+    "exp-018": {
+      "legacyNumber": 18,
+      "text": "Worn power steering belts or pulleys"
+    },
+    "exp-019": {
+      "legacyNumber": 19,
+      "text": "Damaged engine cushions"
+    },
+    "exp-020": {
+      "legacyNumber": 20,
+      "text": "Leaking at the front of the exhaust system"
+    },
+    "exp-021": {
+      "legacyNumber": 21,
+      "text": "Too much oil in the combustion chamber - damaged seals, valves or rings"
+    },
+    "exp-022": {
+      "legacyNumber": 22,
+      "text": "Fuel system not adjusted - carburetor or fuel injectors"
+    },
+    "exp-023": {
+      "legacyNumber": 23,
+      "text": "Worn clutch disc or poor contact pressure"
+    },
+    "exp-024": {
+      "legacyNumber": 24,
+      "text": "Gearbox damaged"
+    },
+    "exp-025": {
+      "legacyNumber": 25,
+      "text": "Bad stabilizer link or damaged rocker arm, rubber bushing, or rocker arm pin"
+    },
+    "exp-026": {
+      "legacyNumber": 26,
+      "text": "Damaged control arm or tie rod"
+    },
+    "exp-027": {
+      "legacyNumber": 27,
+      "text": "Worn shock absorbers, damaged steering rods or suspension springs"
+    },
+    "exp-028": {
+      "legacyNumber": 28,
+      "text": "Defective bearings or wrong tires"
+    },
+    "exp-029": {
+      "legacyNumber": 29,
+      "text": "Brake fluid leakage"
+    },
+    "exp-030": {
+      "legacyNumber": 30,
+      "text": "Braking system badly damaged"
+    },
+    "exp-031": {
+      "legacyNumber": 31,
+      "text": "Seized brakes"
+    },
+    "exp-032": {
+      "legacyNumber": 32,
+      "text": "Broken brake discs or drums, poorly fitting rims or worn bearings"
+    },
+    "exp-033": {
+      "legacyNumber": 33,
+      "text": "Air in the brake system"
+    },
+    "exp-034": {
+      "legacyNumber": 34,
+      "text": "ABS system damaged"
+    },
+    "exp-035": {
+      "legacyNumber": 35,
+      "text": "Bad brake linings or discs or damaged steering system components"
+    },
+    "exp-036": {
+      "legacyNumber": 36,
+      "text": "Damaged turbocharger"
+    },
+    "exp-037": {
+      "legacyNumber": 37,
+      "text": "Fuel filter housing or seals leaking"
+    },
+    "exp-038": {
+      "legacyNumber": 38,
+      "text": "High-pressure fuel pump may be wearing internally"
+    },
+    "exp-039": {
+      "legacyNumber": 39,
+      "text": "Fuel system leakage, requires repair"
+    },
+    "exp-040": {
+      "legacyNumber": 40,
+      "text": "Glow plug system or engine management fault"
+    },
+    "exp-041": {
+      "legacyNumber": 41,
+      "text": "Fuel contamination or poor diesel maintenance"
+    },
+    "exp-042": {
+      "legacyNumber": 42,
+      "text": "High-voltage electrical system requires specialist inspection"
+    },
+    "exp-043": {
+      "legacyNumber": 43,
+      "text": "Traction battery housing or battery cooling system may be damaged"
+    },
+    "exp-044": {
+      "legacyNumber": 44,
+      "text": "Charging system requires repair and may be unsafe to use"
+    },
+    "exp-045": {
+      "legacyNumber": 45,
+      "text": "Automatic transmission wear or fluid condition issue"
+    },
+    "exp-046": {
+      "legacyNumber": 46,
+      "text": "Automatic selector or gearbox control issue"
+    },
+    "exp-047": {
+      "legacyNumber": 47,
+      "text": "Transfer case, differential or prop shaft wear"
+    },
+    "exp-048": {
+      "legacyNumber": 48,
+      "text": "Driveshaft joint or axle boot replacement needed"
+    },
+    "exp-049": {
+      "legacyNumber": 49,
+      "text": "Convertible roof mechanism or sealing requires repair"
+    },
+    "exp-050": {
+      "legacyNumber": 50,
+      "text": "Sliding door mechanism worn or misaligned"
+    },
+    "exp-051": {
+      "legacyNumber": 51,
+      "text": "Tailgate hardware damaged and may fail under load"
+    },
+    "exp-052": {
+      "legacyNumber": 52,
+      "text": "Pickup body may have structural or accident-related damage"
+    },
+    "exp-053": {
+      "legacyNumber": 53,
+      "text": "Combustion quality, glow plugs or injector system issue"
+    },
+    "exp-054": {
+      "legacyNumber": 54,
+      "text": "Engine mount, injector or compression issue"
+    },
+    "exp-055": {
+      "legacyNumber": 55,
+      "text": "Hybrid / EV drive system fault, specialist diagnosis required"
+    },
+    "exp-056": {
+      "legacyNumber": 56,
+      "text": "Diesel emissions or turbo / intake issue"
+    },
+    "exp-057": {
+      "legacyNumber": 57,
+      "text": "Brake blending or regenerative braking calibration issue"
+    },
+    "exp-058": {
+      "legacyNumber": 58,
+      "text": "Traction battery condition may be degraded"
+    },
+    "exp-059": {
+      "legacyNumber": 59,
+      "text": "4WD / AWD system fault or drivetrain wind-up issue"
+    }
+  }
+}

@@ -40,7 +40,7 @@ This document defines strict validation rules for the `Info about the car` form.
 | `registrationNumber` | Registration number | Yes | text | 2-15 characters after trim; allowed chars: letters, digits, spaces, hyphen | trim, uppercase, collapse repeated spaces | `Enter a valid registration number.` |
 | `vin` | VIN number | No | text | If present: exactly 17 chars, regex `^[A-HJ-NPR-Z0-9]{17}$` | trim, uppercase | `VIN must contain exactly 17 letters and digits without I, O or Q.` |
 | `mileage` | Mileage | No | integer | If present: whole number `>= 0` and `<= 9999999` | trim, remove spaces, parse integer | `Enter a valid mileage.` |
-| `fuelType` | Fuel type | Yes | enum | Must match one of: `Petrol`, `Diesel`, `LPG`, `Hybrid`, `Electric` | store as lowercase enum key | `Select the fuel type.` |
+| `fuelType` | Fuel type | Yes | enum | Must match one of: `Petrol`, `Diesel`, `Hybrid`, `Electric` | store as lowercase enum key | `Select the fuel type.` |
 | `transmission` | Transmission | Yes | enum | Must match one of: `Manual`, `Automatic` | store as lowercase enum key | `Select the transmission type.` |
 | `drive` | Drive | Yes | enum | Must match one of: `2WD`, `4WD` | store as lowercase enum key | `Select the drive type.` |
 | `color` | Color | No | text | If present: 1-40 characters after trim | trim, collapse repeated spaces | `Enter a valid color.` |

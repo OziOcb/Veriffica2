@@ -3,17 +3,17 @@
 1. Produkt MVP rozwiązuje problem amatora kupującego używany samochód, który nie wie, na co patrzeć, jak interpretować usterki i potrzebuje prowadzenia krok po kroku podczas inspekcji.
 2. Aplikacja jest skierowana do laików i językiem głównym MVP jest angielski.
 3. Struktura produktu zostaje oparta na 5 Partach: Part 1 `Info about the car`, Part 2 `At a standstill`, Part 3 `Starting the engine`, Part 4 `Test drive`, Part 5 `Documents`.
-4. Part 1 zawiera formularz konfiguracji auta i pola `Fuel type`, `Transmission`, `Drive`, `Body type` są obowiązkowe, ponieważ determinują zestaw pytań.
-5. Lista pytań w dostarczonym pliku była bazą podstawową; pełna logika mapowania pytań oraz brakujące pytania dla konkretnych kategorii pojazdów zostały doprojektowane i rozpisane w artefaktach `.ai/`.
+4. Part 1 zawiera formularz konfiguracji auta i tylko pola `Make`, `Model`, `Fuel type`, `Transmission`, `Drive`, `Body type` są obowiązkowe; pola `Fuel type`, `Transmission`, `Drive` i `Body type` determinują zestaw pytań.
+5. Lista pytań w dostarczonym pliku była bazą podstawową; pełna logika widoczności, normalizacja pytań oraz brakujące pytania dla konkretnych kategorii pojazdów zostały doprojektowane i rozpisane w pakiecie artefaktów `.ai/veriffica-questions-list/`.
 6. Wszystkie pytania mają identyczną wagę. MVP nie przewiduje wag usterek ani systemu deal-breakerów.
 7. Wynik nie jest pojedynczą oceną jakości auta. `Total Score` i wyniki sekcji to zawsze prosty wykres kolumnowy podzielony na trzy części: `Yes / No / Don't know`, np. `70% Yes / 10% No / 20% Don't know`.
 8. Aplikacja ma działać w modelu `Offline-First` jako PWA, z lokalnym przechowywaniem danych i kolejką zmian synchronizowaną po odzyskaniu połączenia.
 9. W MVP należy stosować dobre praktyki synchronizacji offline, w tym `IndexedDB`, strategię rozwiązywania konfliktów typu `Last Write Wins / Client Wins` oraz bezpieczne odnawianie sesji po odzyskaniu sieci.
 10. W przypadku wygaśnięcia sesji podczas pracy offline użytkownik nie może zostać wylogowany; aplikacja ma utrzymywać lokalną sesję do czasu odzyskania połączenia.
-11. Instrukcja z końca pliku .ai/veriffica-list-of-questions.md ma być pokazywana jako pop-up przy każdym rozpoczęciu nowej inspekcji.
+11. Instrukcja z pliku `.ai/veriffica-instrukcja.md` ma być pokazywana jako pop-up przy każdym rozpoczęciu nowej inspekcji.
 12. Pop-up z instrukcją powinien mieć opcję `Don't show again`.
 13. Dashboard ma prezentować kafelki sesji w statusach `Draft` i `Completed`.
-14. Nazwa kafelka sesji jest budowana z danych auta i musi aktualizować się natychmiast po zmianie odpowiednich pól w Part 1 (Make/Model/Year of production).
+14. Nazwa kafelka sesji jest budowana z pól `Make`, `Model` oraz opcjonalnie `Year of production` i `Registration number`, jeśli zostały poprawnie wypełnione, i musi aktualizować się natychmiast po zmianie tych pól w Part 1.
 15. Na koncie użytkownika w MVP mogą istnieć maksymalnie 2 inspekcje.
 16. Użytkownik może usuwać inspekcje z dashboardu, a usunięcie zwalnia slot na nową inspekcję.
 17. Usunięcie inspekcji ma być `Hard Delete`, czyli natychmiastowe i nieodwracalne, z dodatkowym potwierdzeniem.
@@ -43,13 +43,13 @@
 41. MVP nie obejmuje PDF, link sharingu, zdjęć, zewnętrznej weryfikacji VIN, aplikacji natywnych, porównywarki i systemu automatycznej dyskwalifikacji auta.
 42. System pytań został rozdzielony na trzy warstwy: `questionGroups` odpowiadają za widoczność i logikę warunkową, `questions` przechowują treść pytań, a `explanations` przechowują treści edukacyjne pod ikoną `i`.
 43. `questionGroups` nie zawierają pytań w środku; pytania są linkowane przez `groupId`, a treści edukacyjne przez `explanationRef`.
-44. Widoczność pytań zależy od obowiązkowych pól Part 1 oraz runtime flags typu `combustionEnginePresent`, `sparkPlugsPresent`, `chargingPortEquipped`, `turboEquipped`, `mechanicalCompressorEquipped` i `evBatteryDocsAvailable`.
-45. Zmiana pól mapujących `fuelType`, `transmission`, `drive` i `bodyType` uruchamia `Smart Pruning`, czyli usunięcie odpowiedzi należących do grup, które stały się niewidoczne, oraz natychmiastowe przeliczenie postępu i `Total Score`.
+44. Widoczność pytań zależy od addytywnej formuły `Base + fuelType + transmission + drive + bodyType` oraz od ograniczonego zestawu runtime flags: `chargingPortEquipped`, `evBatteryDocsAvailable`, `turboEquipped`, `mechanicalCompressorEquipped`, `importedFromEU`.
+45. Zmiana pól mapujących `fuelType`, `transmission`, `drive`, `bodyType` albo aktywnej runtime flag wpływającej na widoczność uruchamia `Smart Pruning`, czyli usunięcie odpowiedzi należących do grup, które stały się niewidoczne, oraz natychmiastowe przeliczenie postępu i `Total Score`.
 46. W modelu danych systemu pytań obowiązują stabilne identyfikatory `questionId`, `groupId` i `explanationRef`, a pole `order` rośnie co 10, aby umożliwić późniejsze wstawianie nowych pytań bez renumeracji całej listy.
 {{/decisions}}
 
 {{matched_recommendations}}
-1. Przygotować pełną matrycę logiki warunkowej, która mapuje konfigurację z Part 1 na zestaw pytań w Partach 2-5, w tym pytania dodatkowe dla EV, hybryd, LPG, automatu, 4WD i innych wariantów.
+1. Oprzeć implementację o przygotowaną pełną matrycę logiki warunkowej, która mapuje konfigurację z Part 1 oraz runtime flags na zestaw pytań w Partach 2-5, w tym pytania dodatkowe dla petrol, diesel, hybrid, electric, manual, automatic, 4WD i innych wariantów.
 2. Oprzeć przechowywanie offline na `IndexedDB`, a nie na `Local Storage`, oraz opisać mechanizm kolejki zmian i synchronizacji po odzyskaniu połączenia.
 3. Przyjąć strategię rozwiązywania konfliktów danych typu `Last Write Wins / Client Wins` oraz opisać ją w PRD jako świadomą decyzję MVP.
 4. Zachować sesję użytkownika podczas pracy offline i odnawiać ją dopiero po odzyskaniu połączenia, bez przerywania trwającej inspekcji.
@@ -60,7 +60,7 @@
 9. Wprowadzić ekran przejściowy po każdym z Partów z komunikatem o przejściu do kolejnego etapu inspekcji oraz powrotem na `Stronę sesji`.
 10. Utrzymać jeden globalny dokument notatek na `Stronie sesji`, uzupełniany notatkami kontekstowymi z kart pytań.
 11. Dodać auto-save dla notatek, szczególnie przy dłuższej edycji dokumentu globalnego.
-12. Wprowadzić `Smart Pruning` przy zmianie konfiguracji auta: zachowywać odpowiedzi nadal zgodne z konfiguracją, a usuwać tylko odpowiedzi osierocone, po wcześniejszym ostrzeżeniu użytkownika.
+12. Wprowadzić `Smart Pruning` przy zmianie konfiguracji auta lub runtime flag wpływających na widoczność: zachowywać odpowiedzi nadal zgodne z konfiguracją, a usuwać tylko odpowiedzi osierocone, po wcześniejszym ostrzeżeniu użytkownika.
 13. Zablokować wejście do Partów 2-5 do czasu poprawnego wypełnienia wszystkich pól wymaganych w Part 1.
 14. Wprowadzić manualne finalizowanie inspekcji przez przycisk `Zakończ inspekcję` zamiast automatycznego zamykania raportu.
 15. Zastosować jasne, precyzyjne komunikaty walidacyjne w Part 1, wskazujące konkretny błąd i pole wymagające poprawy.
@@ -68,10 +68,10 @@
 17. Dodać zachętę do instalacji PWA na ekranie głównym po pierwszym sensownym użyciu aplikacji.
 18. Rozważyć użycie `Screen Wake Lock API` podczas aktywnej inspekcji, aby ekran nie wygasał w kluczowych momentach.
 19. Dodać lekkie komunikaty typu toast dla potwierdzeń prostych akcji, np. zapisania notatki.
-20. Rozdzielić warstwę widoczności `questionGroups` od warstwy treści `questions`, łącząc je przez `groupId` zamiast osadzać pytania bezpośrednio w konfiguracji grup.
-21. Znormalizować treści edukacyjne w słowniku `explanations`, do którego pytania odnoszą się przez `explanationRef`.
+20. Utrzymać rozdzielenie warstwy widoczności i metadanych grup `questionGroups` od warstwy treści `questions`, łącząc je przez `groupId` zamiast osadzać pytania bezpośrednio w konfiguracji grup.
+21. Utrzymać znormalizowane treści edukacyjne w słowniku `explanations`, do którego pytania odnoszą się przez `explanationRef`.
 22. Używać stabilnych identyfikatorów i pola `order` zamiast wiązać logikę aplikacji z tekstem pytania lub jego pozycją w źródłowym markdownie.
-23. Wprowadzić runtime flags dla przypadków `if equipped` i edge case'ów hybrydowych, aby widoczność pytań nie zależała wyłącznie od prostych enumów z Part 1.
+23. Utrzymać ograniczony zestaw runtime flags wyłącznie dla wyjątków niewynikających bezpośrednio z Part 1, takich jak port ładowania, dokumenty baterii EV, turbo, `mechanicalCompressorEquipped` i import z UE.
 {{/matched_recommendations}}
 
 {{prd_planning_summary}}
@@ -85,7 +85,7 @@ Kluczowe funkcje obejmują:
 3. `Hard Delete` inspekcji z potwierdzeniem i zwalnianiem slotu.
 4. `Stronę sesji` jako centralny ekran sesji, z przyciskami do Partów 1-5, wskaźnikiem wyniku, postępu i miejscem na globalny dokument notatek.
 5. Part 1 jako ściśle walidowany formularz konfiguracji auta.
-6. Dynamiczne generowanie zestawu pytań na podstawie konfiguracji auta.
+6. Dynamiczne wyznaczanie widocznych grup pytań i budowanie uporządkowanej listy pytań na podstawie konfiguracji auta oraz runtime flags.
 7. Part 2-5 jako system pełnoekranowych kart z odpowiedziami `Yes / No / Don't know`.
 8. Blokadę przejścia dalej bez udzielenia odpowiedzi.
 9. Cofanie kart gestem i przyciskiem `Back`.
@@ -96,10 +96,10 @@ Kluczowe funkcje obejmują:
 14. Manualne zakończenie inspekcji przyciskiem `Zakończ inspekcję`.
 15. Usuwanie profilu użytkownika i wszystkich danych.
 16. Działanie offline z lokalnym przechowywaniem i późniejszą synchronizacją po odzyskaniu połączenia.
-17. Znormalizowaną architekturę systemu pytań: `questionGroups` w configu odpowiadają tylko za widoczność, `questions` w banku pytań za treść i kolejność, a `explanations` za współdzielone treści edukacyjne.
-18. Obsługę warunkowych grup pytań dla diesel, LPG, hybrid/electric, automatic, 4WD, convertible, SUV, van, pickup oraz dokumentów EV.
-19. Obsługę pytań typu `if equipped` poprzez runtime flags, a nie przez mnożenie wariantów konfiguracji w Part 1.
-20. `Smart Pruning` odpowiedzi osieroconych po zmianie konfiguracji auta.
+17. Znormalizowaną architekturę systemu pytań: `questionGroups` w configu odpowiadają za widoczność oraz metadane grup, takie jak `part`, `section`, `subsection` i `order`, `questions` w banku pytań za treść i kolejność pytań, a `explanations` za współdzielone treści edukacyjne.
+18. Obsługę warunkowych grup pytań dla petrol, diesel, hybrid, electric, manual, automatic, 4WD, convertible, SUV, van i pickup.
+19. Obsługę runtime-only grup zależnych od wyposażenia lub dokumentów poprzez runtime flags, a nie przez mnożenie wariantów konfiguracji w Part 1.
+20. `Smart Pruning` odpowiedzi osieroconych po zmianie konfiguracji auta lub runtime flags wpływających na widoczność.
 21. Natychmiastowe przeliczanie postępu i `Total Score` po zmianie odpowiedzi albo widoczności pytań.
 
 **b. Kluczowe historie użytkownika i ścieżki korzystania**
@@ -107,10 +107,10 @@ Kluczowe funkcje obejmują:
 Najważniejsza ścieżka użytkownika:
 1. Użytkownik zakłada konto lub loguje się przez Google/Apple.
 2. Trafia na pusty dashboard albo listę swoich inspekcji.
-3. Rozpoczyna nową inspekcję, widzi instrukcję w pop-upie.
+3. Rozpoczyna nową inspekcję, widzi instrukcję z `.ai/veriffica-instrukcja.md` w pop-upie.
 4. Otwiera `Stronę sesji` i wypełnia Part 1.
-5. Po poprawnym uzupełnieniu wymaganych pól odblokowują się Part 2-5, a system wylicza widoczne grupy pytań na podstawie `fuelType`, `transmission`, `drive`, `bodyType` i runtime flags.
-6. Użytkownik przechodzi przez pytania sekcjami, jedna karta na ekran, pozioma nawigacja, obowiązkowa odpowiedź; treść pytań pochodzi z `question-bank`, a ich widoczność z `questionGroups`.
+5. Po poprawnym uzupełnieniu wymaganych pól `make`, `model`, `fuelType`, `transmission`, `drive` i `bodyType` odblokowują się Part 2-5, a system wylicza widoczne grupy pytań na podstawie addytywnej formuły `Base + fuelType + transmission + drive + bodyType` oraz runtime flags.
+6. Użytkownik przechodzi przez pytania sekcjami, jedna karta na ekran, pozioma nawigacja, obowiązkowa odpowiedź; treść pytań pochodzi z `question-bank.json`, a ich widoczność z `question-mapping-config.json` poprzez stabilne `groupId`.
 7. W razie potrzeby dodaje notatki do konkretnych pytań.
 8. Po zakończeniu sekcji wraca na `Stronę sesji`, skąd wybiera kolejny Part.
 9. Na `Summary` przegląda wykresy sekcyjne i globalny wykres odpowiedzi, edytuje odpowiedzi i finalizuje inspekcję.
@@ -118,7 +118,7 @@ Najważniejsza ścieżka użytkownika:
 
 Poboczne ścieżki:
 1. Użytkownik wraca do draftu z dashboardu dzięki przypiętemu CTA.
-2. Użytkownik zmienia konfigurację auta w Part 1, a system ostrzega, że część odpowiedzi zostanie usunięta, wykonuje `Smart Pruning` i ponownie przelicza wynik.
+2. Użytkownik zmienia konfigurację auta w Part 1 albo aktywną runtime flagę wpływającą na widoczność, a system ostrzega, że część odpowiedzi zostanie usunięta, wykonuje `Smart Pruning` i ponownie przelicza wynik.
 3. Użytkownik pracuje offline, a aplikacja zapisuje zmiany lokalnie i synchronizuje je po odzyskaniu sieci.
 4. Użytkownik osiąga limit 2 inspekcji i dostaje pop-up limitu.
 5. Użytkownik usuwa starą inspekcję, aby zwolnić slot.
@@ -143,14 +143,14 @@ Uwaga: z uwagi na decyzję o rezygnacji z monitoringu błędów w pierwszej fazi
 **d. Działanie systemu pytań**
 
 System pytań został doprecyzowany na poziomie danych i logiki runtime:
-1. Bramka wejściowa do systemu pytań wymaga poprawnego uzupełnienia pól `make`, `model`, `year`, `registrationNumber`, `fuelType`, `transmission`, `drive` i `bodyType` w Part 1.
-2. Warstwa widoczności jest opisana w `veriffica-question-mapping-config.json`, gdzie każda grupa ma `id`, `part`, `dependsOnFields`, `visibleWhen` i opcjonalne `requiresEquipmentFlag`.
-3. Warstwa treści jest opisana w `veriffica-question-bank.json`, gdzie każde pytanie ma stabilne `id`, `groupId`, `part`, `section`, `subsection`, `label`, `order` i opcjonalne `explanationRef`.
+1. Bramka wejściowa do systemu pytań wymaga poprawnego uzupełnienia pól `make`, `model`, `fuelType`, `transmission`, `drive` i `bodyType` w Part 1.
+2. Warstwa widoczności jest opisana w `.ai/veriffica-questions-list/question-mapping-config.json`, gdzie każda grupa ma `id`, `part`, `order`, `section`, `subsection`, `dependsOnFields`, `visibleWhen` i opcjonalne `requiresEquipmentFlag`.
+3. Warstwa treści jest opisana w `.ai/veriffica-questions-list/question-bank.json`, gdzie każde pytanie ma stabilne `id`, `groupId`, `part`, `section`, `subsection`, `label`, `order` i opcjonalne `explanationRef`.
 4. Warstwa wyjaśnień jest znormalizowana w top-level sekcji `explanations`, dzięki czemu wiele pytań może współdzielić ten sam opis usterki lub wskazówki edukacyjnej.
-5. Zakres mapowania obejmuje zarówno grupy bazowe, jak i warunki dla paliwa, skrzyni, napędu, nadwozia oraz przypadków `if equipped`.
-6. Runtime flags rozwiązują przypadki graniczne i wyposażeniowe, np. hybrydę z silnikiem spalinowym i świecami, port ładowania, turbo, kompresor mechaniczny czy dokumenty baterii EV.
-7. Kolejność ewaluacji jest następująca: walidacja pól wymaganych Part 1, ustawienie `requiredPart1Complete`, obliczenie widoczności grup, zastosowanie flag `if equipped`, render tylko widocznych grup, pruning odpowiedzi osieroconych oraz przeliczenie postępu i `Total Score`.
-8. Zmiana jednego z pól mapujących `fuelType`, `transmission`, `drive` lub `bodyType` uruchamia pruning w trybie `remove_answers_for_now_hidden_groups`.
+5. Zakres mapowania obejmuje zarówno grupy bazowe, jak i warunki dla paliwa, skrzyni, napędu, nadwozia oraz runtime-only wyjątków związanych z wyposażeniem lub dokumentami.
+6. Runtime flags rozwiązują przypadki graniczne i wyposażeniowe, np. port ładowania, dokumenty baterii EV, turbo, `mechanicalCompressorEquipped` czy dokumenty dla aut importowanych z UE.
+7. Kolejność ewaluacji jest następująca: walidacja pól wymaganych Part 1, obliczenie widoczności grup według modelu addytywnego, zastosowanie runtime flags, złożenie uporządkowanej listy pytań z `question-bank.json`, pruning odpowiedzi osieroconych oraz przeliczenie postępu i `Total Score`.
+8. Zmiana jednego z pól mapujących `fuelType`, `transmission`, `drive`, `bodyType` albo aktywnej runtime flag wpływającej na widoczność uruchamia pruning w trybie `remove_answers_for_now_hidden_groups`.
 9. Odpowiedzi i notatki powinny odnosić się do stabilnych identyfikatorów, a nie do tekstów pytań, co upraszcza edycję odpowiedzi na `Summary`, przyszłe tłumaczenia i dalszy rozwój modelu danych.
 
 **e. Nierozwiązane kwestie lub obszary wymagające dalszego wyjaśnienia**

@@ -1,0 +1,579 @@
+{
+  "$schema": "./question-mapping-config.schema.json",
+  "version": 1,
+  "sourceFile": ".ai/veriffica-questions-list/list-of-questions.md",
+  "visibilityModel": {
+    "type": "additive-buckets",
+    "formula": ["base", "fuelType", "transmission", "drive", "bodyType"],
+    "emptyBuckets": {
+      "drive": ["2wd"],
+      "bodyType": ["sedan", "hatchback", "coupe", "other"]
+    },
+    "runtimeFlags": [
+      "chargingPortEquipped",
+      "evBatteryDocsAvailable",
+      "turboEquipped",
+      "mechanicalCompressorEquipped",
+      "importedFromEU"
+    ]
+  },
+  "questionGroups": [
+    {
+      "id": "g-p2-base-car-body-corrosion",
+      "part": "part2",
+      "order": 10,
+      "section": "Car Body",
+      "subsection": "Corrosion, blistering",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-car-body-repair-traces",
+      "part": "part2",
+      "order": 20,
+      "section": "Car Body",
+      "subsection": "traces of repairs / use",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-engine-structure-bumpers-fenders",
+      "part": "part2",
+      "order": 30,
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Bumpers and fenders",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-engine-structure-side-members",
+      "part": "part2",
+      "order": 40,
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Side members",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-engine-structure-welds",
+      "part": "part2",
+      "order": 50,
+      "section": "Engine compartment and engine - structure and accident traces",
+      "subsection": "Welds",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-front-suspension-condition",
+      "part": "part2",
+      "order": 60,
+      "section": "Front suspension",
+      "subsection": "Suspension condition",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-tires-condition",
+      "part": "part2",
+      "order": 70,
+      "section": "Tires",
+      "subsection": "Tires condition",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-interior-high-mileage-wear",
+      "part": "part2",
+      "order": 80,
+      "section": "Car interior",
+      "subsection": "Wear indicating high mileage",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-interior-upholstery-condition",
+      "part": "part2",
+      "order": 90,
+      "section": "Car interior",
+      "subsection": "The condition of the upholstery",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-interior-electrics",
+      "part": "part2",
+      "order": 100,
+      "section": "Car interior",
+      "subsection": "The electrics",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-base-interior-steering-system",
+      "part": "part2",
+      "order": 110,
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p2-fuel-combustion-coolant-condition",
+      "part": "part2",
+      "order": 120,
+      "section": "The condition of the coolant in the expansion tank and engine",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-combustion-oil-condition",
+      "part": "part2",
+      "order": 130,
+      "section": "Oil condition",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-combustion-belts-pulleys",
+      "part": "part2",
+      "order": 140,
+      "section": "Belts and pulleys",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-combustion-exhaust-condition",
+      "part": "part2",
+      "order": 150,
+      "section": "Exhaust system",
+      "subsection": "Exhaust system condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-petrol-hybrid-spark-plugs",
+      "part": "part2",
+      "order": 160,
+      "section": "Spark plugs condition",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-diesel-fuel-system",
+      "part": "part2",
+      "order": 170,
+      "section": "Diesel fuel system",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["diesel"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-diesel-cold-engine-checks",
+      "part": "part2",
+      "order": 180,
+      "section": "Diesel cold-engine checks",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["diesel"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-hybrid-electric-high-voltage-system",
+      "part": "part2",
+      "order": 190,
+      "section": "High-voltage battery and electrical system",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["hybrid", "electric"]
+      }
+    },
+    {
+      "id": "g-p2-fuel-hybrid-electric-charging-port-accessories",
+      "part": "part2",
+      "order": 200,
+      "section": "Charging port and charging accessories",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["hybrid", "electric"]
+      },
+      "requiresEquipmentFlag": "chargingPortEquipped"
+    },
+    {
+      "id": "g-p2-fuel-combustion-mechanical-compressor",
+      "part": "part2",
+      "order": 210,
+      "section": "Mechanical turbocharger",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      },
+      "requiresEquipmentFlag": "mechanicalCompressorEquipped"
+    },
+    {
+      "id": "g-p2-transmission-automatic-visual-inspection",
+      "part": "part2",
+      "order": 220,
+      "section": "Automatic transmission visual inspection",
+      "subsection": null,
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "transmission": ["automatic"]
+      }
+    },
+    {
+      "id": "g-p2-drive-4wd-driveline-condition",
+      "part": "part2",
+      "order": 230,
+      "section": "4WD driveline condition",
+      "subsection": null,
+      "dependsOnFields": ["drive"],
+      "visibleWhen": {
+        "drive": ["4wd"]
+      }
+    },
+    {
+      "id": "g-p2-body-convertible-roof-seals",
+      "part": "part2",
+      "order": 240,
+      "section": "Convertible roof and seals",
+      "subsection": null,
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "bodyType": ["convertible"]
+      }
+    },
+    {
+      "id": "g-p2-body-suv-raised-body-checks",
+      "part": "part2",
+      "order": 250,
+      "section": "SUV / raised body checks",
+      "subsection": null,
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "bodyType": ["suv"]
+      }
+    },
+    {
+      "id": "g-p2-body-van-cargo-area",
+      "part": "part2",
+      "order": 260,
+      "section": "Van body and cargo area",
+      "subsection": null,
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "bodyType": ["van"]
+      }
+    },
+    {
+      "id": "g-p2-body-pickup-load-bed-tailgate",
+      "part": "part2",
+      "order": 270,
+      "section": "Pickup load bed and tailgate",
+      "subsection": null,
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "bodyType": ["pickup"]
+      }
+    },
+    {
+      "id": "g-p3-base-interior-steering-system",
+      "part": "part3",
+      "order": 280,
+      "section": "Car interior",
+      "subsection": "Steering system",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p3-fuel-combustion-engine-start-up",
+      "part": "part3",
+      "order": 290,
+      "section": "Ignition",
+      "subsection": "Engine start-up",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p3-fuel-combustion-engine-condition",
+      "part": "part3",
+      "order": 300,
+      "section": "Engine compartment and engine",
+      "subsection": "Engine condition",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p3-fuel-combustion-exhaust-system",
+      "part": "part3",
+      "order": 310,
+      "section": "Exhaust system",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p3-fuel-petrol-hybrid-black-exhaust",
+      "part": "part3",
+      "order": 320,
+      "section": "Exhaust system",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "hybrid"]
+      }
+    },
+    {
+      "id": "g-p3-fuel-diesel-start-up-behavior",
+      "part": "part3",
+      "order": 330,
+      "section": "Ignition",
+      "subsection": "Diesel start-up behavior",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["diesel"]
+      }
+    },
+    {
+      "id": "g-p3-fuel-hybrid-electric-power-up-checks",
+      "part": "part3",
+      "order": 340,
+      "section": "Ignition",
+      "subsection": "Hybrid / electric power-up checks",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["hybrid", "electric"]
+      }
+    },
+    {
+      "id": "g-p3-transmission-automatic-selector-engagement",
+      "part": "part3",
+      "order": 350,
+      "section": "Car interior",
+      "subsection": "Automatic selector engagement at standstill",
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "transmission": ["automatic"]
+      }
+    },
+    {
+      "id": "g-p4-base-suspension-responses",
+      "part": "part4",
+      "order": 360,
+      "section": "Suspension",
+      "subsection": "Suspension responses",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p4-base-steering-responses",
+      "part": "part4",
+      "order": 370,
+      "section": "Steering system",
+      "subsection": "Steering system responses",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p4-base-other-phenomena",
+      "part": "part4",
+      "order": 380,
+      "section": "Other phenomena",
+      "subsection": null,
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p4-base-braking-responses",
+      "part": "part4",
+      "order": 390,
+      "section": "Brakes",
+      "subsection": "Braking system responses",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p4-transmission-manual-gearbox-clutch-condition",
+      "part": "part4",
+      "order": 400,
+      "section": "Gearbox and clutch",
+      "subsection": "Gearbox and clutch condition",
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "transmission": ["manual"]
+      }
+    },
+    {
+      "id": "g-p4-transmission-automatic-operation",
+      "part": "part4",
+      "order": 410,
+      "section": "Automatic transmission operation",
+      "subsection": null,
+      "dependsOnFields": ["transmission"],
+      "visibleWhen": {
+        "transmission": ["automatic"]
+      }
+    },
+    {
+      "id": "g-p4-fuel-diesel-operation-under-load",
+      "part": "part4",
+      "order": 420,
+      "section": "Diesel operation under load",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["diesel"]
+      }
+    },
+    {
+      "id": "g-p4-fuel-hybrid-electric-drive-behavior",
+      "part": "part4",
+      "order": 430,
+      "section": "Hybrid / electric drive behavior",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["hybrid", "electric"]
+      }
+    },
+    {
+      "id": "g-p4-fuel-combustion-turbocharger",
+      "part": "part4",
+      "order": 440,
+      "section": "Turbocharger",
+      "subsection": "Exhaust turbocharger",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      },
+      "requiresEquipmentFlag": "turboEquipped"
+    },
+    {
+      "id": "g-p4-fuel-combustion-mechanical-compressor",
+      "part": "part4",
+      "order": 450,
+      "section": "Mechanical turbocharger",
+      "subsection": null,
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["petrol", "diesel", "hybrid"]
+      },
+      "requiresEquipmentFlag": "mechanicalCompressorEquipped"
+    },
+    {
+      "id": "g-p4-drive-4wd-system-operation",
+      "part": "part4",
+      "order": 460,
+      "section": "4WD system operation",
+      "subsection": "Drivetrain responses",
+      "dependsOnFields": ["drive"],
+      "visibleWhen": {
+        "drive": ["4wd"]
+      }
+    },
+    {
+      "id": "g-p4-body-convertible-roof-responses",
+      "part": "part4",
+      "order": 470,
+      "section": "Convertible body noise and seal behavior",
+      "subsection": "Roof responses during the drive",
+      "dependsOnFields": ["bodyType"],
+      "visibleWhen": {
+        "bodyType": ["convertible"]
+      }
+    },
+    {
+      "id": "g-p5-base-vin-number-compliance",
+      "part": "part5",
+      "order": 480,
+      "section": "Chassis numbers (VIN)",
+      "subsection": "VIN number compliance",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p5-base-service-booklet",
+      "part": "part5",
+      "order": 490,
+      "section": "Service booklet",
+      "subsection": "Desired information",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p5-base-registration-certificate",
+      "part": "part5",
+      "order": 500,
+      "section": "Registration certificate",
+      "subsection": "Compliance of the data in the documents with the actual data",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p5-base-vehicle-card",
+      "part": "part5",
+      "order": 510,
+      "section": "Vehicle card",
+      "subsection": "Content",
+      "dependsOnFields": [],
+      "visibleWhen": {}
+    },
+    {
+      "id": "g-p5-fuel-hybrid-electric-battery-documents",
+      "part": "part5",
+      "order": 520,
+      "section": "Charging and traction battery documents",
+      "subsection": "Necessary documents",
+      "dependsOnFields": ["fuelType"],
+      "visibleWhen": {
+        "fuelType": ["hybrid", "electric"]
+      },
+      "requiresEquipmentFlag": "evBatteryDocsAvailable"
+    },
+    {
+      "id": "g-p5-runtime-imported-eu-compulsory-documents",
+      "part": "part5",
+      "order": 530,
+      "section": "Cars imported from the EU",
+      "subsection": "Documents compulsory for the seller",
+      "dependsOnFields": [],
+      "visibleWhen": {},
+      "requiresEquipmentFlag": "importedFromEU"
+    },
+    {
+      "id": "g-p5-runtime-imported-eu-non-compulsory-documents",
+      "part": "part5",
+      "order": 540,
+      "section": "Cars imported from the EU",
+      "subsection": "Documents non-compulsory for the seller",
+      "dependsOnFields": [],
+      "visibleWhen": {},
+      "requiresEquipmentFlag": "importedFromEU"
+    }
+  ]
+}

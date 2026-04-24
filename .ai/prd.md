@@ -19,7 +19,7 @@ Docelowe doświadczenie użytkownika:
 
 1. Użytkownik trafia na stronę główną i loguje się przez Google lub Apple.
 2. Po zalogowaniu przechodzi na dashboard i rozpoczyna nową inspekcję albo wznawia istniejącą.
-3. Przy rozpoczęciu nowej inspekcji widzi instrukcję korzystania z checklisty.
+3. Przy rozpoczęciu nowej inspekcji widzi instrukcję korzystania z checklisty (tekst do instrukcji znajduje się w pliku `.ai/veriffica-instrukcja.md`).
 4. Na stronie sesji wypełnia Part 1, co odblokowuje Parts 2-5.
 5. Użytkownik przechodzi przez pełnoekranowe karty pytań, zapisuje odpowiedzi i opcjonalne notatki.
 6. Po zakończeniu każdego Partu wraca na stronę sesji i sam wybiera kolejny etap.
@@ -71,9 +71,9 @@ Główny problem do rozwiązania można opisać następująco:
 - FR-013. Na jednym koncie mogą istnieć maksymalnie 2 inspekcje jednocześnie, niezależnie od statusu.
 - FR-014. Po osiągnięciu limitu 2 inspekcji aplikacja musi zablokować utworzenie kolejnej i pokazać pop-up informujący o wykorzystaniu limitu.
 - FR-015. Rozpoczęcie nowej inspekcji musi utworzyć nową sesję w statusie `Draft`.
-- FR-016. Przy każdym rozpoczęciu nowej inspekcji aplikacja musi wyświetlić instrukcję pochodzącą z końca checklisty źródłowej oraz umożliwić jej zamknięcie.
+- FR-016. Przy każdym rozpoczęciu nowej inspekcji aplikacja musi wyświetlić instrukcję pochodzącą z pliku `.ai/veriffica-instrukcja.md` oraz umożliwić jej zamknięcie.
 - FR-017. Pop-up z instrukcją musi mieć opcję `Don't show again`, która wyłącza wyświetlanie instrukcji przy kolejnych nowych inspekcjach dla tego użytkownika.
-- FR-018. Nazwa kafelka sesji musi być budowana na podstawie pól `Make`, `Model` i `Year of production` i aktualizować się natychmiast po zmianie tych pól w Part 1.
+- FR-018. Nazwa kafelka sesji musi być budowana na podstawie pól `Make` i `Model` oraz opcjonalnie `Year of production` i `Registration number`, jeśli zostały poprawnie wypełnione, i aktualizować się natychmiast po zmianie tych pól w Part 1.
 - FR-019. Użytkownik musi mieć możliwość otwarcia dowolnej istniejącej inspekcji z dashboardu i wznowienia pracy w dowolnym momencie.
 - FR-020. Użytkownik musi mieć możliwość usunięcia inspekcji z dashboardu.
 - FR-021. Usunięcie inspekcji musi być `Hard Delete`, natychmiastowe i nieodwracalne, wymagać potwierdzenia oraz zwalniać slot na nową inspekcję.
@@ -83,17 +83,17 @@ Główny problem do rozwiązania można opisać następująco:
 - FR-022. Strona sesji musi być centralnym ekranem danej inspekcji i pokazywać: nazwę sesji, przyciski prowadzące do Parts 1-5, bieżący `Total Score`, wskaźnik ukończenia inspekcji oraz globalny dokument notatek.
 - FR-023. Strona sesji musi umożliwiać użytkownikowi samodzielny wybór kolejnego Partu po powrocie z poprzedniego etapu.
 - FR-024. Part 1 musi zawierać pola: `Price`, `Make`, `Model`, `Year of production`, `Registration number`, `VIN number`, `Mileage`, `Fuel type`, `Transmission`, `Drive`, `Color`, `Body type`, `No of doors`, `Address`, `Notes`.
-- FR-025. Pola `Make`, `Model`, `Year of production`, `Registration number`, `Fuel type`, `Transmission`, `Drive` i `Body type` są obowiązkowe.
-- FR-026. Pola `Price`, `VIN number`, `Mileage`, `Color`, `No of doors`, `Address` i `Notes` są opcjonalne, ale jeśli zostaną wypełnione, muszą przejść pełną walidację.
+- FR-025. Pola `Make`, `Model`, `Fuel type`, `Transmission`, `Drive` i `Body type` są obowiązkowe.
+- FR-026. Pola `Price`, `Year of production`, `Registration number`, `VIN number`, `Mileage`, `Color`, `No of doors`, `Address` i `Notes` są opcjonalne, ale jeśli zostaną wypełnione, muszą przejść pełną walidację.
 - FR-027. Walidacja Part 1 musi być ścisła i zgodna z poniższymi regułami:
 - FR-028. `Price`: opcjonalne pole dziesiętne z wartością od `0` do `10000000` i maksymalnie 2 miejscami po przecinku.
 - FR-029. `Make`: wymagane, po przycięciu od 1 do 50 znaków.
 - FR-030. `Model`: wymagane, po przycięciu od 1 do 60 znaków.
-- FR-031. `Year of production`: wymagane, dokładnie 4 cyfry, wartość od `1886` do `current year + 1`.
-- FR-032. `Registration number`: wymagane, po normalizacji od 2 do 15 znaków, dopuszczalne litery, cyfry, spacje i myślnik.
+- FR-031. `Year of production`: opcjonalne, ale jeśli podane, musi zawierać dokładnie 4 cyfry i wartość od `1886` do `current year + 1`.
+- FR-032. `Registration number`: opcjonalne, ale jeśli podane, musi po normalizacji zawierać od 2 do 15 znaków; dopuszczalne są litery, cyfry, spacje i myślnik.
 - FR-033. `VIN number`: opcjonalne, ale jeśli podane, musi zawierać dokładnie 17 znaków i spełniać regex `^[A-HJ-NPR-Z0-9]{17}$`.
 - FR-034. `Mileage`: opcjonalne, ale jeśli podane, musi być liczbą całkowitą od `0` do `9999999`.
-- FR-035. `Fuel type`: wymagane, jedna z wartości `Petrol`, `Diesel`, `LPG`, `Hybrid`, `Electric`.
+- FR-035. `Fuel type`: wymagane, jedna z wartości `Petrol`, `Diesel`, `Hybrid`, `Electric`.
 - FR-036. `Transmission`: wymagane, jedna z wartości `Manual`, `Automatic`.
 - FR-037. `Drive`: wymagane, jedna z wartości `2WD`, `4WD`.
 - FR-038. `Color`: opcjonalne, po przycięciu od 1 do 40 znaków.
@@ -106,27 +106,27 @@ Główny problem do rozwiązania można opisać następująco:
 - FR-045. W przypadku błędu formularza aplikacja musi pokazać komunikat pod nieprawidłowym polem, przewinąć do pierwszego błędnego pola i ustawić na nim fokus.
 - FR-046. Komunikaty walidacyjne muszą być napisane prostym językiem angielskim.
 - FR-047. Walidacja między polami musi blokować zapis konfiguracji `fuelType = Electric` oraz `transmission != Automatic` i wyświetlać komunikat `Electric cars must use Automatic transmission.`.
-- FR-048. Parts 2-5 muszą być nieaktywne, dopóki wszystkie wymagane pola Part 1 nie są poprawne.
+- FR-048. Parts 2-5 muszą być nieaktywne, dopóki wszystkie wymagane pola Part 1, czyli `Make`, `Model`, `Fuel type`, `Transmission`, `Drive` i `Body type`, nie są poprawne.
 - FR-049. Po poprawnym zapisie Part 1 aplikacja musi zapisać znormalizowane dane lokalnie, odblokować Parts 2-5 i zaktualizować nazwę sesji.
 
 ### 3.4 System pytań w Partach 2-5
 
-- FR-050. System pytań musi być znormalizowany do trzech warstw danych: `questionGroups` dla widoczności i logiki warunkowej, `questions` dla treści pytań oraz `explanations` dla treści edukacyjnych.
+- FR-050. System pytań musi być znormalizowany do trzech warstw danych: `questionGroups` dla widoczności i logiki warunkowej, `questions` dla treści pytań oraz `explanations` dla treści edukacyjnych; warstwa danych musi być utrzymywana jako spójny pakiet artefaktów źródłowych, kontraktu typów i schematów walidacyjnych.
 - FR-051. `questionGroups` nie mogą przechowywać pytań wewnątrz siebie; pytania muszą być linkowane przez stabilne `groupId`.
 - FR-052. Treści edukacyjne muszą być linkowane do pytań przez stabilne `explanationRef`.
 - FR-053. Każde pytanie i każda grupa muszą mieć stabilny identyfikator oraz pole `order`, którego wartości rosną co 10, aby umożliwić późniejsze rozszerzenia bez renumeracji całego banku pytań.
-- FR-054. Widoczność grup pytań musi zależeć od obowiązkowych pól Part 1 oraz od runtime flags: `combustionEnginePresent`, `sparkPlugsPresent`, `chargingPortEquipped`, `turboEquipped`, `mechanicalCompressorEquipped`, `evBatteryDocsAvailable`.
-- FR-055. Aplikacja musi zawsze pokazywać bazowe grupy pytań dla nadwozia, przedniego zawieszenia, opon, wnętrza, numerów nadwozia i podstawowych dokumentów.
-- FR-056. Dla `Petrol` aplikacja musi pokazywać bazowe pytania dla aut spalinowych, pytania o świece zapłonowe i czarny dym z silnika benzynowego oraz ukrywać grupy wyłącznie diesel, LPG i electric.
-- FR-057. Dla `Diesel` aplikacja musi pokazywać bazowe pytania dla aut spalinowych z wyłączeniem pytań tylko benzynowych, pokazywać sekcje diesel-only i ukrywać świece zapłonowe, pytania LPG oraz pytania electric-only.
-- FR-058. Dla `LPG` aplikacja musi pokazywać pytania petrol oraz dodatkowe sekcje LPG w Part 2 i Part 5.
-- FR-059. Dla `Hybrid` aplikacja musi pokazywać grupy bazowe, odpowiednie sekcje silnika spalinowego, sekcje wysokiego napięcia i ukrywać sekcje pure electric-only wymagające auta bez silnika spalinowego.
-- FR-060. Dla `Electric` aplikacja musi ukrywać pytania zależne od oleju silnikowego, wydechu, świec zapłonowych, sprzęgła i spalania paliwa oraz pokazywać sekcje high-voltage i charging.
+- FR-054. Widoczność grup pytań musi być modelowana addytywnie według formuły `Base + fuelType + transmission + drive + bodyType`, a runtime flags mogą być używane wyłącznie dla wyjątków nieinferowalnych z obowiązkowych pól Part 1. Aktualny zestaw runtime flags to: `chargingPortEquipped`, `evBatteryDocsAvailable`, `turboEquipped`, `mechanicalCompressorEquipped`, `importedFromEU`.
+- FR-055. Aplikacja musi zawsze pokazywać bazowe grupy pytań dla nadwozia, śladów napraw, struktury komory silnika, przedniego zawieszenia, opon, wnętrza, układu kierowniczego na postoju i po uruchomieniu silnika, reakcji zawieszenia, reakcji układu kierowniczego, innych zjawisk podczas jazdy, hamulców, numerów VIN oraz bazowych dokumentów: `Service booklet`, `Registration certificate` i `Vehicle card`.
+- FR-056. Dla `Petrol` aplikacja musi pokazywać wspólne grupy dla aut spalinowych, pytania o świece zapłonowe, pytania o czarny dym z silnika benzynowego oraz grupy zależne od `turboEquipped` i `mechanicalCompressorEquipped`, jeśli odpowiednie flagi są aktywne.
+- FR-057. Dla `Diesel` aplikacja musi pokazywać wspólne grupy dla aut spalinowych, sekcje `diesel-only` w Part 2-4 oraz opcjonalne grupy zależne od `turboEquipped` i `mechanicalCompressorEquipped`; nie może pokazywać pytań o świece zapłonowe ani sekcji czarnego dymu z silnika benzynowego.
+- FR-058. Jedna grupa pytań może należeć do wielu addytywnych bucketów w ramach osi `fuelType`, jeśli ta sama logika i treść pytania są poprawne dla więcej niż jednego wariantu paliwa, na przykład wspólnie dla `Petrol`, `Diesel` i `Hybrid`.
+- FR-059. Dla `Hybrid` aplikacja musi pokazywać grupy bazowe, wspólne grupy dla aut spalinowych, pytania o świece zapłonowe, pytania o czarny dym z silnika benzynowego, sekcje `high-voltage` oraz sekcje zależne od `chargingPortEquipped`, `evBatteryDocsAvailable`, `turboEquipped` i `mechanicalCompressorEquipped`, gdy odpowiednie flagi są aktywne.
+- FR-060. Dla `Electric` aplikacja musi ukrywać grupy zależne od oleju silnikowego, wydechu, świec zapłonowych, rozruchu silnika spalinowego, sprzęgła i spalania paliwa oraz pokazywać sekcje `high-voltage`, `power-up`, `drive behavior` oraz sekcje zależne od `chargingPortEquipped` i `evBatteryDocsAvailable`, gdy odpowiednie flagi są aktywne.
 - FR-061. Dla `Manual` aplikacja musi pokazywać pytania o sprzęgło i zachowanie manualnej skrzyni oraz ukrywać pytania automatic-only.
 - FR-062. Dla `Automatic` aplikacja musi ukrywać pytania o ruszanie z trzeciego biegu i pytania clutch-specific oraz pokazywać pytania automatic-only.
-- FR-063. Dla `2WD` aplikacja musi ukrywać pytania 4WD-only.
+- FR-063. Dla `2WD` aplikacja nie może dodawać żadnych dodatkowych grup drive-specific i musi ukrywać pytania `4WD-only`.
 - FR-064. Dla `4WD` aplikacja musi pokazywać bazowe pytania jezdne oraz dodatkowe pytania o układ 4WD.
-- FR-065. Dla `SUV`, `Convertible`, `Van` i `Pickup` aplikacja musi pokazywać dodatkowe grupy pytań związane z odpowiednim typem nadwozia.
+- FR-065. Dla `SUV`, `Convertible`, `Van` i `Pickup` aplikacja musi pokazywać dodatkowe grupy pytań związane z odpowiednim typem nadwozia; dla `Sedan`, `Hatchback`, `Coupe` i `Other` aktualny bank pytań nie definiuje dodatkowych grup nadwoziowych.
 - FR-066. Parts 2-5 muszą działać jako pełnoekranowe karty pytań zajmujące całą dostępną wysokość ekranu poza stałymi elementami layoutu.
 - FR-067. Na ekranie może być widoczne tylko jedno pytanie jednocześnie.
 - FR-068. Nawigacja między kartami pytań musi odbywać się poziomo lewo-prawo.
@@ -140,8 +140,8 @@ Główny problem do rozwiązania można opisać następująco:
 - FR-076. Po zapisaniu notatki kontekstowej aplikacja musi dopisać ją do jednego globalnego, edytowalnego dokumentu notatek na stronie sesji wraz z treścią oryginalnego pytania jako nagłówkiem.
 - FR-077. Limit globalnego dokumentu notatek wynosi 10000 znaków.
 - FR-078. Po zakończeniu każdego Partu aplikacja musi pokazać ekran przejściowy z komunikatem o zakończeniu Partu oraz przyciskiem `OK`, który odsyła użytkownika na stronę sesji.
-- FR-079. Zmiana pól `fuelType`, `transmission`, `drive` lub `bodyType` po udzieleniu odpowiedzi musi uruchamiać `Smart Pruning`.
-- FR-080. `Smart Pruning` musi ostrzec użytkownika o usunięciu odpowiedzi, zachować tylko odpowiedzi nadal zgodne z konfiguracją, usunąć odpowiedzi osierocone i natychmiast przeliczyć postęp oraz `Total Score`.
+- FR-079. Zmiana pól `fuelType`, `transmission`, `drive`, `bodyType` lub aktywnej runtime flag wpływającej na widoczność po udzieleniu odpowiedzi musi uruchamiać `Smart Pruning`.
+- FR-080. `Smart Pruning` musi ostrzec użytkownika o usunięciu odpowiedzi, zachować tylko odpowiedzi powiązane z grupami nadal widocznymi po przeliczeniu konfiguracji, usunąć odpowiedzi osierocone i natychmiast przeliczyć postęp oraz `Total Score`.
 
 ### 3.5 Summary, wynik i finalizacja inspekcji
 
@@ -179,7 +179,7 @@ Główny problem do rozwiązania można opisać następująco:
 - Social login przez Google i Apple.
 - Maksymalnie 2 inspekcje na konto.
 - Jeden globalny dokument notatek na sesję.
-- Dynamiczny system pytań zależny od typu pojazdu i runtime flags.
+- Dynamiczny system pytań oparty o model addytywny `Base + fuelType + transmission + drive + bodyType` oraz ograniczony zestaw runtime flags dla wyjątków.
 - Manualne zakończenie inspekcji przez użytkownika.
 - Wynik w formie rozkładu odpowiedzi `Yes / No / Don't know` dla sekcji i całości.
 - Tryb offline po wcześniejszym załadowaniu aplikacji oraz późniejsza synchronizacja kolejki zmian.
@@ -201,6 +201,9 @@ Główny problem do rozwiązania można opisać następująco:
 
 - PRD nie narzuca konkretnego stacku technologicznego; decyzja implementacyjna pozostaje poza zakresem tego dokumentu.
 - Model danych systemu pytań musi opierać się na stabilnych identyfikatorach, a nie na tekstach pytań.
+- Źródłem prawdy dla checklisty MVP jest pakiet artefaktów w `.ai/veriffica-questions-list/`: `list-of-questions.md`, `question-mapping-config.json`, `question-bank.json`, `question-mapping.types.ts` oraz odpowiadające im JSON Schemas.
+- Treść instrukcji startowej dla nowej inspekcji pochodzi z pliku `.ai/veriffica-instrukcja.md`.
+- Zestaw enumów i widoczności pytań musi pozostawać zsynchronizowany z aktualnym kontraktem danych oraz bankiem pytań MVP.
 - Pierwsza wizyta użytkownika całkowicie offline, bez wcześniejszego pobrania zasobów PWA, nie jest gwarantowanym scenariuszem MVP i wymaga wsparcia cache po pierwszym wejściu online.
 - Produkt nie ma zastępować profesjonalnego przeglądu technicznego; instrukcja startowa musi jasno komunikować, że checklistę należy traktować jako narzędzie pomocnicze.
 
@@ -309,7 +312,7 @@ Kryteria akceptacji:
 
 - Dashboard pokazuje osobny kafelek dla każdej inspekcji użytkownika.
 - Każdy kafelek pokazuje status `Draft` albo `Completed`.
-- Nazwa kafelka korzysta z pól `Make`, `Model` i `Year of production`, jeśli są dostępne.
+- Nazwa kafelka korzysta z pól `Make` i `Model` oraz opcjonalnie `Year of production` i `Registration number`, jeśli są dostępne i poprawne.
 - Po zmianie tych pól w Part 1 nazwa kafelka aktualizuje się natychmiast.
 - Kliknięcie kafelka otwiera odpowiednią stronę sesji.
 
@@ -325,7 +328,7 @@ Kryteria akceptacji:
 
 - Rozpoczęcie nowej inspekcji tworzy sesję w statusie `Draft`.
 - Po rozpoczęciu nowej inspekcji pojawia się pop-up z instrukcją.
-- Pop-up zawiera treść opisującą cel checklisty, podział na sekcje i znaczenie odpowiedzi.
+- Pop-up zawiera treść z pliku `.ai/veriffica-instrukcja.md`, opisującą cel checklisty, podział na sekcje i znaczenie odpowiedzi.
 - Zamknięcie pop-upu przenosi użytkownika do strony sesji nowej inspekcji.
 
 ### US-009
@@ -400,6 +403,7 @@ Opis: Jako użytkownik chcę wypełnić konfigurację auta w Part 1 i dostać pr
 Kryteria akceptacji:
 
 - Part 1 zawiera wszystkie zdefiniowane pola formularza.
+- Jako obowiązkowe oznaczone są wyłącznie pola `Make`, `Model`, `Fuel type`, `Transmission`, `Drive` i `Body type`.
 - Pola obowiązkowe nie pozwalają na poprawny zapis, jeśli są puste lub nieprawidłowe.
 - Pola opcjonalne mogą zostać puste, ale jeśli są wypełnione, muszą spełnić swoje reguły walidacyjne.
 - Błędy pojawiają się pod odpowiednimi polami prostym językiem angielskim.
@@ -416,7 +420,7 @@ Opis: Jako użytkownik chcę, aby dalsze części inspekcji odblokowywały się 
 
 Kryteria akceptacji:
 
-- Przyciski prowadzące do Parts 2-5 są nieaktywne, dopóki wszystkie wymagane pola Part 1 nie są poprawne.
+- Przyciski prowadzące do Parts 2-5 są nieaktywne, dopóki pola `Make`, `Model`, `Fuel type`, `Transmission`, `Drive` i `Body type` nie są poprawne.
 - Po poprawnym zapisie wymaganych pól przyciski do Parts 2-5 odblokowują się bez potrzeby odświeżania strony.
 - Jeśli późniejsza zmiana w Part 1 unieważni wymagane dane, Parts 2-5 ponownie stają się zablokowane.
 - Stan blokady jest spójny na stronie sesji i po wznowieniu inspekcji.
@@ -431,10 +435,10 @@ Opis: Jako użytkownik chcę, aby tytuł sesji od razu odzwierciedlał wpisane d
 
 Kryteria akceptacji:
 
-- Po zmianie poprawnych wartości pól `Make`, `Model` lub `Year of production` tytuł sesji aktualizuje się natychmiast.
+- Po zmianie poprawnych wartości pól `Make`, `Model`, `Year of production` lub `Registration number` tytuł sesji aktualizuje się natychmiast.
 - Zmiana jest widoczna zarówno na stronie sesji, jak i na dashboardzie.
 - Tytuł korzysta z wartości znormalizowanych przed zapisem.
-- Nieprawidłowe dane nie tworzą mylącego finalnego tytułu sesji.
+- Jeśli `Year of production` lub `Registration number` nie są wypełnione albo są nieprawidłowe, nie są dodawane do tytułu sesji.
 
 ### US-016
 
@@ -446,10 +450,11 @@ Opis: Jako użytkownik chcę widzieć tylko pytania właściwe dla mojego auta, 
 
 Kryteria akceptacji:
 
-- Widoczność grup pytań zależy od `fuelType`, `transmission`, `drive`, `bodyType` i runtime flags.
+- Widoczność grup pytań zależy od addytywnej formuły `Base + fuelType + transmission + drive + bodyType` oraz runtime flags `chargingPortEquipped`, `evBatteryDocsAvailable`, `turboEquipped`, `mechanicalCompressorEquipped`, `importedFromEU`.
 - Pytania bazowe są widoczne dla wszystkich odpowiednich inspekcji.
-- Pytania specyficzne dla `Diesel`, `LPG`, `Hybrid`, `Electric`, `Automatic`, `4WD` i wybranych typów nadwozia pojawiają się wyłącznie wtedy, gdy są zasadne.
-- Pytania typu `if equipped` pojawiają się tylko wtedy, gdy odpowiednia flaga wyposażenia ma wartość prawda.
+- Pytania specyficzne dla `Petrol`, `Diesel`, `Hybrid`, `Electric`, `Manual`, `Automatic`, `4WD`, `Convertible`, `SUV`, `Van`, `Pickup` oraz dokumentów dla aut importowanych z UE pojawiają się wyłącznie wtedy, gdy są zasadne.
+- Grupy zależne od wyposażenia lub dokumentów runtime-only pojawiają się tylko wtedy, gdy odpowiednia flaga ma wartość prawda.
+- Jedna grupa pytań może być współdzielona przez wiele wariantów paliwa, jeśli logika widoczności i treść pozostają takie same.
 - System opiera się na stabilnych identyfikatorach grup, pytań i wyjaśnień, a nie na tekście pytań.
 
 ### US-017
@@ -458,11 +463,11 @@ ID: US-017
 
 Tytuł: Bezpieczne przycinanie odpowiedzi po zmianie konfiguracji auta
 
-Opis: Jako użytkownik chcę, aby po zmianie kluczowych parametrów auta aplikacja zachowała nadal poprawne odpowiedzi i usunęła tylko osierocone dane, abym nie stracił więcej informacji niż to konieczne.
+Opis: Jako użytkownik chcę, aby po zmianie kluczowych parametrów auta lub flag wpływających na widoczność aplikacja zachowała nadal poprawne odpowiedzi i usunęła tylko osierocone dane, abym nie stracił więcej informacji niż to konieczne.
 
 Kryteria akceptacji:
 
-- Zmiana `fuelType`, `transmission`, `drive` albo `bodyType` po udzieleniu odpowiedzi uruchamia `Smart Pruning`.
+- Zmiana `fuelType`, `transmission`, `drive`, `bodyType` albo runtime flag używanych do widoczności po udzieleniu odpowiedzi uruchamia `Smart Pruning`.
 - Przed zastosowaniem `Smart Pruning` użytkownik otrzymuje ostrzeżenie, że część odpowiedzi może zostać usunięta.
 - Odpowiedzi nadal zgodne z nową konfiguracją pozostają zachowane.
 - Odpowiedzi należące do ukrytych grup są usuwane.
