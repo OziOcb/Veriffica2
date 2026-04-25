@@ -8,7 +8,7 @@ Rekomendowany model docelowy:
 
 - Frontend i aplikacja PWA: Nuxt 4 + Nuxt UI 4 + TailwindCSS 4.
 - Warstwa API i logiki serwerowej: Nitro server routes w tym samym repozytorium.
-- Auth i baza danych: Supabase Auth + Supabase PostgreSQL.
+- Auth i baza danych: Supabase Auth (email + password) + Supabase PostgreSQL.
 - Offline-first: Dexie.js na IndexedDB jako lokalny system zapisu i kolejki synchronizacji.
 - Hosting i CI/CD: Vercel + GitHub Actions.
 
@@ -23,7 +23,7 @@ Ta architektura jest nowoczesna na warstwie DX i UI, ale celowo nudna w rdzeniu:
 | Ścisła walidacja Part 1 | Silne reguły pól, normalizacja, walidacja między polami i odblokowanie Parts 2-5 | Wspólne kontrakty walidacyjne po stronie klienta i serwera, bez rozjazdu logiki |
 | Smart Pruning | Zmiana konfiguracji auta może usuwać część odpowiedzi | Logika musi działać deterministycznie lokalnie, zanim dane zostaną zsynchronizowane |
 | Bezpieczeństwo danych | Użytkownik może widzieć i edytować wyłącznie własne dane | Potrzebne RLS w bazie oraz serwerowa kontrola sesji dla operacji wrażliwych |
-| Social login i ciągłość sesji | Google i Apple muszą działać także w modelu offline-resume | Auth nie może być spleciony z lokalnym stanem inspekcji; po reconnect sesja ma się odnowić bez utraty lokalnych danych |
+| Email auth i ciągłość sesji | Rejestracja, logowanie i utrzymanie sesji muszą działać stabilnie także w modelu offline-resume | Auth nie może być spleciony z lokalnym stanem inspekcji; po reconnect sesja ma się odnowić bez utraty lokalnych danych |
 | SEO i PWA | Landing page ma być publiczny i dobrze indeksowalny, aplikacja ma działać jak PWA | Potrzebny SSR/prerender dla strony publicznej oraz service worker dla zasobów aplikacji |
 
 ### Wymagania niefunkcjonalne
@@ -85,13 +85,13 @@ Ta architektura jest nowoczesna na warstwie DX i UI, ale celowo nudna w rdzeniu:
 
 | Warstwa | Rekomendacja | Rola | Dlaczego ta decyzja |
 | --- | --- | --- | --- |
-| Uwierzytelnianie | Supabase Auth z Google i Apple OAuth | Logowanie social, sesje użytkownika | Szybki start, dobra integracja z Nuxt, brak potrzeby budowania auth od zera |
+| Uwierzytelnianie | Supabase Auth email + password | Rejestracja, logowanie, reset hasła i sesje użytkownika | Najprostszy przepływ MVP, mniejszy koszt operacyjny i brak zależności od providerów OAuth |
 | Sesje | SSR cookies + silent refresh po reconnect | Bezpieczna sesja w online, płynne odnowienie po offline | Lokalny stan inspekcji nie zależy od chwilowej ważności tokenu |
 | Autoryzacja | Postgres RLS + server-side session checks | Izolacja danych per user | Najważniejsze zabezpieczenie dla dashboardu, sesji i summary |
 | Hard delete danych | Server-side orchestrated delete | Usunięcie konta i sesji wraz z danymi | Operacja wrażliwa nie powinna być wykonywana bezpośrednio z klienta |
 | Limity biznesowe | Server-side guard + SQL transaction/function | Maksymalnie 2 inspekcje na konto | Zapobiega race conditions i obchodzeniu limitu po stronie klienta |
 | Security headers | `nuxt-security` | CSP, HSTS, X-Frame-Options, itp. | Tani i skuteczny baseline bezpieczeństwa |
-| Zarządzanie sekretami | Vercel env vars + Supabase secrets + GitHub Secrets | Bezpieczne przechowywanie kluczy i callback URLs | Standardowy i prosty model dla małego zespołu |
+| Zarządzanie sekretami | Vercel env vars + Supabase secrets + GitHub Secrets | Bezpieczne przechowywanie kluczy integracyjnych i danych SMTP | Standardowy i prosty model dla małego zespołu |
 | Ochrona cache | Cache tylko dla statycznych assetów i public pages | Ochrona przed wyciekiem danych uwierzytelnionych | PWA nie może cache'ować prywatnych payloadów w publicznym cache przeglądarki |
 
 ### Infrastruktura & DevOps
@@ -128,7 +128,7 @@ flowchart TD
 ### Przepływ logiczny
 
 1. Pierwsza wizyta online ładuje publiczny landing page przez SSR/prerender oraz pobiera app shell i statyczny question bank do cache PWA.
-2. Użytkownik loguje się przez Google lub Apple; sesja jest utrzymywana po stronie serwera i przeglądarki w modelu bezpiecznych cookies.
+2. Użytkownik rejestruje konto lub loguje się przy użyciu adresu e-mail i hasła; sesja jest utrzymywana po stronie serwera i przeglądarki w modelu bezpiecznych cookies.
 3. Po wejściu do strefy chronionej aplikacja najpierw czyta ostatni lokalny snapshot z IndexedDB, dzięki czemu dashboard i sesja mogą uruchomić się także offline.
 4. Każda zmiana domenowa zapisuje się najpierw lokalnie do Dexie: Part 1, odpowiedzi, notatki, status sesji, progress i kolejka synchronizacji.
 5. Gdy urządzenie odzyska połączenie, aplikacja wysyła batch zmian lub pełny snapshot inspekcji do Nitro API.
@@ -188,7 +188,7 @@ Krótko: nowoczesny frontend pozostaje szybki, bo ciężar logiki jest w SSR, co
 | Faza | Zakres | Rezultat |
 | --- | --- | --- |
 | Faza 0: Foundation | Bootstrap Nuxt 4, Nuxt UI 4, Tailwind 4, pnpm, GitHub Actions, Vercel, Supabase project, env management | Stabilny szkielet projektu i środowiska |
-| Faza 1: Identity + Dashboard | Social login, route guards, RLS baseline, dashboard, create/delete inspection, limit 2 inspekcji, user preferences | Użytkownik może wejść do systemu i zarządzać sesjami |
+| Faza 1: Identity + Dashboard | Auth email + password, route guards, RLS baseline, dashboard, create/delete inspection, limit 2 inspekcji, user preferences | Użytkownik może wejść do systemu i zarządzać sesjami |
 | Faza 2: Domain Core | Part 1, normalizacja i walidacja, session title builder, runtime flags, question bank resolver | Poprawnie konfigurowana inspekcja i dynamiczny zestaw pytań |
 | Faza 3: Inspection Runner | Fullscreen question cards, notes, explanations, progress, total score, summary editing | Główna wartość produktu działa end-to-end |
 | Faza 4: Offline & Sync Hardening | Dexie schema, queue, reconnect sync, smart pruning, stale state reconciliation, PWA installability | Produkt działa wiarygodnie offline-first |
@@ -214,10 +214,10 @@ To podejście ogranicza ryzyko, bo większość logiki biznesowej może zostać 
 | Supabase Pro | od 25 USD / miesiąc | Auth, Postgres, backup i funkcje SQL |
 | GitHub Actions | 0-20 USD / miesiąc | Zależnie od liczby buildów i testów e2e |
 | Domena i DNS | 1-5 USD / miesiąc | Średniorocznie |
-| Apple Developer Program | ok. 99 USD / rok | Wymagane do produkcyjnego Sign in with Apple |
+| Transactional email / SMTP | 0-15 USD / miesiąc | Opcjonalnie dla maili rejestracyjnych, resetu hasła i własnego nadawcy |
 | Monitoring dodatkowy | 0-20 USD / miesiąc | Opcjonalnie po becie |
 
-Realistyczny koszt utrzymania MVP przy niskim ruchu: około 55-90 USD miesięcznie plus 99 USD rocznie za Apple Developer Program.
+Realistyczny koszt utrzymania MVP przy niskim ruchu: około 45-85 USD miesięcznie.
 
 ### Główne ryzyka architektoniczne
 
@@ -227,7 +227,7 @@ Realistyczny koszt utrzymania MVP przy niskim ruchu: około 55-90 USD miesięczn
 | Zachowanie PWA na iOS Safari | Wysoki | Testować wcześnie na realnych urządzeniach; nie opierać synchronizacji wyłącznie o browser Background Sync |
 | Błędy polityk RLS | Wysoki | Testy integracyjne polityk, code review dla SQL migrations, brak bezpośrednich operacji admin z klienta |
 | Rozjazd question banku z kodem | Średni | CI walidujące JSON Schema, wersjonowanie artefaktów i jedno źródło prawdy w repo |
-| Złożoność Apple Sign-In | Średni | Skonfigurować i przetestować callbacki na początku projektu, nie na końcu |
+| Dostarczalność maili auth | Średni | Skonfigurować własny SMTP lub sprawdzonego providera przed uruchomieniem maili rejestracyjnych i resetu hasła |
 | Migracje IndexedDB | Średni | Dexie versioning, scenariusze upgrade testowane w Playwright |
 
 ### Finalna rekomendacja CTO / Solution Architect
@@ -237,7 +237,7 @@ Najlepszym wyborem dla Veriffica jest:
 - Nuxt 4 jako full-stack shell aplikacji.
 - Nuxt UI 4 + TailwindCSS 4 jako warstwa interfejsu.
 - Nitro jako BFF i warstwa logiki serwerowej.
-- Supabase jako backend managed: Auth + PostgreSQL + RLS.
+- Supabase jako backend managed: Auth email + password + PostgreSQL + RLS.
 - Dexie na IndexedDB jako lokalny storage i kolejka offline.
 - Vercel + GitHub Actions jako hosting i delivery pipeline.
 

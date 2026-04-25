@@ -1,7 +1,7 @@
 # Aplikacja - Veriffica (MVP)
 
 ## Główny problem
-Inspekcja samochodu przed zakupem dla amatora jest stresująca i skomplikowana. Kupujący nie wiedzą, na co patrzeć, jak interpretować usterki i często gubią się w chaosie informacji. Veriffica upraszcza ten proces, oferując spersonalizowaną, interaktywną listę kontrolną, która prowadzi użytkownika za rękę i automatycznie ocenia stan techniczny pojazdu.
+Inspekcja samochodu przed zakupem dla amatora jest stresująca i skomplikowana. Kupujący nie wiedzą, na co patrzeć, jak interpretować usterki i często gubią się w chaosie informacji. Veriffica upraszcza ten proces, oferując spersonalizowaną, interaktywną listę kontrolną, która prowadzi użytkownika za rękę i porządkuje odpowiedzi oraz obserwacje z inspekcji.
 
 ## Najmniejszy zestaw funkcjonalności
 - Język angielski jako główny jezyk aplikacji
@@ -17,8 +17,8 @@ Inspekcja samochodu przed zakupem dla amatora jest stresująca i skomplikowana. 
 	3. Listę wszystkich pytań i udzielonych odpowiedzi. Lista musi dać sie edytować w każdej chwili
 - Strona profilowa: Strona profilu użytkownika na ktorej widoczne sa dane o uzytkowniku
 - Strona z ustawieniami aplikacji: Strona z ustawieniami takimi jak wielkość czcionki, theme (dark/light) itd.
-- Social Login: Uproszczony system kont (Google/Apple) umożliwiający szybki dostęp i trwałe przechowywanie raportów.
-- Tryb Offline-First (PWA): Wykorzystanie Local Storage i "Kolejki Zmian" do pracy bez dostępu do internetu oraz automatyczna synchronizacja danych w tle.
+- System kont: Rejestracja i logowanie przy użyciu adresu e-mail i hasła, oparte na Supabase Auth, umożliwiające szybki dostęp i trwałe przechowywanie raportów.
+- Tryb Offline-First (PWA): Wykorzystanie IndexedDB i "Kolejki Zmian" do pracy bez dostępu do internetu oraz automatyczna synchronizacja danych w tle.
 
 ## Co NIE wchodzi w zakres MVP
 - Wybór innych jezyków dla aplikacji

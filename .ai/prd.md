@@ -8,7 +8,7 @@ Główne założenia produktu:
 
 - Produkt jest skierowany do laików kupujących używany samochód.
 - Główny język interfejsu MVP to English.
-- Główny przepływ produktu składa się z: strony głównej, logowania społecznościowego, dashboardu, strony sesji, formularza Part 1, systemu pytań w Partach 2-5, strony Summary, profilu użytkownika i ustawień.
+- Główny przepływ produktu składa się z: strony głównej, ekranu logowania i rejestracji, dashboardu, strony sesji, formularza Part 1, systemu pytań w Partach 2-5, strony Summary, profilu użytkownika i ustawień.
 - Proces inspekcji jest podzielony na 5 części: `Part 1 - Info about the car`, `Part 2 - At a standstill`, `Part 3 - Starting the engine`, `Part 4 - Test drive`, `Part 5 - Documents`.
 - Wynik inspekcji nie jest pojedynczą oceną jakości auta. Aplikacja prezentuje wyłącznie rozkład odpowiedzi `Yes / No / Don't know` dla każdej sekcji i dla całej inspekcji.
 - Wszystkie pytania mają taką samą wagę. MVP nie zawiera wag usterek ani automatycznego systemu deal-breakerów.
@@ -17,8 +17,8 @@ Główne założenia produktu:
 
 Docelowe doświadczenie użytkownika:
 
-1. Użytkownik trafia na stronę główną i loguje się przez Google lub Apple.
-2. Po zalogowaniu przechodzi na dashboard i rozpoczyna nową inspekcję albo wznawia istniejącą.
+1. Użytkownik trafia na stronę główną, rejestruje konto lub loguje się przy użyciu adresu e-mail i hasła.
+2. Po uwierzytelnieniu przechodzi na dashboard i rozpoczyna nową inspekcję albo wznawia istniejącą.
 3. Przy rozpoczęciu nowej inspekcji widzi instrukcję korzystania z checklisty (tekst do instrukcji znajduje się w pliku `.ai/veriffica-instrukcja.md`).
 4. Na stronie sesji wypełnia Part 1, co odblokowuje Parts 2-5.
 5. Użytkownik przechodzi przez pełnoekranowe karty pytań, zapisuje odpowiedzi i opcjonalne notatki.
@@ -54,8 +54,8 @@ Główny problem do rozwiązania można opisać następująco:
 ### 3.1 Dostęp, konto i bezpieczeństwo
 
 - FR-001. Aplikacja musi udostępniać publiczną stronę główną z opisem produktu i akcjami logowania/rejestracji.
-- FR-002. Aplikacja musi umożliwiać logowanie społecznościowe przez Google i Apple.
-- FR-003. Po udanym logowaniu użytkownik musi zostać przekierowany na dashboard.
+- FR-002. Aplikacja musi umożliwiać rejestrację konta i logowanie przy użyciu adresu e-mail i hasła.
+- FR-003. Po udanej rejestracji lub logowaniu użytkownik musi zostać przekierowany na dashboard.
 - FR-004. Dashboard, strony sesji, Summary, profil i ustawienia muszą być dostępne wyłącznie dla uwierzytelnionego użytkownika.
 - FR-005. Użytkownik może widzieć i modyfikować wyłącznie własne inspekcje, notatki i dane konta.
 - FR-006. Profil użytkownika musi prezentować podstawowe informacje o koncie.
@@ -176,7 +176,7 @@ Główny problem do rozwiązania można opisać następująco:
 
 - Webowa aplikacja PWA działająca na urządzeniach mobilnych i desktopowych.
 - Angielski jako jedyny język interfejsu w MVP.
-- Social login przez Google i Apple.
+- Rejestracja i logowanie przy użyciu adresu e-mail i hasła.
 - Maksymalnie 2 inspekcje na konto.
 - Jeden globalny dokument notatek na sesję.
 - Dynamiczny system pytań oparty o model addytywny `Base + fuelType + transmission + drive + bodyType` oraz ograniczony zestaw runtime flags dla wyjątków.
@@ -213,30 +213,31 @@ Główny problem do rozwiązania można opisać następująco:
 
 ID: US-001
 
-Tytuł: Zobaczenie strony głównej i wejście do logowania
+Tytuł: Zobaczenie strony głównej i wejście do rejestracji/logowania
 
-Opis: Jako potencjalny użytkownik chcę zobaczyć publiczną stronę główną z jasnym opisem wartości produktu i możliwością rozpoczęcia logowania, abym mógł szybko zacząć korzystać z aplikacji.
+Opis: Jako potencjalny użytkownik chcę zobaczyć publiczną stronę główną z jasnym opisem wartości produktu i możliwością rozpoczęcia rejestracji lub logowania, abym mógł szybko zacząć korzystać z aplikacji.
 
 Kryteria akceptacji:
 
 - Niezalogowany użytkownik widzi publiczną stronę główną.
 - Strona główna wyjaśnia, że aplikacja prowadzi przez 5-częściową inspekcję używanego samochodu.
 - Strona główna zawiera wyraźne akcje logowania lub rejestracji.
-- Wybranie akcji logowania prowadzi użytkownika do dostępnych metod uwierzytelnienia.
+- Wybranie akcji logowania lub rejestracji prowadzi użytkownika do formularza uwierzytelniania opartego na adresie e-mail i haśle.
 
 ### US-002
 
 ID: US-002
 
-Tytuł: Logowanie przez Google lub Apple
+Tytuł: Rejestracja i logowanie przy użyciu adresu e-mail i hasła
 
-Opis: Jako nowy lub powracający użytkownik chcę zalogować się przez Google lub Apple, aby bezpiecznie uzyskać dostęp do swoich inspekcji.
+Opis: Jako nowy lub powracający użytkownik chcę zarejestrować konto lub zalogować się przy użyciu adresu e-mail i hasła, aby bezpiecznie uzyskać dostęp do swoich inspekcji.
 
 Kryteria akceptacji:
 
-- Użytkownik może wybrać logowanie przez Google lub Apple.
-- Po udanym logowaniu użytkownik trafia na dashboard.
-- Po nieudanym logowaniu użytkownik pozostaje poza strefą chronioną i dostaje czytelny komunikat o błędzie.
+- Użytkownik może założyć konto przy użyciu adresu e-mail i hasła.
+- Użytkownik może zalogować się przy użyciu adresu e-mail i hasła.
+- Po udanej rejestracji lub logowaniu użytkownik trafia na dashboard.
+- Po nieudanej rejestracji lub logowaniu użytkownik pozostaje poza strefą chronioną i dostaje czytelny komunikat o błędzie.
 - Po odświeżeniu strony aktywna sesja użytkownika pozostaje zachowana do momentu wylogowania lub usunięcia konta.
 
 ### US-003

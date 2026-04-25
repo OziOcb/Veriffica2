@@ -46,6 +46,7 @@
 44. Widoczność pytań zależy od addytywnej formuły `Base + fuelType + transmission + drive + bodyType` oraz od ograniczonego zestawu runtime flags: `chargingPortEquipped`, `evBatteryDocsAvailable`, `turboEquipped`, `mechanicalCompressorEquipped`, `importedFromEU`.
 45. Zmiana pól mapujących `fuelType`, `transmission`, `drive`, `bodyType` albo aktywnej runtime flag wpływającej na widoczność uruchamia `Smart Pruning`, czyli usunięcie odpowiedzi należących do grup, które stały się niewidoczne, oraz natychmiastowe przeliczenie postępu i `Total Score`.
 46. W modelu danych systemu pytań obowiązują stabilne identyfikatory `questionId`, `groupId` i `explanationRef`, a pole `order` rośnie co 10, aby umożliwić późniejsze wstawianie nowych pytań bez renumeracji całej listy.
+47. W MVP rezygnujemy z logowania społecznościowego Google/Apple na rzecz rejestracji i logowania przy użyciu adresu e-mail i hasła, opartych na Supabase Auth.
 {{/decisions}}
 
 {{matched_recommendations}}
@@ -77,7 +78,7 @@
 {{prd_planning_summary}}
 **a. Główne wymagania funkcjonalne produktu**
 
-Veriffica MVP to anglojęzyczna aplikacja PWA `Offline-First` dla laików kupujących używane auta. Główny przepływ składa się z: strony głównej, logowania społecznościowego Google/Apple, dashboardu z limitem maksymalnie 2 inspekcji, `Strony sesji`, formularza Part 1, systemu pytań w Partach 2-5, strony `Summary`, profilu użytkownika i ustawień.
+Veriffica MVP to anglojęzyczna aplikacja PWA `Offline-First` dla laików kupujących używane auta. Główny przepływ składa się z: strony głównej, rejestracji i logowania przy użyciu adresu e-mail i hasła, dashboardu z limitem maksymalnie 2 inspekcji, `Strony sesji`, formularza Part 1, systemu pytań w Partach 2-5, strony `Summary`, profilu użytkownika i ustawień.
 
 Kluczowe funkcje obejmują:
 1. Tworzenie i zarządzanie maksymalnie 2 inspekcjami na konto.
@@ -105,7 +106,7 @@ Kluczowe funkcje obejmują:
 **b. Kluczowe historie użytkownika i ścieżki korzystania**
 
 Najważniejsza ścieżka użytkownika:
-1. Użytkownik zakłada konto lub loguje się przez Google/Apple.
+1. Użytkownik zakłada konto lub loguje się przy użyciu adresu e-mail i hasła.
 2. Trafia na pusty dashboard albo listę swoich inspekcji.
 3. Rozpoczyna nową inspekcję, widzi instrukcję z `.ai/veriffica-instrukcja.md` w pop-upie.
 4. Otwiera `Stronę sesji` i wypełnia Part 1.
