@@ -1,31 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2025-07-15',
+  devtools: { enabled: true },
+
   modules: [
-    '@nuxt/eslint',
-    '@nuxt/ui',
-    '@vite-pwa/nuxt',
+    '@pinia/nuxt',
     '@vueuse/nuxt',
-    '@pinia/nuxt'
-  ],
-
-  devtools: {
-    enabled: true
-  },
-
-  css: ['~/assets/css/main.css'],
-
-  routeRules: {
-    '/': { prerender: true }
-  },
-
-  compatibilityDate: '2025-01-15',
-
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
-  }
+    '@vite-pwa/nuxt',
+    '@nuxt/test-utils',
+    '@nuxt/eslint'
+  ]
 })
