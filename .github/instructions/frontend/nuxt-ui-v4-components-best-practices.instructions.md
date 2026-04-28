@@ -4,6 +4,7 @@ description: "Use when creating or editing Nuxt UI v4 UI in app/components or ap
 applyTo:
   - "app/components/**/*.vue"
   - "app/pages/**/*.vue"
+  - "app/layouts/**/*.vue"
 ---
 # Nuxt UI v4 Component Best Practices
 
