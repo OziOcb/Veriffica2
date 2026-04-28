@@ -1,5 +1,5 @@
 ---
-name: "Tailwind CSS v4 Stylesheet Best Practices"
+name: "Tailwind CSS v4 Stylesheet"
 description: "Use when creating or editing Tailwind CSS v4 stylesheets in Nuxt/Vue projects, especially app CSS that defines imports, theme tokens, sources, custom utilities, or custom variants. Covers CSS-first v4 configuration with @import, @theme, @source, @utility, @variant, @custom-variant, @apply, @reference, and Nuxt UI compatibility."
 applyTo:
   - "app/assets/css/**/*.css"

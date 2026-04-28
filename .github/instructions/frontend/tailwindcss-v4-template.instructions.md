@@ -1,5 +1,5 @@
 ---
-name: "Tailwind CSS v4 Template Best Practices"
+name: "Tailwind CSS v4 Template"
 description: "Use when creating or editing Tailwind CSS v4 utility classes in Nuxt/Vue templates or component style blocks. Covers static class detection, utility composition, arbitrary values, arbitrary variants, responsive and dark-mode usage, @reference, and Nuxt UI coexistence."
 applyTo:
   - "app/app.vue"

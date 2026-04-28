@@ -1,5 +1,5 @@
 ---
-name: "Vitest Test Best Practices"
+name: "Vitest"
 description: "Use when creating or editing Vitest 4 tests for unit logic or Nuxt runtime slices. Covers test structure, async patterns, parameterized tests, mocking, timers, environments, and deterministic assertions. Complements Nuxt Test Utils runtime guidance with generic Vitest testing rules."
 applyTo:
   - "test/unit/**/*.{test,spec}.ts"

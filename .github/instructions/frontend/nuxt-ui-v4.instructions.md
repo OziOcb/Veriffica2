@@ -1,10 +1,9 @@
 ---
-name: "Nuxt UI v4 Config Best Practices"
-description: "Use when configuring Nuxt UI v4 in app/app.vue, app/app.config.ts, app CSS, or nuxt.config.ts. Covers current v4 module setup, UApp, CSS-first @theme tokens, semantic colors, icon aliases, color mode integration, and build-time Nuxt UI options."
+name: "Nuxt UI v4 Config"
+description: "Use when creating or editing Nuxt UI v4 configuration in app/app.vue, app/app.config.ts, or nuxt.config.ts. Covers current v4 module setup, UApp, semantic colors, icon aliases, color mode integration, and build-time Nuxt UI options. Complements tailwindcss-v4-stylesheet and nuxt4 instructions."
 applyTo:
   - "app/app.vue"
   - "app/app.config.ts"
-  - "app/assets/css/**/*.css"
   - "nuxt.config.ts"
 ---
 # Nuxt UI v4 Config Best Practices

@@ -1,13 +1,12 @@
 ---
-name: "Nitro Server Routes Best Practices"
-description: "Use when creating or editing Nuxt 4 Nitro backend code in server/api, server/routes, server/middleware, server/plugins, server/utils, or backend-related nuxt.config. Covers REST handlers, request validation, error responses, runtime config, internal fetch forwarding, background tasks, and modular BFF boundaries."
+name: "Nitro Server Routes"
+description: "Use when creating or editing Nuxt 4 Nitro backend code in server/api, server/routes, server/middleware, server/plugins, or server/utils. Covers REST handlers, request validation, error responses, runtime config, internal fetch forwarding, background tasks, and modular BFF boundaries."
 applyTo:
   - "server/api/**/*.ts"
   - "server/routes/**/*.ts"
   - "server/middleware/**/*.ts"
   - "server/plugins/**/*.ts"
   - "server/utils/**/*.ts"
-  - "nuxt.config.ts"
 ---
 # Nitro Server Routes Best Practices
 

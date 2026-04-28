@@ -1,5 +1,5 @@
 ---
-name: "GitHub Actions Best Practices"
+name: "GitHub Actions"
 description: "Use when creating or editing GitHub Actions workflows for CI or CD in this repository, including workflow triggers, Node 22 setup, pnpm installation and caching, script execution, artifacts, secrets, and deployment gating."
 applyTo:
   - ".github/workflows/**/*.{yml,yaml}"

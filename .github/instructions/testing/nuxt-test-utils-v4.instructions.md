@@ -1,6 +1,6 @@
 ---
-name: "Nuxt Test Utils v4 Best Practices"
-description: "Use when configuring or writing Nuxt runtime tests with Nuxt Test Utils v4 alongside Vitest, including defineVitestProject, environmentOptions.nuxt, mountSuspended, renderSuspended, mockNuxtImport, mockComponent, and registerEndpoint. Complements generic Vitest instructions with Nuxt-specific runtime testing guidance."
+name: "Nuxt Test Utils v4"
+description: "Use when creating or editing Nuxt runtime tests with Nuxt Test Utils v4 alongside Vitest, including defineVitestProject, environmentOptions.nuxt, mountSuspended, renderSuspended, mockNuxtImport, mockComponent, and registerEndpoint. Complements vitest and vitest-config instructions with Nuxt-specific runtime testing guidance."
 applyTo:
   - "vitest.config.ts"
   - "nuxt.config.ts"

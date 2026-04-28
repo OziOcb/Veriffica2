@@ -1,5 +1,5 @@
 ---
-name: "Vue3 Best Practices"
+name: "Vue 3"
 description: "Use when creating or editing Vue 3 SFCs, UI components, component templates, component-local state, watchers, computed values, or Composition API composables. Covers script setup, typed props and emits, reactivity correctness, accessibility, and styling patterns."
 applyTo:
   - "app/**/*.vue"

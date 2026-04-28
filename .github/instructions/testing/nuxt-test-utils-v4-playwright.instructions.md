@@ -1,6 +1,6 @@
 ---
-name: "Nuxt Test Utils v4 Playwright Best Practices"
-description: "Use when configuring or writing Playwright runner tests with Nuxt Test Utils v4, including ConfigOptions, use.nuxt, @nuxt/test-utils/playwright fixtures, goto hydration waits, and Nuxt-aware e2e setup. Complements generic Playwright or Vitest rules with Nuxt-specific browser testing guidance."
+name: "Nuxt Test Utils v4 Playwright"
+description: "Use when creating or editing Playwright runner tests with Nuxt Test Utils v4, including ConfigOptions, use.nuxt, @nuxt/test-utils/playwright fixtures, goto hydration waits, and Nuxt-aware e2e setup. Complements playwright instructions with Nuxt-specific browser testing guidance."
 applyTo:
   - "playwright.config.ts"
   - "test/e2e/**/*.{test,spec}.ts"

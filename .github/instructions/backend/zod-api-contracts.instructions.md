@@ -1,5 +1,5 @@
 ---
-name: "Zod API Contracts Best Practices"
+name: "Zod API Contracts"
 description: "Use when creating or editing shared backend contracts, request schemas, response schemas, or validation logic with Zod 4 across shared and server code. Covers schema ownership, parse vs safeParse, inferred types, transforms, async validation, and client-server contract reuse."
 applyTo:
   - "shared/**/*.ts"

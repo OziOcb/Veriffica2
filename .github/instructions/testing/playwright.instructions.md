@@ -1,6 +1,6 @@
 ---
-name: "Playwright Best Practices"
-description: "Use when configuring or writing Playwright tests, including playwright.config.ts, projects, fixtures, locators, web-first assertions, retries, traces, and stable end-to-end test structure. Complements Nuxt Test Utils Playwright instructions with generic Playwright runner guidance."
+name: "Playwright"
+description: "Use when creating or editing Playwright tests, including playwright.config.ts, projects, fixtures, locators, web-first assertions, retries, traces, and stable end-to-end test structure. Complements nuxt-test-utils-v4-playwright instructions with generic Playwright runner guidance."
 applyTo:
   - "playwright.config.ts"
   - "test/e2e/**/*.{test,spec}.ts"

@@ -1,5 +1,5 @@
 ---
-name: "Nuxt UI v4 Component Best Practices"
+name: "Nuxt UI v4 Components"
 description: "Use when creating or editing Nuxt UI v4 UI in app/components or app/pages, including components such as UButton, UCard, UForm, UModal, UTable, UInput, and overlay-driven page UI. Covers props, slots, ui vs class overrides, icons, color mode controls, forms, and accessibility."
 applyTo:
   - "app/components/**/*.vue"

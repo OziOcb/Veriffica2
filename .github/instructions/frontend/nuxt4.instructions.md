@@ -1,6 +1,6 @@
 ---
-name: "Nuxt4 Best Practices"
-description: "Use when creating or editing Nuxt 4 app shell, pages, layouts, route middleware, plugins, router options, runtime config, server handlers, or nuxt.config. Covers app directory boundaries, SSR, useAsyncData/useFetch, SEO metadata, prerendering, security, and Nitro architecture conventions."
+name: "Nuxt 4"
+description: "Use when creating or editing Nuxt 4 app shell, pages, layouts, route middleware, plugins, router options, runtime config, server handlers, or nuxt.config.ts. Covers app directory boundaries, SSR, useAsyncData/useFetch, SEO metadata, prerendering, security, and Nitro architecture conventions."
 applyTo:
   - "app/app.vue"
   - "app/error.vue"

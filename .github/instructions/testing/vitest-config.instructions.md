@@ -1,5 +1,5 @@
 ---
-name: "Vitest Config Best Practices"
+name: "Vitest Config"
 description: "Use when creating or editing Vitest 4 configuration in vitest.config.ts or dedicated Vitest setup files. Covers projects, environments, setupFiles, coverage, reporters, isolation, and migration-safe configuration for current Vitest 4.x. Complements Nuxt Test Utils configuration guidance with generic Vitest rules."
 applyTo:
   - "vitest.config.ts"

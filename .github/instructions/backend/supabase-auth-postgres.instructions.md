@@ -1,5 +1,5 @@
 ---
-name: "Supabase Auth Postgres Best Practices"
+name: "Supabase Auth Postgres"
 description: "Use when creating or editing backend code or SQL related to Supabase Auth, PostgreSQL, RLS, or Supabase CLI workflows. Covers email/password auth, SSR session handling, SQL migrations, RLS policies, service-role boundaries, and relational plus JSONB data modeling for the current Supabase platform."
 applyTo:
   - "server/api/**/*.ts"

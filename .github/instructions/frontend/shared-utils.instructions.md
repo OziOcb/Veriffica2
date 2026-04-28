@@ -1,5 +1,5 @@
 ---
-name: "Shared Utils Best Practices"
+name: "Shared Utils"
 description: "Use when creating or editing Nuxt 4 app utilities in app/utils or cross-context helpers and types in shared. Covers auto-import scanning, environment-safe boundaries, explicit typing, purity, and import conventions for reusable utilities."
 applyTo:
   - "app/utils/**/*.ts"

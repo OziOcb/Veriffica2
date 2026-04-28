@@ -1,5 +1,5 @@
 ---
-name: "Vercel Nuxt Deployment Best Practices"
+name: "Vercel Nuxt Deployment"
 description: "Use when creating or editing deployment-related configuration for Nuxt on Vercel, including Nuxt deployment settings, Vercel environment strategy, preview versus production behavior, deployment-related env files, and custom Vercel build output options."
 applyTo:
   - "nuxt.config.ts"
