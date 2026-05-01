@@ -17,6 +17,7 @@ This document provides a reproducible guide to install `@nuxtjs/supabase` in thi
 - If typed Supabase clients should be enabled immediately, you must have either:
   - a local Supabase stack available through the Supabase CLI, or
   - a remote Supabase project ref that can be used to generate types.
+- If you want to generate types from the local Supabase environment, verify that `pnpm exec supabase status` reports a running local development setup before switching `supabase.types` away from `false`.
 
 IMPORTANT: Check prerequisites before performing the actions below. If they are not met, stop and ask the user to fix them.
 
@@ -53,11 +54,16 @@ export default defineNuxtConfig({
 
   supabase: {
     // Keep runtime values in environment variables.
-    // Enable this path only when real generated types exist.
-    types: './app/types/database.types.ts',
+    // Use the Nuxt alias path expected by the module.
+    types: '~/types/database.types.ts',
   },
 })
 ```
+
+Important:
+
+- The generated file can live at `app/types/database.types.ts`, but the module option must use the Nuxt alias path `~/types/database.types.ts`.
+- Do not set `types` to `./app/types/database.types.ts`. In this repository that path is not resolved correctly by `@nuxtjs/supabase` during build.
 
 If `app/types/database.types.ts` does not exist yet and you cannot generate it in the same task, use:
 
@@ -95,6 +101,14 @@ If the repository does not already contain `.env`, create it from `.env.example`
 
 If the user does not provide real values in the same task, leave `.env.example` documented and tell the user exactly which values are still required.
 
+If the user approves using local development credentials from the running Supabase stack, you may obtain them from:
+
+```bash
+pnpm exec supabase status
+```
+
+and use the reported `Project URL`, `Publishable`, and `Secret` values for the local `.env` only. Never commit these values.
+
 ### 5. Generate database types
 
 Recommended target path:
@@ -102,6 +116,12 @@ Recommended target path:
 `app/types/database.types.ts`
 
 Create the `app/types` directory first if it does not already exist.
+
+If you are using the local Supabase stack, verify it is running before generating types:
+
+```bash
+pnpm exec supabase status
+```
 
 If the local Supabase stack is available:
 
@@ -114,6 +134,12 @@ If the user provides a remote Supabase project ref:
 ```bash
 pnpm exec supabase gen types --lang=typescript --project-id <project-ref> > app/types/database.types.ts
 ```
+
+After generation:
+
+- Confirm that `app/types/database.types.ts` now exists.
+- If `nuxt.config.ts` is still using `supabase.types = false`, change it to `supabase.types = '~/types/database.types.ts'`.
+- If generation failed or the file was not created, leave `supabase.types = false` and tell the user what is still missing.
 
 If the Supabase CLI is unavailable, stop after module installation or set `supabase.types = false`, then tell the user which prerequisite is still missing.
 
@@ -131,6 +157,11 @@ Successful validation means:
 - `nuxt.config.ts` includes the module exactly once.
 - Environment variables are documented without leaking secrets.
 - Optional type generation either succeeded or was explicitly deferred.
+- If typed clients were enabled, the build must not warn that the configured database types file was not found or that `Database = unknown` is being used.
+
+Expected warning behavior:
+
+- If `.env` is still missing real values, `pnpm build` may warn about missing `NUXT_PUBLIC_SUPABASE_URL` and `NUXT_PUBLIC_SUPABASE_KEY` even when module installation and type loading are otherwise correct.
 
 ## Notes for This Repository
 

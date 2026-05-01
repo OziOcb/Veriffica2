@@ -10,7 +10,12 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@nuxt/eslint",
     "@nuxt/ui",
+    "@nuxtjs/supabase",
   ],
+
+  supabase: {
+    types: "~/types/database.types.ts",
+  },
 
   css: ["~/assets/css/main.css"],
 });
