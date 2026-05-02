@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   ],
 
   supabase: {
-    types: "~/types/database.types.ts",
+    types: "~/db/database.types.ts",
   },
 
   css: ["~/assets/css/main.css"],

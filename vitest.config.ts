@@ -13,10 +13,23 @@ export default defineConfig({
         },
       },
       await defineVitestProject({
+        resolve: {
+          alias: {
+            // Expose the #supabase/server virtual module so vi.mock can resolve it
+            // in the Nuxt test environment.
+            "#supabase/server": fileURLToPath(
+              new URL(
+                "./node_modules/@nuxtjs/supabase/dist/runtime/server/services/index.js",
+                import.meta.url,
+              ),
+            ),
+          },
+        },
         test: {
           name: "nuxt",
           include: ["test/nuxt/*.{test,spec}.ts"],
           environment: "nuxt",
+          setupFiles: ["./test/setup/server-globals.ts"],
           environmentOptions: {
             nuxt: {
               rootDir: fileURLToPath(new URL(".", import.meta.url)),
