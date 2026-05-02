@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { DEFAULT_USER_ID } from "~/db/supabase.client";
 
 // ── Hoist shared mock state so it's available inside vi.mock factories ─────
 
@@ -25,7 +26,7 @@ const { getCurrentUserAccount } =
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-const STUB_USER_ID = "3a858a17-fbf1-4b59-93b4-dfee151ad4b4";
+const STUB_USER_ID = DEFAULT_USER_ID;
 
 const STUB_PROFILE_ROW = {
   user_id: STUB_USER_ID,
