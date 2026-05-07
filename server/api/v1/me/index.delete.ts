@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { deleteCookie, getHeader } from "h3";
 import { parseCookieHeader } from "@supabase/ssr";
-import { DeleteCurrentUserCommandSchema } from "../../../shared/contracts/delete-current-user";
-import { getRequiredUserId } from "../../utils/auth/get-required-user-id";
-import { assertMutationOrigin } from "../../utils/security/assert-mutation-origin";
+import { DeleteCurrentUserCommandSchema } from "../../../../shared/contracts/delete-current-user";
+import { getRequiredUserId } from "../../../utils/auth/get-required-user-id";
+import { assertMutationOrigin } from "../../../utils/security/assert-mutation-origin";
 import {
   assertRateLimit,
   getRateLimitKey,
-} from "../../utils/security/rate-limit";
-import { deleteCurrentUserAccount } from "../../utils/services/delete-current-user-account";
+} from "../../../utils/security/rate-limit";
+import { deleteCurrentUserAccount } from "../../../utils/services/delete-current-user-account";
 import type { DeleteCurrentUserResponseDto } from "~/types";
 
 export default defineEventHandler(

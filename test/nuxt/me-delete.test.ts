@@ -31,7 +31,7 @@ import { serverSupabaseUser } from "#supabase/server";
 // ── Import handler AFTER mocks are established ────────────────────────────
 
 const { default: meDeleteHandler } =
-  await import("../../server/api/v1/me.delete");
+  await import("../../server/api/v1/me/index.delete");
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 

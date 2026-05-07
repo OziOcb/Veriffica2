@@ -22,7 +22,8 @@ vi.mock("#supabase/server", () => ({
 }));
 
 // Import the handler after mocks are set up.
-const { default: meGetHandler } = await import("../../server/api/v1/me.get");
+const { default: meGetHandler } =
+  await import("../../server/api/v1/me/index.get");
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 

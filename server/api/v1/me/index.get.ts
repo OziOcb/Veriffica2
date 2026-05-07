@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type { GetCurrentUserResponseDto } from "~/types";
-import { getCurrentUserAccount } from "../../utils/services/get-current-user-account";
+import { getCurrentUserAccount } from "../../../utils/services/get-current-user-account";
 
 export default defineEventHandler(
   async (event): Promise<GetCurrentUserResponseDto> => {
