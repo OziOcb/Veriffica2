@@ -1,6 +1,6 @@
 ---
 name: endpoint-implement-from-plan
-description: FILE='' (np. .ai/endpoint-me-get-implementation-plan.md) <- dodaj referencję do planu implementacji endpointa.  Wdrożenie punktu końcowego interfejsu API REST w oparciu o plan wdrożenia
+description: FILE='' (np. .ai/endpoints/endpoint-me-get-implementation-plan.md) <- dodaj referencję do planu implementacji endpointa.  Wdrożenie punktu końcowego interfejsu API REST w oparciu o plan wdrożenia
 ---
 
 Twoim zadaniem jest wdrożenie endpointa interfejsu API REST w oparciu o podany plan wdrożenia. Twoim celem jest stworzenie solidnej i dobrze zorganizowanej implementacji, która zawiera odpowiednią walidację, obsługę błędów i podąża za wszystkimi logicznymi krokami opisanymi w planie.

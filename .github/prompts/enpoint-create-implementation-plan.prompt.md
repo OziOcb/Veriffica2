@@ -109,4 +109,4 @@ Końcowe wyniki powinny składać się wyłącznie z planu wdrożenia w formacie
 - #file:endpoint-me-get-implementation-plan.md
 - #file:endpoint-me-delete-implementation-plan.md
 
-Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/endpoint-{{ENDPOINT_NAME}}-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.
+Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/endpoints/endpoint-{{ENDPOINT_NAME}}-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.
