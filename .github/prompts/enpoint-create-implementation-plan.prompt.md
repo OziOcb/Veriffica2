@@ -67,7 +67,7 @@ W całym planie upewnij się, że
 
 Końcowym wynikiem powinien być dobrze zorganizowany plan wdrożenia w formacie markdown. Oto przykład tego, jak powinny wyglądać dane wyjściowe:
 
-``markdown
+```markdown
 # API Endpoint Implementation Plan: [Nazwa punktu końcowego]
 
 ## 1. Przegląd punktu końcowego
@@ -103,10 +103,10 @@ Końcowym wynikiem powinien być dobrze zorganizowany plan wdrożenia w formacie
 1. [Krok 1]
 2. [Krok 2]
 3. [Krok 3]
-..
+```
 
-Końcowe wyniki powinny składać się wyłącznie z planu wdrożenia w formacie markdown i nie powinny powielać ani powtarzać żadnej pracy wykonanej w sekcji analizy. Oto dwa przykladowe pliki
-- #file:endpoint-me-get-implementation-plan.md
-- #file:endpoint-me-delete-implementation-plan.md
+Końcowe wyniki powinny składać się wyłącznie z planu wdrożenia w formacie markdown i nie powinny powielać ani powtarzać żadnej pracy wykonanej w sekcji analizy. Oto dwa przykładowe pliki
+- .ai/endpoints/endpoint-me-get-implementation-plan.md
+- .ai/endpoints/endpoint-me-delete-implementation-plan.md
 
 Pamiętaj, aby zapisać swój plan wdrożenia jako .ai/endpoints/endpoint-{{ENDPOINT_NAME}}-implementation-plan.md. Upewnij się, że plan jest szczegółowy, przejrzysty i zapewnia kompleksowe wskazówki dla zespołu programistów.
