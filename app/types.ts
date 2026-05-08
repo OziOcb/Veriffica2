@@ -1,4 +1,8 @@
 import type { Json, Tables } from "./db/database.types";
+import type {
+  PatchCurrentUserPreferencesResponse as PatchCurrentUserPreferencesResponseContract,
+  PatchCurrentUserPreferencesResult as PatchCurrentUserPreferencesResultContract,
+} from "../shared/contracts/current-user-preferences";
 
 type ProfileRow = Tables<"profiles">;
 type UserPreferencesRow = Tables<"user_preferences">;
@@ -551,8 +555,10 @@ export type DeleteCurrentUserResponseDto =
   ApiSuccessResponseDto<DeleteCurrentUserResultDto>;
 export type GetCurrentUserPreferencesResponseDto =
   ApiSuccessResponseDto<UserPreferencesDto>;
+export type PatchCurrentUserPreferencesResultDto =
+  PatchCurrentUserPreferencesResultContract;
 export type PatchCurrentUserPreferencesResponseDto =
-  ApiSuccessResponseDto<UserPreferencesDto>;
+  PatchCurrentUserPreferencesResponseContract;
 export type ListInspectionsResponseDto =
   ApiListResponseDto<InspectionListItemDto>;
 
