@@ -548,6 +548,66 @@ export const PutInspectionPart1ResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── PATCH /api/v1/inspections/{inspectionId}/runtime-flags ────────────────
+
+export const RuntimeFlagsPatchModeSchema = z.enum(["preview", "apply"]);
+
+export const PatchInspectionRuntimeFlagsQuerySchema = z.object({
+  mode: RuntimeFlagsPatchModeSchema.default("apply"),
+});
+
+const _runtimeFlagFields = {
+  chargingPortEquipped: z.boolean().optional(),
+  evBatteryDocsAvailable: z.boolean().optional(),
+  turboEquipped: z.boolean().optional(),
+  mechanicalCompressorEquipped: z.boolean().optional(),
+  importedFromEU: z.boolean().optional(),
+} as const;
+
+const _runtimeFlagKeys = Object.keys(_runtimeFlagFields) as Array<
+  keyof typeof _runtimeFlagFields
+>;
+
+/**
+ * Strict command schema for PATCH .../runtime-flags.
+ *
+ * - `baseSnapshotVersion` is always required (optimistic concurrency).
+ * - At least one known flag field must be present (empty patch is rejected).
+ * - Unknown keys are rejected by strictObject (mapped to 422 by the handler).
+ */
+export const PatchInspectionRuntimeFlagsCommandSchema = z
+  .strictObject({
+    baseSnapshotVersion: z.number().int().positive(),
+    ..._runtimeFlagFields,
+  })
+  .superRefine((data, ctx) => {
+    const hasFlag = _runtimeFlagKeys.some(
+      (key) => key in data && data[key] !== undefined,
+    );
+    if (!hasFlag) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: [],
+        message:
+          "At least one runtime flag field must be present in the request body.",
+      });
+    }
+  });
+
+export const PatchInspectionRuntimeFlagsResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  runtimeFlags: InspectionRuntimeFlagsSchema,
+  visibleGroupIds: z.array(z.string()),
+  visibleQuestionIds: z.array(z.string()),
+  smartPruning: SmartPruningResultSchema,
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const PatchInspectionRuntimeFlagsResponseSchema = z.object({
+  data: PatchInspectionRuntimeFlagsResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -622,3 +682,18 @@ export type PutInspectionPart1Response = z.infer<
   typeof PutInspectionPart1ResponseSchema
 >;
 export type InspectionPart1Object = z.infer<typeof InspectionPart1ObjectSchema>;
+
+export type RuntimeFlagsPatchMode = z.infer<typeof RuntimeFlagsPatchModeSchema>;
+export type PatchInspectionRuntimeFlagsQuery = z.infer<
+  typeof PatchInspectionRuntimeFlagsQuerySchema
+>;
+/** Normalized output type — shape used in service logic. */
+export type PatchInspectionRuntimeFlagsCommand = z.output<
+  typeof PatchInspectionRuntimeFlagsCommandSchema
+>;
+export type PatchInspectionRuntimeFlagsResult = z.infer<
+  typeof PatchInspectionRuntimeFlagsResultSchema
+>;
+export type PatchInspectionRuntimeFlagsResponse = z.infer<
+  typeof PatchInspectionRuntimeFlagsResponseSchema
+>;
