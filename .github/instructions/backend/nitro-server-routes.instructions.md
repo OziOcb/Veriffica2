@@ -18,6 +18,7 @@ applyTo:
 - Use `server/plugins` only for Nitro lifecycle extensions and cross-cutting runtime wiring.
 - Move reusable backend logic into `server/utils` or shared domain modules instead of duplicating it across handlers.
 - Prefer REST and JSON for MVP backend flows, with clear resource names and method-specific handlers such as `.get.ts`, `.post.ts`, `.delete.ts`.
+- When a dynamic API resource also has nested subroutes, keep the resource-level handlers inside the dynamic folder as `index.get.ts`, `index.delete.ts`, and similar files, and place child routes beside them in the same folder. Avoid mixing sibling `[resourceId].get.ts` / `[resourceId].delete.ts` files with `[resourceId]/...` subroute folders for the same resource.
 - Keep backend orchestration aligned with the product architecture: snapshot-based sync per inspection, not event sourcing or CQRS.
 
 ## Request Handling and Validation

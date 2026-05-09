@@ -161,34 +161,41 @@ export const GetInspectionDetailQuerySchema = z.object({
     .pipe(z.array(InspectionDetailExpansionSchema)),
 });
 
-export const InspectionPart1Schema = z
-  .object({
-    price: z.number().nullable(),
-    make: z.string(),
-    model: z.string(),
-    yearOfProduction: z.number().int().nullable(),
-    registrationNumber: z.string().nullable(),
-    vinNumber: z.string().nullable(),
-    mileage: z.number().nullable(),
-    fuelType: z.enum(["Petrol", "Diesel", "Hybrid", "Electric"]),
-    transmission: z.enum(["Manual", "Automatic"]),
-    drive: z.enum(["2WD", "4WD"]),
-    color: z.string().nullable(),
-    bodyType: z.enum([
-      "Sedan",
-      "Hatchback",
-      "SUV",
-      "Coupe",
-      "Convertible",
-      "Van",
-      "Pickup",
-      "Other",
-    ]),
-    numberOfDoors: z.number().int().nullable(),
-    address: z.string().nullable(),
-    notes: z.string(),
-  })
-  .nullable();
+/**
+ * Non-nullable Part 1 object schema — the canonical normalized shape of a
+ * saved Part 1 payload. Used both in detail/response schemas (where part1 is
+ * guaranteed non-null after a successful PUT) and as a building block for the
+ * nullable variant consumed by GET responses.
+ */
+export const InspectionPart1ObjectSchema = z.object({
+  price: z.number().nullable(),
+  make: z.string(),
+  model: z.string(),
+  yearOfProduction: z.number().int().nullable(),
+  registrationNumber: z.string().nullable(),
+  vinNumber: z.string().nullable(),
+  mileage: z.number().nullable(),
+  fuelType: z.enum(["Petrol", "Diesel", "Hybrid", "Electric"]),
+  transmission: z.enum(["Manual", "Automatic"]),
+  drive: z.enum(["2WD", "4WD"]),
+  color: z.string().nullable(),
+  bodyType: z.enum([
+    "Sedan",
+    "Hatchback",
+    "SUV",
+    "Coupe",
+    "Convertible",
+    "Van",
+    "Pickup",
+    "Other",
+  ]),
+  numberOfDoors: z.number().int().nullable(),
+  address: z.string().nullable(),
+  notes: z.string(),
+});
+
+/** Nullable variant — Part 1 is null until the first successful PUT. */
+export const InspectionPart1Schema = InspectionPart1ObjectSchema.nullable();
 
 export const InspectionPartIdSchema = z.enum([
   "part1",
@@ -275,6 +282,272 @@ export const DeleteInspectionResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── PUT /api/v1/inspections/{inspectionId}/part-1 ─────────────────────────
+
+/**
+ * Normalizes a string by trimming leading/trailing whitespace and collapsing
+ * internal runs of whitespace to a single space. Applied to free-text fields
+ * such as `make`, `model`, `color`, and `address`.
+ */
+function collapseWhitespace(s: string): string {
+  return s.trim().replace(/\s+/g, " ");
+}
+
+export const PutInspectionPart1QuerySchema = z.object({
+  /**
+   * When `"true"`, validation and normalization run but no database write
+   * occurs. The response shape is identical to a real PUT.
+   */
+  dryRun: z
+    .string()
+    .optional()
+    .transform((v) => v === "true"),
+});
+
+/**
+ * Command schema for PUT /api/v1/inspections/{inspectionId}/part-1.
+ *
+ * Uses `strictObject` to reject any keys beyond the declared fields.
+ * String fields are normalized in-schema transforms before downstream
+ * length / pattern validations run through `.pipe()`.
+ * Cross-field and dynamic-range constraints are enforced in `.superRefine()`.
+ */
+export const PutInspectionPart1CommandSchema = z
+  .strictObject({
+    // ── Required fields ────────────────────────────────────────────────────
+    make: z
+      .string()
+      .transform(collapseWhitespace)
+      .pipe(
+        z
+          .string()
+          .min(1, "Make is required.")
+          .max(50, "Make must be at most 50 characters."),
+      ),
+
+    model: z
+      .string()
+      .transform(collapseWhitespace)
+      .pipe(
+        z
+          .string()
+          .min(1, "Model is required.")
+          .max(60, "Model must be at most 60 characters."),
+      ),
+
+    fuelType: z.enum(["Petrol", "Diesel", "Hybrid", "Electric"]),
+
+    transmission: z.enum(["Manual", "Automatic"]),
+
+    drive: z.enum(["2WD", "4WD"]),
+
+    bodyType: z.enum([
+      "Sedan",
+      "Hatchback",
+      "SUV",
+      "Coupe",
+      "Convertible",
+      "Van",
+      "Pickup",
+      "Other",
+    ]),
+
+    // ── Optional nullable numeric fields ───────────────────────────────────
+    /** 0–10 000 000, max 2 fraction digits. */
+    price: z
+      .number()
+      .min(0, "Price cannot be negative.")
+      .max(10_000_000, "Price exceeds the maximum allowed value.")
+      .nullable()
+      .optional()
+      .transform((v) => v ?? null),
+
+    /** Exactly 4 digits; dynamic upper bound enforced in superRefine. */
+    yearOfProduction: z
+      .number()
+      .int("Year of production must be an integer.")
+      .nullable()
+      .optional()
+      .transform((v) => v ?? null),
+
+    /** 0–9 999 999. */
+    mileage: z
+      .number()
+      .int("Mileage must be an integer.")
+      .min(0, "Mileage cannot be negative.")
+      .max(9_999_999, "Mileage exceeds the maximum allowed value.")
+      .nullable()
+      .optional()
+      .transform((v) => v ?? null),
+
+    /** 1–9. */
+    numberOfDoors: z
+      .number()
+      .int("Number of doors must be an integer.")
+      .min(1, "Number of doors must be at least 1.")
+      .max(9, "Number of doors must be at most 9.")
+      .nullable()
+      .optional()
+      .transform((v) => v ?? null),
+
+    // ── Optional nullable string fields (with normalization) ───────────────
+    /**
+     * Normalized to uppercase with collapsed spaces.
+     * After normalization: 2–15 chars matching ^[A-Z0-9 -]+$.
+     */
+    registrationNumber: z
+      .string()
+      .nullable()
+      .optional()
+      .transform((val) => {
+        if (val === null || val === undefined) return null;
+        return val.trim().toUpperCase().replace(/\s+/g, " ");
+      })
+      .pipe(
+        z
+          .string()
+          .min(
+            2,
+            "Registration number must be at least 2 characters after normalization.",
+          )
+          .max(15, "Registration number must be at most 15 characters.")
+          .regex(
+            /^[A-Z0-9 -]+$/,
+            "Registration number may only contain letters A–Z, digits, spaces, and hyphens.",
+          )
+          .nullable(),
+      ),
+
+    /**
+     * Normalized to uppercase. Must be exactly 17 chars matching
+     * ^[A-HJ-NPR-Z0-9]{17}$ (VIN standard excludes I, O, Q).
+     */
+    vinNumber: z
+      .string()
+      .nullable()
+      .optional()
+      .transform((val) => {
+        if (val === null || val === undefined) return null;
+        return val.toUpperCase();
+      })
+      .pipe(
+        z
+          .string()
+          .length(17, "VIN must be exactly 17 characters.")
+          .regex(
+            /^[A-HJ-NPR-Z0-9]{17}$/,
+            "VIN contains invalid characters. Letters I, O, and Q are not allowed.",
+          )
+          .nullable(),
+      ),
+
+    /** Trimmed and collapsed; 1–40 chars. */
+    color: z
+      .string()
+      .nullable()
+      .optional()
+      .transform((val) => {
+        if (val === null || val === undefined) return null;
+        return collapseWhitespace(val);
+      })
+      .pipe(
+        z
+          .string()
+          .min(1, "Color must be at least 1 character.")
+          .max(40, "Color must be at most 40 characters.")
+          .nullable(),
+      ),
+
+    /** Trimmed and collapsed; 5–150 chars. */
+    address: z
+      .string()
+      .nullable()
+      .optional()
+      .transform((val) => {
+        if (val === null || val === undefined) return null;
+        return collapseWhitespace(val);
+      })
+      .pipe(
+        z
+          .string()
+          .min(5, "Address must be at least 5 characters.")
+          .max(150, "Address must be at most 150 characters.")
+          .nullable(),
+      ),
+
+    /** Free-text notes; max 1000 chars. Defaults to empty string. */
+    notes: z
+      .string()
+      .max(1000, "Notes must be at most 1000 characters.")
+      .default(""),
+  })
+  .superRefine((data, ctx) => {
+    // Cross-field: Electric fuel type requires Automatic transmission.
+    if (data.fuelType === "Electric" && data.transmission !== "Automatic") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["transmission"],
+        message: "Electric cars must use Automatic transmission.",
+      });
+    }
+
+    // Dynamic upper bound for yearOfProduction: current UTC year + 1.
+    if (data.yearOfProduction !== null) {
+      const maxYear = new Date().getUTCFullYear() + 1;
+      if (data.yearOfProduction < 1886 || data.yearOfProduction > maxYear) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["yearOfProduction"],
+          message: `Year of production must be between 1886 and ${maxYear}.`,
+        });
+      }
+    }
+
+    // Price: at most 2 fraction digits (e.g. 23000.999 is rejected).
+    if (data.price !== null) {
+      if (Math.round(data.price * 100) !== data.price * 100) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["price"],
+          message: "Price may have at most 2 decimal places.",
+        });
+      }
+    }
+  });
+
+export const SmartPruningResultSchema = z.object({
+  /** Whether any answers or question notes were removed. */
+  applied: z.boolean(),
+  /** IDs of answers removed because their question became invisible. */
+  removedAnswerIds: z.array(z.string()),
+  /** IDs of question notes removed because their question became invisible. */
+  removedQuestionNoteIds: z.array(z.string()),
+});
+
+export const PutInspectionPart1ResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  /** Normalized Part 1 data as persisted (or as computed in dryRun mode). */
+  part1: InspectionPart1ObjectSchema,
+  /** Canonical title rebuilt from normalized Part 1 fields. */
+  title: z.string(),
+  /** Parts that are now enabled because required Part 1 fields are present. */
+  unlockedParts: z.array(InspectionQuestionPartIdSchema),
+  /** Canonical visible group IDs recomputed from Part 1 + runtime flags. */
+  visibleGroupIds: z.array(z.string()),
+  /** Canonical visible question IDs recomputed from Part 1 + runtime flags. */
+  visibleQuestionIds: z.array(z.string()),
+  smartPruning: SmartPruningResultSchema,
+  /** Incremented snapshot version after a real save; unchanged in dryRun. */
+  snapshotVersion: z.number().int().positive(),
+  /** ISO 8601 UTC timestamp — reflects the persisted client_updated_at. */
+  clientUpdatedAt: z.string(),
+});
+
+export const PutInspectionPart1ResponseSchema = z.object({
+  data: PutInspectionPart1ResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -330,3 +603,22 @@ export type DeleteInspectionResult = z.infer<
 export type DeleteInspectionResponse = z.infer<
   typeof DeleteInspectionResponseSchema
 >;
+export type PutInspectionPart1Query = z.infer<
+  typeof PutInspectionPart1QuerySchema
+>;
+/** Raw client input type before transforms run. */
+export type PutInspectionPart1CommandInput = z.input<
+  typeof PutInspectionPart1CommandSchema
+>;
+/** Normalized output type after transforms — shape used in service logic. */
+export type PutInspectionPart1Command = z.output<
+  typeof PutInspectionPart1CommandSchema
+>;
+export type SmartPruningResult = z.infer<typeof SmartPruningResultSchema>;
+export type PutInspectionPart1Result = z.infer<
+  typeof PutInspectionPart1ResultSchema
+>;
+export type PutInspectionPart1Response = z.infer<
+  typeof PutInspectionPart1ResponseSchema
+>;
+export type InspectionPart1Object = z.infer<typeof InspectionPart1ObjectSchema>;

@@ -1,24 +1,23 @@
 import { randomUUID } from "node:crypto";
-import { getValidatedRouterParams, readValidatedBody } from "h3";
-import { getRequiredUserId } from "../../../utils/auth/get-required-user-id";
-import { assertMutationOrigin } from "../../../utils/security/assert-mutation-origin";
-import { deleteInspection } from "../../../utils/services/delete-inspection";
+import {
+  getValidatedRouterParams,
+  getValidatedQuery,
+  readValidatedBody,
+  createError,
+} from "h3";
+import { getRequiredUserId } from "../../../../utils/auth/get-required-user-id";
+import { assertMutationOrigin } from "../../../../utils/security/assert-mutation-origin";
+import { saveInspectionPart1 } from "../../../../utils/services/save-inspection-part1";
 import {
   InspectionRouteParamsSchema,
-  DeleteInspectionCommandSchema,
-} from "../../../../shared/contracts/inspections";
+  PutInspectionPart1QuerySchema,
+  PutInspectionPart1CommandSchema,
+} from "../../../../../shared/contracts/inspections";
 import type { ApiSuccessResponseDto } from "~/types";
-
-interface DeleteInspectionResponseData {
-  deleted: true;
-  inspectionId: string;
-  freedSlots: 1;
-}
+import type { PutInspectionPart1Result } from "../../../../../shared/contracts/inspections";
 
 export default defineEventHandler(
-  async (
-    event,
-  ): Promise<ApiSuccessResponseDto<DeleteInspectionResponseData>> => {
+  async (event): Promise<ApiSuccessResponseDto<PutInspectionPart1Result>> => {
     const requestId = randomUUID();
 
     useRuntimeConfig(event);
@@ -34,25 +33,37 @@ export default defineEventHandler(
       InspectionRouteParamsSchema.parse(params),
     );
 
-    await readValidatedBody(event, (body) =>
-      DeleteInspectionCommandSchema.parse(body),
+    const { dryRun } = await getValidatedQuery(event, (query) =>
+      PutInspectionPart1QuerySchema.parse(query),
+    );
+
+    const command = await readValidatedBody(event, (body) =>
+      PutInspectionPart1CommandSchema.parse(body),
     );
 
     // ── Domain operation ───────────────────────────────────────────────────
-    let result;
+    let result: PutInspectionPart1Result;
     try {
-      result = await deleteInspection(event, userId, inspectionId, requestId);
+      result = await saveInspectionPart1(
+        event,
+        userId,
+        inspectionId,
+        command,
+        dryRun,
+        requestId,
+      );
     } catch (err) {
       if (typeof err === "object" && err !== null && "statusCode" in err) {
         throw err;
       }
 
       console.error(
-        "[DELETE /api/v1/inspections/:inspectionId] unexpected error",
+        "[PUT /api/v1/inspections/:inspectionId/part-1] unexpected error",
         {
           requestId,
           userId,
           inspectionId,
+          dryRun,
           error: err,
         },
       );
@@ -66,11 +77,7 @@ export default defineEventHandler(
 
     // ── Response ───────────────────────────────────────────────────────────
     return {
-      data: {
-        deleted: true,
-        inspectionId: result.inspectionId,
-        freedSlots: result.freedSlots,
-      },
+      data: result,
       meta: {
         requestId,
         timestamp: new Date().toISOString(),

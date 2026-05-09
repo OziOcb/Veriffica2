@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { getValidatedRouterParams, getValidatedQuery } from "h3";
-import { getRequiredUserId } from "../../../utils/auth/get-required-user-id";
-import { getInspectionDetail } from "../../../utils/services/get-inspection-detail";
+import { getRequiredUserId } from "../../../../utils/auth/get-required-user-id";
+import { getInspectionDetail } from "../../../../utils/services/get-inspection-detail";
 import {
   InspectionRouteParamsSchema,
   GetInspectionDetailQuerySchema,
-} from "../../../../shared/contracts/inspections";
+} from "../../../../../shared/contracts/inspections";
 import type { ApiSuccessResponseDto, InspectionDetailDto } from "~/types";
 
 export default defineEventHandler(

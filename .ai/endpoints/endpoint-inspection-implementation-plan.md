@@ -17,11 +17,10 @@ Zakres odpowiedzialności warstwy Nitro:
 - zwrócenie odpowiedzi w kanonicznej kopercie API.
 
 Docelowe lokalizacje:
-
 | Rola | Ścieżka |
 |---|---|
-| GET handler | `server/api/v1/inspections/[inspectionId].get.ts` |
-| DELETE handler | `server/api/v1/inspections/[inspectionId].delete.ts` |
+| GET handler | `server/api/v1/inspections/[inspectionId]/index.get.ts` |
+| DELETE handler | `server/api/v1/inspections/[inspectionId]/index.delete.ts` |
 | GET serwis | `server/utils/services/get-inspection-detail.ts` |
 | DELETE serwis | `server/utils/services/delete-inspection.ts` |
 | Zod kontrakty | `shared/contracts/inspections.ts` (rozszerzenie istniejącego pliku) |
@@ -459,7 +458,7 @@ const partProgress: InspectionPartProgressDto[] = (['part2', 'part3', 'part4', '
 
 > **Uwaga:** Jeżeli prywatna SQL funkcja `private.delete_inspection` jest niedostępna przez standardowy Supabase client, alternatywą jest bezpośredni DELETE z `serverSupabaseServiceRole` z odpowiednim filtrem `user_id` i `id`, a lock check zaimplementowany przez wcześniejszy SELECT. Preferowana jest SQL funkcja dla atomowości.
 
-### 9.5 GET handler — `server/api/v1/inspections/[inspectionId].get.ts`
+### 9.5 GET handler — `server/api/v1/inspections/[inspectionId]/index.get.ts`
 
 1. Utworzyć plik handlera.
 2. Wywołać `getRequiredUserId(event)`.
@@ -469,7 +468,7 @@ const partProgress: InspectionPartProgressDto[] = (['part2', 'part3', 'part4', '
 6. Zbudować i zwrócić `ApiSuccessResponseDto<InspectionDetailDto>` z meta.
 7. Otoczyć całość blokiem `try/catch` z logowaniem błędów (requestId, inspectionId, userId) i re-throwem H3 errors.
 
-### 9.6 DELETE handler — `server/api/v1/inspections/[inspectionId].delete.ts`
+### 9.6 DELETE handler — `server/api/v1/inspections/[inspectionId]/index.delete.ts`
 
 1. Utworzyć plik handlera.
 2. Wywołać `assertMutationOrigin(event)`.

@@ -32,7 +32,7 @@ import { serverSupabaseUser } from "#supabase/server";
 // ── Import handler AFTER mocks are established ────────────────────────────
 
 const { default: inspectionGetHandler } =
-  await import("../../server/api/v1/inspections/[inspectionId].get");
+  await import("../../server/api/v1/inspections/[inspectionId]/index.get");
 
 // ── Stub data ──────────────────────────────────────────────────────────────
 
