@@ -6,6 +6,7 @@ import {
   createError,
   defineEventHandler,
   getValidatedQuery,
+  getValidatedRouterParams,
   readValidatedBody,
   setResponseStatus,
 } from "h3";
@@ -14,6 +15,7 @@ Object.assign(globalThis, {
   defineEventHandler,
   createError,
   getValidatedQuery,
+  getValidatedRouterParams,
   readValidatedBody,
   setResponseStatus,
 });
