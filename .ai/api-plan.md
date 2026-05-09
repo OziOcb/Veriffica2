@@ -150,7 +150,6 @@
   - `400 Bad Request` if confirmation is missing or incorrect
   - `401 Unauthorized`
   - `409 Conflict` if the delete flow cannot complete safely
-  - `429 Too Many Requests`
 
 ### 2.5 User Preferences
 
@@ -1234,7 +1233,7 @@
 
 - Apply rate limits at the edge and application layer:
   - Auth endpoints: strict IP and email-based rate limits.
-  - Destructive endpoints (`DELETE /me`, `DELETE /inspections/{id}`): very low burst limits.
+  - Destructive endpoints: `DELETE /me` keeps a very low burst limit.
   - Sync/write endpoints: per-session throttling to absorb reconnect storms.
 - Require `Origin` and `Referer` validation on state-changing requests because the session model is cookie-based.
 - Enforce JSON body size limits to protect sync and notes endpoints.

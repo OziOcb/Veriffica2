@@ -55,27 +55,25 @@ const VALID_BODY = { confirmation: "DELETE_INSPECTION" } as const;
 
 // ── Event factory ──────────────────────────────────────────────────────────
 
-let _ipCounter = 1;
-
 /**
  * Builds a minimal H3Event stub for DELETE /api/v1/inspections/:inspectionId.
  *
  * - Router params in context.params for getValidatedRouterParams.
  * - _parsedBody pre-filled so readValidatedBody skips streaming.
- * - Unique IP per call to prevent rate-limit accumulation across tests.
+ * - Fixed IP so the suite exercises repeated same-IP calls without any
+ *   rate-limit workaround.
  * - node.res stubs for H3 response helpers.
  */
 function makeEvent(
   inspectionId: string = STUB_INSPECTION_ID,
   body: unknown = VALID_BODY,
 ): H3Event {
-  const ip = `10.0.0.${_ipCounter++}`;
   return {
     method: "DELETE",
     node: {
       req: {
         method: "DELETE",
-        socket: { remoteAddress: ip },
+        socket: { remoteAddress: "127.0.0.1" },
         headers: {},
         body: JSON.stringify(body),
       },

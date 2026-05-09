@@ -299,7 +299,6 @@ DELETE /api/v1/inspections/:inspectionId   body: { confirmation }
 
 ### Limity operacji destrukcyjnych
 
-- DELETE powinien mieć niski burst rate limit analogiczny do `DELETE /api/v1/me`, implementowany przez `server/utils/security/rate-limit.ts`.
 - Literat `DELETE_INSPECTION` jest świadomym potwierdzeniem akcji i musi być sprawdzany po stronie serwera niezależnie od walidacji w UI.
 
 ### Sekrety i granice uprzywilejowania
@@ -331,7 +330,6 @@ DELETE /api/v1/inspections/:inspectionId   body: { confirmation }
 | Brakujące lub nieprawidłowe `confirmation` | `400 Bad Request` | `VALIDATION_ERROR` |
 | Inspekcja nie należy do użytkownika lub nie istnieje | `404 Not Found` | — |
 | Inspekcja zablokowana przez aktywną operację zapisu | `409 Conflict` | `INSPECTION_LOCKED` |
-| Przekroczony rate limit | `429 Too Many Requests` | — |
 | Błąd DB / Supabase | `500 Internal Server Error` | — |
 
 Koperta błędu:

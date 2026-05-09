@@ -2,10 +2,6 @@ import { randomUUID } from "node:crypto";
 import { getValidatedRouterParams, readValidatedBody } from "h3";
 import { getRequiredUserId } from "../../../utils/auth/get-required-user-id";
 import { assertMutationOrigin } from "../../../utils/security/assert-mutation-origin";
-import {
-  assertRateLimit,
-  getRateLimitKey,
-} from "../../../utils/security/rate-limit";
 import { deleteInspection } from "../../../utils/services/delete-inspection";
 import {
   InspectionRouteParamsSchema,
@@ -29,7 +25,6 @@ export default defineEventHandler(
 
     // ── Security guards (run before any privileged operation) ──────────────
     assertMutationOrigin(event);
-    assertRateLimit(event, getRateLimitKey(event));
 
     // ── Auth: resolve current user from SSR session ────────────────────────
     const userId = await getRequiredUserId(event);
