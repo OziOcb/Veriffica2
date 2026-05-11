@@ -10,6 +10,8 @@
  * on the next build.
  */
 
+import type { ExplanationRef, QuestionExplanationDto } from "~/types";
+
 // ── Types ──────────────────────────────────────────────────────────────────
 
 /** Lowercase value as stored in the question-mapping-config JSON. */
@@ -49,6 +51,10 @@ export interface QuestionGroup {
   id: string;
   part: "part2" | "part3" | "part4" | "part5";
   order: number;
+  /** Human-readable section name (e.g. "Car Body"). */
+  section: string;
+  /** Human-readable subsection name (e.g. "Corrosion, blistering"). */
+  subsection: string;
   /** Fields from Part 1 that gate this group's visibility. */
   dependsOnFields: string[];
   /**
@@ -68,6 +74,15 @@ export interface QuestionItem {
   groupId: string;
   part: "part2" | "part3" | "part4" | "part5";
   order: number;
+  /** Human-readable question label as authored in the question bank. */
+  label: string;
+  /** Optional stable reference to a shared educational explanation. */
+  explanationRef?: string;
+}
+
+interface QuestionBankExplanationEntry {
+  legacyNumber: number;
+  text: string;
 }
 
 // ── Raw data (inlined at build time via JSON import) ───────────────────────
@@ -80,6 +95,7 @@ const mappingConfig = mappingConfigRaw as unknown as {
 };
 const questionBankData = questionBankRaw as unknown as {
   questions: QuestionItem[];
+  explanations: Record<string, QuestionBankExplanationEntry>;
 };
 
 // ── Exported singletons ────────────────────────────────────────────────────
@@ -102,6 +118,48 @@ export const QUESTIONS_BY_GROUP: ReadonlyMap<string, readonly string[]> =
       QUESTIONS.filter((q) => q.groupId === g.id).map((q) => q.id),
     ]),
   );
+
+/**
+ * Map of questionId → human-readable label text.
+ * Built once at module load time for O(1) lookup during response assembly.
+ */
+export const QUESTION_TEXT_BY_ID: ReadonlyMap<string, string> = new Map(
+  QUESTIONS.map((q) => [q.id, q.label]),
+);
+
+/**
+ * Map of groupId → canonical group title composed as "section — subsection".
+ * Built once at module load time for O(1) lookup during response assembly.
+ */
+export const GROUP_TITLE_BY_ID: ReadonlyMap<string, string> = new Map(
+  QUESTION_GROUPS.map((g) => [g.id, `${g.section} — ${g.subsection}`]),
+);
+
+/**
+ * Normalizes the question-bank explanation refs (`exp-001`) into the API
+ * shape used by the app DTOs (`exp_001`).
+ */
+export function normalizeExplanationRef(ref: string): ExplanationRef {
+  return ref.replace(/^exp-/, "exp_") as ExplanationRef;
+}
+
+/**
+ * Map of explanationRef -> normalized explanation DTO.
+ * Built once at module load time so the resolved-questions service can reuse
+ * canonical content without reading JSON at request time.
+ */
+export const QUESTION_EXPLANATIONS_BY_REF: ReadonlyMap<
+  ExplanationRef,
+  QuestionExplanationDto
+> = new Map(
+  Object.entries(questionBankData.explanations).map(([ref, explanation]) => [
+    normalizeExplanationRef(ref),
+    {
+      title: `Explanation ${explanation.legacyNumber}`,
+      content: explanation.text,
+    },
+  ]),
+);
 
 // ── Part 1 field → question bank key mappers ───────────────────────────────
 

@@ -608,6 +608,106 @@ export const PatchInspectionRuntimeFlagsResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── GET /api/v1/inspections/{inspectionId}/parts/{partId}/questions ─────────
+
+/**
+ * Route params schema for the resolved-questions endpoint.
+ * Combines the inspection UUID with a part identifier limited to parts 2–5,
+ * because Part 1 is a vehicle-data form — not a question checklist.
+ */
+export const InspectionPartRouteParamsSchema = z.object({
+  inspectionId: z.string().uuid(),
+  partId: InspectionQuestionPartIdSchema,
+});
+
+/** The three optional expansion tokens a client may request. */
+export const QuestionExpansionSchema = z.enum([
+  "explanations",
+  "answers",
+  "notes",
+]);
+
+/**
+ * Parses the optional `include` query param from a comma-separated string
+ * into a typed array of expansion tokens. Unknown tokens cause a ZodError
+ * (mapped to 400 by the handler).
+ */
+export const GetInspectionPartQuestionsQuerySchema = z.object({
+  include: z
+    .string()
+    .optional()
+    .transform((val): string[] => {
+      if (!val) return [];
+      return val
+        .split(",")
+        .map((v) => v.trim())
+        .filter(Boolean);
+    })
+    .pipe(z.array(QuestionExpansionSchema)),
+});
+
+/**
+ * A single visible question group with canonical order and the ordered list
+ * of visible question IDs that belong to it.
+ */
+export const ResolvedQuestionGroupSchema = z.object({
+  id: z.string(),
+  order: z.number().int().nonnegative(),
+  title: z.string(),
+  questionIds: z.array(z.string()),
+});
+
+/**
+ * A single resolved question card.
+ * `answer` and `questionNote` appear only when the client requested the
+ * corresponding `include` expansion. `explanationRef` is optional — not every
+ * question has a linked explanation.
+ */
+export const ResolvedQuestionSchema = z.object({
+  id: z.string(),
+  groupId: z.string(),
+  order: z.number().int().nonnegative(),
+  text: z.string(),
+  allowedAnswers: z.array(z.enum(["yes", "no", "dont_know"])),
+  explanationRef: z.string().optional(),
+  answer: z.enum(["yes", "no", "dont_know"]).optional(),
+  questionNote: z.string().optional(),
+});
+
+/** A single explanation entry linked from a question card via explanationRef. */
+export const QuestionExplanationSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+});
+
+/**
+ * Dictionary of explanations keyed by explanationRef.
+ * Only present when the client requested `include=explanations`, and only
+ * contains refs referenced by at least one visible question.
+ */
+export const QuestionExplanationDictionarySchema = z.record(
+  z.string(),
+  QuestionExplanationSchema,
+);
+
+/**
+ * Canonical result payload for the resolved-questions endpoint.
+ * `explanations` is omitted when the client did not request the expansion.
+ */
+export const GetInspectionPartQuestionsResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  part: InspectionQuestionPartIdSchema,
+  questionBankVersion: z.string(),
+  groups: z.array(ResolvedQuestionGroupSchema),
+  questions: z.array(ResolvedQuestionSchema),
+  explanations: QuestionExplanationDictionarySchema.optional(),
+});
+
+export const GetInspectionPartQuestionsResponseSchema = z.object({
+  data: GetInspectionPartQuestionsResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -696,4 +796,23 @@ export type PatchInspectionRuntimeFlagsResult = z.infer<
 >;
 export type PatchInspectionRuntimeFlagsResponse = z.infer<
   typeof PatchInspectionRuntimeFlagsResponseSchema
+>;
+export type InspectionPartRouteParams = z.infer<
+  typeof InspectionPartRouteParamsSchema
+>;
+export type QuestionExpansion = z.infer<typeof QuestionExpansionSchema>;
+export type GetInspectionPartQuestionsQuery = z.infer<
+  typeof GetInspectionPartQuestionsQuerySchema
+>;
+export type ResolvedQuestionGroup = z.infer<typeof ResolvedQuestionGroupSchema>;
+export type ResolvedQuestion = z.infer<typeof ResolvedQuestionSchema>;
+export type QuestionExplanation = z.infer<typeof QuestionExplanationSchema>;
+export type QuestionExplanationDictionary = z.infer<
+  typeof QuestionExplanationDictionarySchema
+>;
+export type GetInspectionPartQuestionsResult = z.infer<
+  typeof GetInspectionPartQuestionsResultSchema
+>;
+export type GetInspectionPartQuestionsResponse = z.infer<
+  typeof GetInspectionPartQuestionsResponseSchema
 >;
