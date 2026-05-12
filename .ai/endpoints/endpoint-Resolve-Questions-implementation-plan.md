@@ -117,12 +117,12 @@ Odpowiedź powinna mieć standardową kopertę sukcesu:
         "id": "base-body",
         "order": 10,
         "title": "Body",
-        "questionIds": ["q_body_panel_gaps"]
+        "questionIds": ["q-p2-body-panel-gaps"]
       }
     ],
     "questions": [
       {
-        "id": "q_body_panel_gaps",
+        "id": "q-p2-body-panel-gaps",
         "groupId": "base-body",
         "order": 10,
         "text": "Do the body panel gaps look even?",

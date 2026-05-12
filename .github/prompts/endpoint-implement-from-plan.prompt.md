@@ -21,6 +21,7 @@ Najpierw dokładnie przejrzyj dostarczony plan wdrożenia:
 
 <implementation_approach>
 Realizuj maksymalnie 3 kroki planu implementacji, podsumuj krótko co zrobiłeś i opisz plan na 3 kolejne działania - zatrzymaj w tym momencie pracę i czekaj na mój feedback.
+Po zakonczeniu implementacji, wyswietl podsumowanie tego co zostało zrobione, jakie były wyzwania i jak je pokonałeś.
 </implementation_approach>
 
 Teraz wykonaj następujące kroki, aby zaimplementować punkt końcowy interfejsu API REST:

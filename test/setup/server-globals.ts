@@ -9,6 +9,7 @@ import {
   getValidatedRouterParams,
   readBody,
   readValidatedBody,
+  setResponseHeader,
   setResponseStatus,
 } from "h3";
 
@@ -19,5 +20,6 @@ Object.assign(globalThis, {
   getValidatedRouterParams,
   readBody,
   readValidatedBody,
+  setResponseHeader,
   setResponseStatus,
 });

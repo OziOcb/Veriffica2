@@ -14,6 +14,9 @@ import type { Json, Tables } from "~/db/database.types";
 import type {
   InspectionPart1Dto,
   InspectionRuntimeFlagsDto,
+  InspectionProgressDto,
+  InspectionScoreDistributionDto,
+  InspectionAnswerValue,
   FuelType,
   TransmissionType,
   DriveType,
@@ -204,6 +207,51 @@ export function buildPart1(row: SnapshotSourceRow): InspectionPart1Dto | null {
     address: row.address,
     notes,
   };
+}
+
+// ── Derived metric helpers ─────────────────────────────────────────────────
+
+/**
+ * Computes overall inspection progress from the current answers map and the
+ * set of visible question IDs.
+ *
+ * `completionRate` is rounded to 2 decimal places (percentage).
+ */
+export function computeProgress(
+  answers: Record<string, string>,
+  visibleQuestionIds: string[],
+): InspectionProgressDto {
+  const visibleQuestions = visibleQuestionIds.length;
+  const answeredQuestions = visibleQuestionIds.filter(
+    (id) => id in answers,
+  ).length;
+  const completionRate =
+    visibleQuestions > 0
+      ? Math.round((answeredQuestions / visibleQuestions) * 10000) / 100
+      : 0;
+  return { answeredQuestions, visibleQuestions, completionRate };
+}
+
+/**
+ * Computes the score distribution (yes / no / dontKnow counts) from the
+ * current answers map limited to currently visible questions only.
+ */
+export function computeScoreDistribution(
+  answers: Record<string, string>,
+  visibleQuestionIds: string[],
+): InspectionScoreDistributionDto {
+  let yes = 0;
+  let no = 0;
+  let dontKnow = 0;
+
+  for (const qId of visibleQuestionIds) {
+    const answer = answers[qId] as InspectionAnswerValue | undefined;
+    if (answer === "yes") yes++;
+    else if (answer === "no") no++;
+    else if (answer === "dont_know") dontKnow++;
+  }
+
+  return { yes, no, dontKnow };
 }
 
 /**

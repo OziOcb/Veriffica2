@@ -708,6 +708,62 @@ export const GetInspectionPartQuestionsResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── PUT/DELETE /api/v1/inspections/{inspectionId}/answers/{questionId} ──────
+
+/**
+ * Route params schema for the answer mutation endpoints.
+ * Syntactically validates that questionId follows the canonical `q_` prefix
+ * convention. Semantic visibility validation happens in the service layer.
+ */
+export const InspectionQuestionRouteParamsSchema = z.object({
+  inspectionId: z.string().uuid(),
+  questionId: z
+    .string()
+    .regex(/^q-[a-z0-9-]+$/, "Question ID must follow the q-<id> format."),
+});
+
+/**
+ * Strict command schema for PUT .../answers/{questionId}.
+ * Unknown keys are rejected so the client cannot inject unrecognized fields.
+ */
+export const PutInspectionAnswerCommandSchema = z.strictObject({
+  answer: InspectionAnswerValueSchema,
+  /** Optimistic concurrency token matching the current snapshot_version. */
+  baseSnapshotVersion: z.number().int().positive(),
+  /** ISO 8601 UTC timestamp with explicit offset. */
+  clientUpdatedAt: z.string().datetime({ offset: true }),
+});
+
+export const PutInspectionAnswerResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  questionId: z.string(),
+  answer: InspectionAnswerValueSchema,
+  /** New snapshot_version after the write; unchanged on a no-op save. */
+  snapshotVersion: z.number().int().positive(),
+  progress: InspectionProgressSchema,
+  scoreDistribution: InspectionScoreDistributionSchema,
+});
+
+export const PutInspectionAnswerResponseSchema = z.object({
+  data: PutInspectionAnswerResultSchema,
+  meta: ApiMetaSchema,
+});
+
+export const DeleteInspectionAnswerResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  questionId: z.string(),
+  deleted: z.literal(true),
+  /** New snapshot_version after the delete. */
+  snapshotVersion: z.number().int().positive(),
+  progress: InspectionProgressSchema,
+  scoreDistribution: InspectionScoreDistributionSchema,
+});
+
+export const DeleteInspectionAnswerResponseSchema = z.object({
+  data: DeleteInspectionAnswerResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -815,4 +871,24 @@ export type GetInspectionPartQuestionsResult = z.infer<
 >;
 export type GetInspectionPartQuestionsResponse = z.infer<
   typeof GetInspectionPartQuestionsResponseSchema
+>;
+
+export type InspectionQuestionRouteParams = z.infer<
+  typeof InspectionQuestionRouteParamsSchema
+>;
+/** Normalized output type after transforms — shape used in service logic. */
+export type PutInspectionAnswerCommand = z.output<
+  typeof PutInspectionAnswerCommandSchema
+>;
+export type PutInspectionAnswerResult = z.infer<
+  typeof PutInspectionAnswerResultSchema
+>;
+export type PutInspectionAnswerResponse = z.infer<
+  typeof PutInspectionAnswerResponseSchema
+>;
+export type DeleteInspectionAnswerResult = z.infer<
+  typeof DeleteInspectionAnswerResultSchema
+>;
+export type DeleteInspectionAnswerResponse = z.infer<
+  typeof DeleteInspectionAnswerResponseSchema
 >;

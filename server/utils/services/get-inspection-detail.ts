@@ -2,17 +2,18 @@ import { serverSupabaseServiceRole } from "#supabase/server";
 import { createError } from "h3";
 import type { H3Event } from "h3";
 import type { Json, Tables } from "~/db/database.types";
+import {
+  computeProgress,
+  computeScoreDistribution,
+} from "./inspection-snapshot";
 import type {
   InspectionDetailDto,
   InspectionPart1Dto,
   InspectionRuntimeFlagsDto,
   InspectionAnswersDto,
   InspectionQuestionNotesDto,
-  InspectionScoreDistributionDto,
-  InspectionProgressDto,
   InspectionDetailedProgressDto,
   InspectionPartStateDto,
-  InspectionAnswerValue,
   InspectionMode,
   InspectionStatus,
   FuelType,
@@ -203,39 +204,6 @@ function buildPart1(
     address: row.address,
     notes,
   };
-}
-
-function computeProgress(
-  answers: Record<string, string>,
-  visibleQuestionIds: string[],
-): InspectionProgressDto {
-  const visibleQuestions = visibleQuestionIds.length;
-  const answeredQuestions = visibleQuestionIds.filter(
-    (id) => id in answers,
-  ).length;
-  const completionRate =
-    visibleQuestions > 0
-      ? Math.round((answeredQuestions / visibleQuestions) * 10000) / 100
-      : 0;
-  return { answeredQuestions, visibleQuestions, completionRate };
-}
-
-function computeScoreDistribution(
-  answers: Record<string, string>,
-  visibleQuestionIds: string[],
-): InspectionScoreDistributionDto {
-  let yes = 0;
-  let no = 0;
-  let dontKnow = 0;
-
-  for (const qId of visibleQuestionIds) {
-    const answer = answers[qId] as InspectionAnswerValue | undefined;
-    if (answer === "yes") yes++;
-    else if (answer === "no") no++;
-    else if (answer === "dont_know") dontKnow++;
-  }
-
-  return { yes, no, dontKnow };
 }
 
 /**
