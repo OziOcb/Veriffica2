@@ -144,7 +144,7 @@ Typy TypeScript derywować przez `z.infer` — nie powielać ręcznie.
     "answers": { "q_brakes_pedal_feel": "yes" },
     "questionNotes": { "q_brakes_pedal_feel": "Pedal feels stable." },
     "globalNotes": "Overall clean cabin.",
-    "visibleGroupIds": ["base-body", "fuel-petrol-common"],
+    "visibleGroupIds": ["base_body", "fuel_petrol_common"],
     "visibleQuestionIds": ["q_brakes_pedal_feel"],
     "parts": [
       { "part": "part1", "enabled": true, "completed": true },

@@ -70,27 +70,27 @@ const STUB_ROW_WITH_PART1 = {
       importedFromEU: false,
     },
     answers: {
-      "q-p2-base-car-body-corrosion-bonnet": "yes",
-      "q-p2-base-car-body-corrosion-boot-lid": "no",
+      q_p2_base_car_body_corrosion_bonnet: "yes",
+      q_p2_base_car_body_corrosion_boot_lid: "no",
     },
     question_notes: {
-      "q-p2-base-car-body-corrosion-bonnet": "Minor surface rust.",
+      q_p2_base_car_body_corrosion_bonnet: "Minor surface rust.",
     },
     global_notes: "",
     // These are real group/question IDs from question-mapping-config.json and
     // question-bank.json so the filter logic in the service can match them.
     visible_group_ids: [
-      "g-p2-base-car-body-corrosion",
-      "g-p2-base-car-body-repair-traces",
-      "g-p2-fuel-combustion-coolant-condition",
+      "g_p2_base_car_body_corrosion",
+      "g_p2_base_car_body_repair_traces",
+      "g_p2_fuel_combustion_coolant_condition",
     ],
     visible_question_ids: [
-      "q-p2-base-car-body-corrosion-bonnet",
-      "q-p2-base-car-body-corrosion-boot-lid",
-      "q-p2-base-car-body-corrosion-fender",
-      "q-p2-fuel-combustion-coolant-condition-lack-of-clarity",
-      "q-p2-fuel-combustion-coolant-condition-smell-of-exhaust-fumes",
-      "q-p2-fuel-combustion-coolant-condition-leaks",
+      "q_p2_base_car_body_corrosion_bonnet",
+      "q_p2_base_car_body_corrosion_boot_lid",
+      "q_p2_base_car_body_corrosion_fender",
+      "q_p2_fuel_combustion_coolant_condition_lack_of_clarity",
+      "q_p2_fuel_combustion_coolant_condition_smell_of_exhaust_fumes",
+      "q_p2_fuel_combustion_coolant_condition_leaks",
     ],
   },
 };
@@ -257,18 +257,18 @@ describe("GET /api/v1/inspections/:inspectionId/parts/:partId/questions handler"
 
     if (parsed.success) {
       const bonnet = parsed.data.data.questions.find(
-        (q) => q.id === "q-p2-base-car-body-corrosion-bonnet",
+        (q) => q.id === "q_p2_base_car_body_corrosion_bonnet",
       );
       expect(bonnet?.answer).toBe("yes");
 
       const bootLid = parsed.data.data.questions.find(
-        (q) => q.id === "q-p2-base-car-body-corrosion-boot-lid",
+        (q) => q.id === "q_p2_base_car_body_corrosion_boot_lid",
       );
       expect(bootLid?.answer).toBe("no");
 
       // Unanswered question has no answer field
       const fender = parsed.data.data.questions.find(
-        (q) => q.id === "q-p2-base-car-body-corrosion-fender",
+        (q) => q.id === "q_p2_base_car_body_corrosion_fender",
       );
       expect(fender?.answer).toBeUndefined();
     }
@@ -291,13 +291,13 @@ describe("GET /api/v1/inspections/:inspectionId/parts/:partId/questions handler"
 
     if (parsed.success) {
       const bonnet = parsed.data.data.questions.find(
-        (q) => q.id === "q-p2-base-car-body-corrosion-bonnet",
+        (q) => q.id === "q_p2_base_car_body_corrosion_bonnet",
       );
       expect(bonnet?.questionNote).toBe("Minor surface rust.");
 
       // Question without a note has no questionNote field
       const bootLid = parsed.data.data.questions.find(
-        (q) => q.id === "q-p2-base-car-body-corrosion-boot-lid",
+        (q) => q.id === "q_p2_base_car_body_corrosion_boot_lid",
       );
       expect(bootLid?.questionNote).toBeUndefined();
     }
@@ -321,7 +321,7 @@ describe("GET /api/v1/inspections/:inspectionId/parts/:partId/questions handler"
     if (parsed.success) {
       const lackOfClarity = parsed.data.data.questions.find(
         (q) =>
-          q.id === "q-p2-fuel-combustion-coolant-condition-lack-of-clarity",
+          q.id === "q_p2_fuel_combustion_coolant_condition_lack_of_clarity",
       );
 
       expect(lackOfClarity?.explanationRef).toBe("exp_001");

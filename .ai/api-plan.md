@@ -403,8 +403,8 @@
     },
     "globalNotes": "Overall clean cabin.",
     "visibleGroupIds": [
-      "base-body",
-      "fuel-petrol-common"
+      "base_body",
+      "fuel_petrol_common"
     ],
     "visibleQuestionIds": [
       "q_brakes_pedal_feel"
@@ -553,8 +553,8 @@
       "part5"
     ],
     "visibleGroupIds": [
-      "base-body",
-      "fuel-petrol-common"
+      "base_body",
+      "fuel_petrol_common"
     ],
     "visibleQuestionIds": [
       "q_brakes_pedal_feel"
@@ -618,9 +618,9 @@
       "importedFromEU": false
     },
     "visibleGroupIds": [
-      "base-body",
-      "fuel-petrol-common",
-      "petrol-turbo"
+      "base_body",
+      "fuel_petrol_common",
+      "petrol_turbo"
     ],
     "visibleQuestionIds": [
       "q_brakes_pedal_feel",
@@ -669,7 +669,7 @@
     "questionBankVersion": "2026-05-01",
     "groups": [
       {
-        "id": "base-body",
+        "id": "base_body",
         "order": 10,
         "title": "Body",
         "questionIds": [
@@ -680,7 +680,7 @@
     "questions": [
       {
         "id": "q_body_panel_gaps",
-        "groupId": "base-body",
+        "groupId": "base_body",
         "order": 10,
         "text": "Do the body panel gaps look even?",
         "allowedAnswers": [
@@ -955,7 +955,7 @@
       {
         "questionId": "q_body_panel_gaps",
         "part": "part2",
-        "groupId": "base-body",
+        "groupId": "base_body",
         "text": "Do the body panel gaps look even?",
         "answer": "yes",
         "editable": true,
@@ -1138,9 +1138,9 @@
       },
       "globalNotes": "Overall clean interior.",
       "visibleGroupIds": [
-        "base-body",
-        "fuel-petrol-common",
-        "petrol-turbo"
+        "base_body",
+        "fuel_petrol_common",
+        "petrol_turbo"
       ],
       "visibleQuestionIds": [
         "q_body_panel_gaps",

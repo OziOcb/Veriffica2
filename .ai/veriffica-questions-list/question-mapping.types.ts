@@ -56,9 +56,9 @@ export type VisibleWhen = {
   [Field in Part1Field]?: Array<Part1FieldValueMap[Field]>;
 };
 
-export type QuestionGroupId = `g-${string}`;
-export type QuestionId = `q-${string}`;
-export type ExplanationRef = `exp-${string}`;
+export type QuestionGroupId = `g_${string}`;
+export type QuestionId = `q_${string}`;
+export type ExplanationRef = `exp_${string}`;
 
 export interface VisibilityModel {
   type: "additive-buckets";

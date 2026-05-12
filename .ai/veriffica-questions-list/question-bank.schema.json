@@ -3,7 +3,13 @@
   "title": "Veriffica Question Bank",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "sourceFile", "allowedAnswers", "questions", "explanations"],
+  "required": [
+    "version",
+    "sourceFile",
+    "allowedAnswers",
+    "questions",
+    "explanations"
+  ],
   "properties": {
     "$schema": {
       "type": "string",
@@ -34,7 +40,7 @@
     "explanations": {
       "type": "object",
       "patternProperties": {
-        "^exp-.+$": {
+        "^exp_.+$": {
           "$ref": "#/$defs/explanationEntry"
         }
       },
@@ -48,15 +54,15 @@
     },
     "questionId": {
       "type": "string",
-      "pattern": "^q-.+$"
+      "pattern": "^q_.+$"
     },
     "questionGroupId": {
       "type": "string",
-      "pattern": "^g-.+$"
+      "pattern": "^g_.+$"
     },
     "explanationRef": {
       "type": "string",
-      "pattern": "^exp-.+$"
+      "pattern": "^exp_.+$"
     },
     "allowedAnswer": {
       "type": "string",
@@ -68,7 +74,15 @@
     "questionItem": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "groupId", "part", "section", "subsection", "label", "order"],
+      "required": [
+        "id",
+        "groupId",
+        "part",
+        "section",
+        "subsection",
+        "label",
+        "order"
+      ],
       "properties": {
         "id": {
           "$ref": "#/$defs/questionId"

@@ -114,16 +114,16 @@ Odpowiedź powinna mieć standardową kopertę sukcesu:
     "questionBankVersion": "2026-05-01",
     "groups": [
       {
-        "id": "base-body",
+        "id": "base_body",
         "order": 10,
         "title": "Body",
-        "questionIds": ["q-p2-body-panel-gaps"]
+        "questionIds": ["q_p2_body_panel_gaps"]
       }
     ],
     "questions": [
       {
-        "id": "q-p2-body-panel-gaps",
-        "groupId": "base-body",
+        "id": "q_p2_body_panel_gaps",
+        "groupId": "base_body",
         "order": 10,
         "text": "Do the body panel gaps look even?",
         "allowedAnswers": ["yes", "no", "dont_know"],

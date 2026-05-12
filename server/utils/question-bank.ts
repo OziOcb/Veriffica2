@@ -136,11 +136,11 @@ export const GROUP_TITLE_BY_ID: ReadonlyMap<string, string> = new Map(
 );
 
 /**
- * Normalizes the question-bank explanation refs (`exp-001`) into the API
- * shape used by the app DTOs (`exp_001`).
+ * Returns the canonical underscore-form explanation ref used by the question
+ * bank and app DTOs. Legacy hyphenated refs are still normalized on read.
  */
 export function normalizeExplanationRef(ref: string): ExplanationRef {
-  return ref.replace(/^exp-/, "exp_") as ExplanationRef;
+  return ref.replace(/-/g, "_") as ExplanationRef;
 }
 
 /**

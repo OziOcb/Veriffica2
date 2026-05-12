@@ -52,7 +52,7 @@ const { default: answerDeleteHandler } =
 
 const STUB_USER_ID = DEFAULT_USER_ID;
 const STUB_INSPECTION_ID = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
-const STUB_QUESTION_ID = "q-p2-base-car-body-corrosion-bonnet";
+const STUB_QUESTION_ID = "q_p2_base_car_body_corrosion_bonnet";
 const STUB_SNAPSHOT_VERSION = 9;
 
 /** A minimal visible question snapshot with one question visible. */
@@ -322,7 +322,7 @@ describe("PUT /api/v1/inspections/:inspectionId/answers/:questionId handler", ()
       answerPutHandler(
         makeEvent({
           method: "PUT",
-          questionId: "q-p2-invisible-question",
+          questionId: "q_p2_invisible_question",
         }),
       ),
     ).rejects.toMatchObject({ statusCode: 422 });
@@ -523,7 +523,10 @@ describe("DELETE /api/v1/inspections/:inspectionId/answers/:questionId handler",
 
     await expect(
       answerDeleteHandler(
-        makeEvent({ method: "DELETE", questionId: "q-p2-invisible-question" }),
+        makeEvent({
+          method: "DELETE",
+          questionId: "q_p2_invisible_question",
+        }),
       ),
     ).rejects.toMatchObject({ statusCode: 404 });
   });

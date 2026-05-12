@@ -165,9 +165,9 @@ Typy TypeScript powinny zostać wyprowadzone przez `z.infer` lub `z.output`, bez
       "importedFromEU": false
     },
     "visibleGroupIds": [
-      "base-body",
-      "fuel-petrol-common",
-      "petrol-turbo"
+      "base_body",
+      "fuel_petrol_common",
+      "petrol_turbo"
     ],
     "visibleQuestionIds": [
       "q_brakes_pedal_feel",

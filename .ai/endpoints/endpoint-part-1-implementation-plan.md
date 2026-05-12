@@ -172,7 +172,7 @@ interface PutPart1ServiceResult {
     },
     "title": "Toyota Corolla 2016 ABC 123",
     "unlockedParts": ["part2", "part3", "part4", "part5"],
-    "visibleGroupIds": ["base-body", "fuel-petrol-common"],
+    "visibleGroupIds": ["base_body", "fuel_petrol_common"],
     "visibleQuestionIds": ["q_brakes_pedal_feel"],
     "smartPruning": {
       "applied": false,
@@ -283,7 +283,7 @@ Tytuł powinien być budowany deterministycznie po stronie serwisu TypeScript (n
 
 `visibleGroupIds` i `visibleQuestionIds` są wyliczane po stronie serwisu Node.js z kanonicznego question bank (repo artifact, nie baza). Widoczność bazuje na:
 - `Base` — zawsze widoczne
-- `fuelType` — `fuel-petrol-common`, `fuel-diesel-common`, `fuel-hybrid-common`, `fuel-electric-common`
+- `fuelType` — `fuel_petrol_common`, `fuel_diesel_common`, `fuel_hybrid_common`, `fuel_electric_common`
 - `transmission`, `drive`, `bodyType` — dodatkowe grupy specyficzne dla konfiguracji
 - Runtime flags (pobierane ze snapshotu — nie zmieniane przez Part 1)
 

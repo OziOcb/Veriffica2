@@ -719,7 +719,7 @@ export const InspectionQuestionRouteParamsSchema = z.object({
   inspectionId: z.string().uuid(),
   questionId: z
     .string()
-    .regex(/^q-[a-z0-9-]+$/, "Question ID must follow the q-<id> format."),
+    .regex(/^q_[a-z0-9_]+$/, "Question ID must follow the q_<id> format."),
 });
 
 /**

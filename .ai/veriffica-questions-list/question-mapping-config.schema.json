@@ -77,7 +77,7 @@
     },
     "questionGroupId": {
       "type": "string",
-      "pattern": "^g-.+$"
+      "pattern": "^g_.+$"
     },
     "nullableString": {
       "type": ["string", "null"]

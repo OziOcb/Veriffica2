@@ -88,7 +88,7 @@ const STUB_DETAIL_ROW = {
       q_brakes_pedal_feel: "Pedal feels stable.",
     },
     global_notes: "Overall clean cabin.",
-    visible_group_ids: ["base-body"],
+    visible_group_ids: ["base_body"],
     visible_question_ids: [
       "q_brakes_pedal_feel",
       "q_body_rust",
