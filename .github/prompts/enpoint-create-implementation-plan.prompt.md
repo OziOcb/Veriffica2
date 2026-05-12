@@ -29,8 +29,19 @@ Zanim zaczniemy, zapoznaj się z poniższymi informacjami:
 
 4. Implementation rules:
 <implementation_rules>
-#file:nitro-server-routes.instructions.md #file:supabase-auth-postgres.instructions.md #file:zod-api-contracts.instructions.md
+#file:nitro-server-routes.instructions.md
+#file:supabase-auth-postgres.instructions.md
+#file:zod-api-contracts.instructions.md
 </implementation_rules>
+
+5. Question bank:
+<question_bank>
+#file:question-bank.json
+#file:question-bank.schema.json
+#file:question-mapping-config.json
+#file:question-mapping-config.schema.json
+#file:question-mapping.types.ts
+</question_bank>
 
 Twoim zadaniem jest stworzenie kompleksowego planu wdrożenia endpointu interfejsu API REST. Przed dostarczeniem ostatecznego planu użyj znaczników <analysis>, aby przeanalizować informacje i nakreślić swoje podejście. W tej analizie upewnij się, że:
 

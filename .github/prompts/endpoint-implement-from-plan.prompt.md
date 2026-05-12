@@ -16,8 +16,18 @@ Najpierw dokładnie przejrzyj dostarczony plan wdrożenia:
 </types>
 
 <implementation_rules>
-#file:nitro-server-routes.instructions.md #file:supabase-auth-postgres.instructions.md #file:zod-api-contracts.instructions.md
+#file:nitro-server-routes.instructions.md
+#file:supabase-auth-postgres.instructions.md
+#file:zod-api-contracts.instructions.md
 </implementation_rules>
+
+<question_bank>
+#file:question-bank.json
+#file:question-bank.schema.json
+#file:question-mapping-config.json
+#file:question-mapping-config.schema.json
+#file:question-mapping.types.ts
+</question_bank>
 
 <implementation_approach>
 Realizuj maksymalnie 3 kroki planu implementacji, podsumuj krótko co zrobiłeś i opisz plan na 3 kolejne działania - zatrzymaj w tym momencie pracę i czekaj na mój feedback.
