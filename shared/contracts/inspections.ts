@@ -764,6 +764,90 @@ export const DeleteInspectionAnswerResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── PUT/DELETE /api/v1/inspections/{inspectionId}/question-notes/{questionId}
+
+/**
+ * Schema for the text of a single question note.
+ * Trimmed before validation; empty string after trim is rejected — use DELETE
+ * to remove a note.
+ */
+export const QuestionNoteTextSchema = z
+  .string()
+  .transform((s) => s.trim())
+  .pipe(
+    z
+      .string()
+      .min(
+        1,
+        "Note must not be empty after trimming. Use DELETE to remove a note.",
+      )
+      .max(500, "Note must be at most 500 characters."),
+  );
+
+/**
+ * Schema for the global notes document.
+ * Allows empty string (clearing the document) but caps at 10 000 characters.
+ */
+export const GlobalNotesTextSchema = z
+  .string()
+  .max(10_000, "Global notes must be at most 10 000 characters.");
+
+export const PutInspectionQuestionNoteCommandSchema = z.strictObject({
+  note: QuestionNoteTextSchema,
+  /** Optimistic concurrency token matching the current snapshot_version. */
+  baseSnapshotVersion: z.number().int().positive(),
+  /** ISO 8601 UTC timestamp with explicit offset. */
+  clientUpdatedAt: z.string().datetime({ offset: true }),
+});
+
+export const PutInspectionQuestionNoteResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  questionId: z.string(),
+  /** Normalised note value as persisted in snapshot.question_notes. */
+  questionNote: z.string(),
+  /** Canonical global_notes document after one-way mirroring. */
+  globalNotes: z.string(),
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const PutInspectionQuestionNoteResponseSchema = z.object({
+  data: PutInspectionQuestionNoteResultSchema,
+  meta: ApiMetaSchema,
+});
+
+export const DeleteInspectionQuestionNoteResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  questionId: z.string(),
+  deleted: z.literal(true),
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const DeleteInspectionQuestionNoteResponseSchema = z.object({
+  data: DeleteInspectionQuestionNoteResultSchema,
+  meta: ApiMetaSchema,
+});
+
+// ── PUT /api/v1/inspections/{inspectionId}/global-notes ────────────────────
+
+export const PutInspectionGlobalNotesCommandSchema = z.strictObject({
+  globalNotes: GlobalNotesTextSchema,
+  /** Optimistic concurrency token matching the current snapshot_version. */
+  baseSnapshotVersion: z.number().int().positive(),
+  /** ISO 8601 UTC timestamp with explicit offset. */
+  clientUpdatedAt: z.string().datetime({ offset: true }),
+});
+
+export const PutInspectionGlobalNotesResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  globalNotes: z.string(),
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const PutInspectionGlobalNotesResponseSchema = z.object({
+  data: PutInspectionGlobalNotesResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -891,4 +975,31 @@ export type DeleteInspectionAnswerResult = z.infer<
 >;
 export type DeleteInspectionAnswerResponse = z.infer<
   typeof DeleteInspectionAnswerResponseSchema
+>;
+
+/** Normalized output type after transforms — shape used in service logic. */
+export type PutInspectionQuestionNoteCommand = z.output<
+  typeof PutInspectionQuestionNoteCommandSchema
+>;
+export type PutInspectionQuestionNoteResult = z.infer<
+  typeof PutInspectionQuestionNoteResultSchema
+>;
+export type PutInspectionQuestionNoteResponse = z.infer<
+  typeof PutInspectionQuestionNoteResponseSchema
+>;
+export type DeleteInspectionQuestionNoteResult = z.infer<
+  typeof DeleteInspectionQuestionNoteResultSchema
+>;
+export type DeleteInspectionQuestionNoteResponse = z.infer<
+  typeof DeleteInspectionQuestionNoteResponseSchema
+>;
+/** Normalized output type after transforms — shape used in service logic. */
+export type PutInspectionGlobalNotesCommand = z.output<
+  typeof PutInspectionGlobalNotesCommandSchema
+>;
+export type PutInspectionGlobalNotesResult = z.infer<
+  typeof PutInspectionGlobalNotesResultSchema
+>;
+export type PutInspectionGlobalNotesResponse = z.infer<
+  typeof PutInspectionGlobalNotesResponseSchema
 >;
