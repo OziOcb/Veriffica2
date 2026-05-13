@@ -848,6 +848,124 @@ export const PutInspectionGlobalNotesResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── GET /api/v1/inspections/{inspectionId}/summary ─────────────────────────
+
+export const InspectionSummaryExpansionSchema = z.enum(["questions", "notes"]);
+
+/**
+ * Parses the optional `include` query param for the summary endpoint.
+ * Splits comma-separated tokens into a typed array.
+ * Rejects `include=notes` when `questions` is absent — notes are an
+ * extension of question rows, not a standalone top-level resource.
+ */
+export const GetInspectionSummaryQuerySchema = z
+  .object({
+    include: z
+      .string()
+      .optional()
+      .transform((val): string[] => {
+        if (!val) return [];
+        return val
+          .split(",")
+          .map((v) => v.trim())
+          .filter(Boolean);
+      })
+      .pipe(z.array(InspectionSummaryExpansionSchema)),
+  })
+  .superRefine((data, ctx) => {
+    if (data.include.includes("notes") && !data.include.includes("questions")) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["include"],
+        message: "include=notes requires include=questions to also be present.",
+      });
+    }
+  });
+
+export const InspectionSummaryPartSchema = z.object({
+  part: InspectionQuestionPartIdSchema,
+  scoreDistribution: InspectionScoreDistributionSchema,
+});
+
+/**
+ * A single answered question row within the summary expansion.
+ * `questionNote` is present only when `include=notes` was requested and
+ * the question has a recorded note.
+ */
+export const InspectionSummaryQuestionSchema = z.object({
+  questionId: z.string(),
+  part: InspectionQuestionPartIdSchema,
+  groupId: z.string(),
+  text: z.string(),
+  answer: InspectionAnswerValueSchema,
+  editable: z.boolean(),
+  questionNote: z.string().optional(),
+});
+
+export const InspectionSummarySchema = z.object({
+  inspectionId: z.string().uuid(),
+  title: z.string(),
+  status: InspectionStatusSchema,
+  mode: InspectionModeSchema,
+  totalScoreDistribution: InspectionScoreDistributionSchema,
+  parts: z.array(InspectionSummaryPartSchema),
+  questions: z.array(InspectionSummaryQuestionSchema).optional(),
+  progress: InspectionProgressSchema,
+});
+
+export const GetInspectionSummaryResponseSchema = z.object({
+  data: InspectionSummarySchema,
+  meta: ApiMetaSchema,
+});
+
+// ── POST /api/v1/inspections/{inspectionId}/finalize ────────────────────────
+
+/**
+ * Strict command schema — extra keys are rejected.
+ * `confirmation` must be the exact sentinel `"FINALIZE_INSPECTION"`.
+ */
+export const FinalizeInspectionCommandSchema = z.strictObject({
+  confirmation: z.literal("FINALIZE_INSPECTION"),
+  baseSnapshotVersion: z.number().int().positive(),
+});
+
+export const FinalizeInspectionResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  status: z.literal("completed"),
+  completedAt: z.string(),
+  mode: z.literal("report"),
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const FinalizeInspectionResponseSchema = z.object({
+  data: FinalizeInspectionResultSchema,
+  meta: ApiMetaSchema,
+});
+
+// ── POST /api/v1/inspections/{inspectionId}/reopen ──────────────────────────
+
+/**
+ * Strict command schema — extra keys are rejected.
+ * `confirmation` must be the exact sentinel `"REOPEN_INSPECTION"`.
+ */
+export const ReopenInspectionCommandSchema = z.strictObject({
+  confirmation: z.literal("REOPEN_INSPECTION"),
+  baseSnapshotVersion: z.number().int().positive(),
+});
+
+export const ReopenInspectionResultSchema = z.object({
+  inspectionId: z.string().uuid(),
+  status: z.literal("draft"),
+  completedAt: z.null(),
+  mode: z.literal("editable"),
+  snapshotVersion: z.number().int().positive(),
+});
+
+export const ReopenInspectionResponseSchema = z.object({
+  data: ReopenInspectionResultSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -1002,4 +1120,36 @@ export type PutInspectionGlobalNotesResult = z.infer<
 >;
 export type PutInspectionGlobalNotesResponse = z.infer<
   typeof PutInspectionGlobalNotesResponseSchema
+>;
+export type InspectionSummaryExpansion = z.infer<
+  typeof InspectionSummaryExpansionSchema
+>;
+export type GetInspectionSummaryQuery = z.infer<
+  typeof GetInspectionSummaryQuerySchema
+>;
+export type InspectionSummaryPart = z.infer<typeof InspectionSummaryPartSchema>;
+export type InspectionSummaryQuestion = z.infer<
+  typeof InspectionSummaryQuestionSchema
+>;
+export type InspectionSummary = z.infer<typeof InspectionSummarySchema>;
+export type GetInspectionSummaryResponse = z.infer<
+  typeof GetInspectionSummaryResponseSchema
+>;
+export type FinalizeInspectionCommand = z.infer<
+  typeof FinalizeInspectionCommandSchema
+>;
+export type FinalizeInspectionResult = z.infer<
+  typeof FinalizeInspectionResultSchema
+>;
+export type FinalizeInspectionResponse = z.infer<
+  typeof FinalizeInspectionResponseSchema
+>;
+export type ReopenInspectionCommand = z.infer<
+  typeof ReopenInspectionCommandSchema
+>;
+export type ReopenInspectionResult = z.infer<
+  typeof ReopenInspectionResultSchema
+>;
+export type ReopenInspectionResponse = z.infer<
+  typeof ReopenInspectionResponseSchema
 >;
