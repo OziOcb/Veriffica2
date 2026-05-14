@@ -966,6 +966,179 @@ export const ReopenInspectionResponseSchema = z.object({
   meta: ApiMetaSchema,
 });
 
+// ── POST /api/v1/inspections/{inspectionId}/sync ───────────────────────────
+
+/**
+ * Optional `strategy` query param; the only supported value is `client_wins`.
+ * Omitting it is treated as `client_wins` in the handler.
+ */
+export const PostInspectionSyncQuerySchema = z.object({
+  strategy: z.literal("client_wins").optional(),
+});
+
+/**
+ * Partial patch of Part 1 fields for a sync mutation.
+ * All fields are optional — the service merges provided values with the
+ * existing canonical Part 1 before running full PutInspectionPart1 validation
+ * on the merged result. Enum fields are validated eagerly to reject garbage
+ * before the merge step.
+ */
+export const InspectionSyncPart1PatchSchema = z.strictObject({
+  price: z.number().min(0).max(10_000_000).nullable().optional(),
+  make: z.string().min(1).max(50).optional(),
+  model: z.string().min(1).max(60).optional(),
+  yearOfProduction: z.number().int().nullable().optional(),
+  registrationNumber: z.string().min(1).max(15).nullable().optional(),
+  vinNumber: z.string().max(17).nullable().optional(),
+  mileage: z.number().int().min(0).max(9_999_999).nullable().optional(),
+  fuelType: z.enum(["Petrol", "Diesel", "Hybrid", "Electric"]).optional(),
+  transmission: z.enum(["Manual", "Automatic"]).optional(),
+  drive: z.enum(["2WD", "4WD"]).optional(),
+  color: z.string().min(1).max(40).nullable().optional(),
+  bodyType: z
+    .enum([
+      "Sedan",
+      "Hatchback",
+      "SUV",
+      "Coupe",
+      "Convertible",
+      "Van",
+      "Pickup",
+      "Other",
+    ])
+    .optional(),
+  numberOfDoors: z.number().int().min(1).max(9).nullable().optional(),
+  address: z.string().min(1).max(150).nullable().optional(),
+  notes: z.string().max(1000).optional(),
+});
+
+/**
+ * Partial patch of runtime flags. Uses the same five known fields as
+ * `InspectionRuntimeFlagsSchema` but makes each boolean optional.
+ * Unknown keys are rejected by `strictObject`.
+ */
+export const InspectionSyncRuntimeFlagsPatchSchema = z.strictObject({
+  ..._runtimeFlagFields,
+});
+
+/**
+ * Answer patch map. Keys must follow the canonical `q_...` format.
+ * Only keys present in this map are updated — absent keys remain unchanged.
+ */
+export const InspectionSyncAnswersPatchSchema = z.record(
+  z
+    .string()
+    .regex(/^q_[a-z0-9_]+$/, "Question ID must follow the q_<id> format."),
+  InspectionAnswerValueSchema,
+);
+
+/**
+ * Question-notes patch map. Keys must follow the canonical `q_...` format.
+ * Each note is capped at 500 characters. Only keys present are updated.
+ */
+export const InspectionSyncQuestionNotesPatchSchema = z.record(
+  z
+    .string()
+    .regex(/^q_[a-z0-9_]+$/, "Question ID must follow the q_<id> format."),
+  z.string().max(500, "Question note must be at most 500 characters."),
+);
+
+/**
+ * Strict mutation object — unknown top-level keys are rejected.
+ * At least one field must be present; an entirely empty mutation is invalid.
+ */
+export const InspectionSyncMutationSchema = z
+  .strictObject({
+    part1: InspectionSyncPart1PatchSchema.optional(),
+    runtimeFlags: InspectionSyncRuntimeFlagsPatchSchema.optional(),
+    answers: InspectionSyncAnswersPatchSchema.optional(),
+    questionNotes: InspectionSyncQuestionNotesPatchSchema.optional(),
+    globalNotes: GlobalNotesTextSchema.optional(),
+  })
+  .superRefine((data, ctx) => {
+    const hasAtLeastOne =
+      data.part1 !== undefined ||
+      data.runtimeFlags !== undefined ||
+      data.answers !== undefined ||
+      data.questionNotes !== undefined ||
+      data.globalNotes !== undefined;
+    if (!hasAtLeastOne) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: [],
+        message:
+          "Mutation must contain at least one field (part1, runtimeFlags, answers, questionNotes, or globalNotes).",
+      });
+    }
+  });
+
+/**
+ * Full sync command body — strictly typed to reject unknown top-level keys.
+ */
+export const SyncInspectionCommandSchema = z.strictObject({
+  baseSnapshotVersion: z.number().int().positive(),
+  clientUpdatedAt: z.string().datetime({ offset: true }),
+  mutation: InspectionSyncMutationSchema,
+});
+
+export const SyncConflictInfoSchema = z.object({
+  detected: z.boolean(),
+  resolvedWith: z.literal("client_wins"),
+});
+
+export const SyncConflictCanonicalInspectionSchema = z.object({
+  id: z.string().uuid(),
+  snapshotVersion: z.number().int().positive(),
+  clientUpdatedAt: z.string(),
+});
+
+/** Canonical inspection shape returned on a successful sync operation. */
+export const SyncedInspectionSchema = z.object({
+  id: z.string().uuid(),
+  title: z.string(),
+  status: InspectionStatusSchema,
+  snapshotVersion: z.number().int().positive(),
+  clientUpdatedAt: z.string(),
+  updatedAt: z.string(),
+  part1: InspectionPart1Schema,
+  runtimeFlags: InspectionRuntimeFlagsSchema,
+  answers: z.record(z.string(), InspectionAnswerValueSchema),
+  questionNotes: z.record(z.string(), z.string()),
+  globalNotes: z.string(),
+  visibleGroupIds: z.array(z.string()),
+  visibleQuestionIds: z.array(z.string()),
+  progress: InspectionProgressSchema,
+  scoreDistribution: InspectionScoreDistributionSchema,
+  mode: InspectionModeSchema,
+});
+
+export const SyncInspectionResultSchema = z.object({
+  inspection: SyncedInspectionSchema,
+  conflict: SyncConflictInfoSchema,
+  smartPruning: SmartPruningResultSchema,
+});
+
+export const SyncInspectionResponseSchema = z.object({
+  data: SyncInspectionResultSchema,
+  meta: ApiMetaSchema,
+});
+
+export const SyncInspectionConflictDataSchema = z.object({
+  canonicalInspection: SyncConflictCanonicalInspectionSchema,
+});
+
+export const SyncInspectionConflictResponseSchema = z.object({
+  error: z.object({
+    code: z.literal("SYNC_CONFLICT"),
+    message: z.string(),
+    details: z
+      .array(z.object({ field: z.string(), message: z.string() }))
+      .optional(),
+  }),
+  data: SyncInspectionConflictDataSchema,
+  meta: ApiMetaSchema,
+});
+
 // ── Inferred types ─────────────────────────────────────────────────────────
 // Derived from schemas — do not maintain these by hand.
 
@@ -1152,4 +1325,40 @@ export type ReopenInspectionResult = z.infer<
 >;
 export type ReopenInspectionResponse = z.infer<
   typeof ReopenInspectionResponseSchema
+>;
+export type PostInspectionSyncQuery = z.infer<
+  typeof PostInspectionSyncQuerySchema
+>;
+export type InspectionSyncPart1Patch = z.output<
+  typeof InspectionSyncPart1PatchSchema
+>;
+export type InspectionSyncRuntimeFlagsPatch = z.output<
+  typeof InspectionSyncRuntimeFlagsPatchSchema
+>;
+export type InspectionSyncAnswersPatch = z.infer<
+  typeof InspectionSyncAnswersPatchSchema
+>;
+export type InspectionSyncQuestionNotesPatch = z.infer<
+  typeof InspectionSyncQuestionNotesPatchSchema
+>;
+export type InspectionSyncMutation = z.output<
+  typeof InspectionSyncMutationSchema
+>;
+export type SyncInspectionCommand = z.output<
+  typeof SyncInspectionCommandSchema
+>;
+export type SyncConflictInfo = z.infer<typeof SyncConflictInfoSchema>;
+export type SyncConflictCanonicalInspection = z.infer<
+  typeof SyncConflictCanonicalInspectionSchema
+>;
+export type SyncedInspection = z.infer<typeof SyncedInspectionSchema>;
+export type SyncInspectionResult = z.infer<typeof SyncInspectionResultSchema>;
+export type SyncInspectionResponse = z.infer<
+  typeof SyncInspectionResponseSchema
+>;
+export type SyncInspectionConflictData = z.infer<
+  typeof SyncInspectionConflictDataSchema
+>;
+export type SyncInspectionConflictResponse = z.infer<
+  typeof SyncInspectionConflictResponseSchema
 >;
